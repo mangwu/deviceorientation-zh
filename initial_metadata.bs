@@ -1,0 +1,28 @@
+<!-- 从index.bs截取的原始位于<pre class="metadata"></pre>之间的原始文档数据 -->
+<pre class='metadata'>
+Title: DeviceOrientation Event Specification
+Shortname: orientation-event
+Level: none
+Status: ED
+Group: dap
+TR: https://www.w3.org/TR/orientation-event/
+ED: https://w3c.github.io/deviceorientation/
+Repository: w3c/deviceorientation
+Editor: Reilly Grant 83788, Google LLC https://www.google.com
+Editor: Raphael Kubo da Costa 95850, Intel Corporation https://intel.com
+Former Editor: Rich Tibbett, Opera Software ASA
+Former Editor: Tim Volodine, Google Inc
+Former Editor: Steve Block, Google Inc until July 2012
+Former Editor: Andrei Popescu, Google Inc until July 2012
+Abstract: This specification defines several new DOM events that provide information about the physical orientation and motion of a hosting device.
+Boilerplate: omit issues-index, omit conformance, repository-issue-tracking no
+Include MDN Panels: if possible
+Issue Tracking: DeviceOrientation Event Specification Issues Repository https://github.com/w3c/deviceorientation/issues
+</pre>
+<pre class="anchors">
+urlPrefix: https://compat.spec.whatwg.org/; spec: COMPATIBILITY
+    type: interface
+        text: orientationchange; url: event-orientationchange
+urlPrefix: https://www.w3.org/TR/page-visibility-2/; spec: PAGE-VISIBILITY
+    type: dfn
+        text: visible; url: dom-visibilitystate-visible

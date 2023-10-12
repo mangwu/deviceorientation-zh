@@ -1,22 +1,30 @@
+<link href="./override.css" rel="stylesheet" />
+<script defer src="./custom-script.js"></script>
+<script src="./backup-script.js"></script>
+
 <pre class='metadata'>
-Title: DeviceOrientation Event Specification
+Title: 设备方向事件(DeviceOrientation Event)规范
 Shortname: orientation-event
 Level: none
-Status: ED
+Status: UD
 Group: dap
 TR: https://www.w3.org/TR/orientation-event/
-ED: https://w3c.github.io/deviceorientation/
-Repository: w3c/deviceorientation
-Editor: Reilly Grant 83788, Google LLC https://www.google.com
-Editor: Raphael Kubo da Costa 95850, Intel Corporation https://intel.com
-Former Editor: Rich Tibbett, Opera Software ASA
-Former Editor: Tim Volodine, Google Inc
-Former Editor: Steve Block, Google Inc until July 2012
-Former Editor: Andrei Popescu, Google Inc until July 2012
-Abstract: This specification defines several new DOM events that provide information about the physical orientation and motion of a hosting device.
-Boilerplate: omit issues-index, omit conformance, repository-issue-tracking no
-Include MDN Panels: if possible
-Issue Tracking: DeviceOrientation Event Specification Issues Repository https://github.com/w3c/deviceorientation/issues
+ED: https://mangwu.github.io/deviceorientation-zh/
+Text Macro: DATE 2023年10月12日
+Text Macro: LONGSTATUS 翻译草案
+Boilerplate: omit issues-index, omit conformance, repository-issue-tracking no, copyright off
+Repository: mangwu/deviceorientation-zh
+No Editor: true
+!编辑者:
+	Reilly Grant <a href="https://www.google.com">(Google LLC)</a>
+	Raphael Kubo da Costa <a href="https://intel.com">(Microsoft)</a>
+!前作者:
+    Rich Tibbett (Opera Software ASA)
+    Tim Volodine (Google Inc)
+    Steve Block (Google Inc until July 2012)
+    Andrei Popescu (Google Inc until July 2012)
+!翻译反馈: 邮件 <a class="p-name fn u-email email" href="mailto:1185956753@qq.com">@mangwu</a>
+Abstract: 本规范定义了几个新的 DOM 事件，这些事件提供了关于主机设备的物理方向和运动的信息。
 </pre>
 <pre class="anchors">
 urlPrefix: https://compat.spec.whatwg.org/; spec: COMPATIBILITY
