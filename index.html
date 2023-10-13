@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/orientation-event/" rel="canonical">
-  <meta content="52aaa90e4d2ef09fc0b43285abd903554a4b3e8d" name="document-revision">
+  <meta content="e626d6e0aecb18d8d0edb87961519e2c160ccceb" name="document-revision">
   <link href="./override.css" rel="stylesheet">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -590,7 +590,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">设备方向事件(DeviceOrientation Event)规范</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#UD">翻译草案</a>, <time class="dt-updated" datetime="2023-10-12">2023年10月12日</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#UD">翻译草案</a>, <time class="dt-updated" datetime="2023-10-13">2023年10月12日</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -631,8 +631,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#conformance-requirements"><span class="secno">1</span> <span class="content">Conformance requirements</span></a>
-    <li><a href="#introduction"><span class="secno">2</span> <span class="content">Introduction</span></a>
+    <li><a href="#conformance-requirements"><span class="secno">1</span> <span class="content">一致性要求</span></a>
+    <li><a href="#introduction"><span class="secno">2</span> <span class="content">简介</span></a>
     <li><a href="#scope"><span class="secno">3</span> <span class="content">Scope</span></a>
     <li>
      <a href="#description"><span class="secno">4</span> <span class="content">Description</span></a>
@@ -674,40 +674,74 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <main>
 <script defer src="./custom-script.js"></script>
 <script src="./backup-script.js"></script>
-   <h2 class="heading settled" data-level="1" id="conformance-requirements"><span class="secno">1. </span><span class="content">Conformance requirements</span><a class="self-link" href="#conformance-requirements"></a></h2>
-   <p>All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked non-normative. Everything else in this specification is normative.</p>
-   <p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a></p>
-   <p>Requirements phrased in the imperative as part of algorithms (such as "strip any leading space characters" or "return false and abort these steps") are to be interpreted with the meaning of the key word ("must", "should", "may", etc) used in introducing the algorithm.</p>
-   <p>Conformance requirements phrased as algorithms or specific steps may be implemented in any manner, so long as the end result is equivalent. (In particular, the algorithms defined in this specification are intended to be easy to follow, and not intended to be performant.)</p>
-   <p>User agents may impose implementation-specific limits on otherwise unconstrained inputs, e.g. to prevent denial of service attacks, to guard against running out of memory, or to work around platform-specific limitations.</p>
-   <p>Implementations that use ECMAScript to implement the APIs defined in this specification must implement them in a manner consistent with the ECMAScript Bindings defined in the Web IDL specification, as this specification uses that specification’s terminology. <a data-link-type="biblio" href="#biblio-webidl" title="Web IDL Standard">[WEBIDL]</a></p>
-   <p>The events introduced by this specification implement the Event interface defined in the DOM Specification, <a data-link-type="biblio" href="#biblio-dom" title="DOM Standard">[DOM]</a>. Implementations must therefore support this specification.</p>
-   <h2 class="heading settled" data-level="2" id="introduction"><span class="secno">2. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
-   <p><em>This section is non-normative.</em></p>
-   <p>This specification provides two new DOM events for obtaining information about the physical orientation and movement of the hosting device. The information provided by the events is not raw sensor data, but rather high-level data which is agnostic to the underlying source of information. Common sources of information include gyroscopes, compasses and accelerometers.</p>
-   <p>The first DOM event provided by the specification, <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation">deviceorientation</a></code>, supplies the physical orientation of the device, expressed as a series of rotations from a local coordinate frame.</p>
-   <p>The second DOM event provided by this specification, <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion">devicemotion</a></code>, supplies the acceleration of the device, expressed in Cartesian coordinates in a coordinate frame defined in the device. It also supplies the rotation rate of the device about a local coordinate frame. Where practically possible, the event should provide the acceleration of the device’s center of mass.</p>
-   <p>The following code extracts illustrate basic use of the events.</p>
-   <div class="example" id="example-7620a2e2">
-    <a class="self-link" href="#example-7620a2e2"></a> Registering to receive <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation①">deviceorientation</a></code> events: 
+   <h2 class="no-num no-toc no-ref heading settled" id="sotd-cn"> <span class="content">文档状态</span> </h2>
+   <div data-fill-with="status-cn">
+    <p><em>本节介绍了本文件发布时的状态。当前 <abbr title="World Wide Web Consortium">W3C</abbr> 出版物列表和本技术报告的最新修订版可在 <a href="https://www.w3.org/TR/"> <abbr title="World Wide Web Consortium">W3C</abbr> 技术报告索引 </a> 中找到，网址为 https://www.w3.org/TR/ 。</em> </p>
+    <p> 本文件由 <a href="https://www.w3.org/groups/wg/das">设备和传感器工作小组</a> 依据 <a href="https://www.w3.org/2021/Process-20211102/#w3c-recommendation-track">W3C 
+    推荐流程</a> 作为 <strong>工作草案</strong> (Working Draft)发布。 <span class="del-content">本文档旨在成为W3C推荐标准</span> 。 </p>
+    <p> 如果您想要对本规范提出反馈和意见，请使用向 <a U00022 href="mailto:public-device-apis@w3.org?Subject=%5Borientation-event%5D%20PUT%20SUBJECT%20HERE"> public-device-apis@w3.org</a> 发送邮件 ( <a href="mailto:public-device-apis-request@w3.org?subject=subscribe"> subscribe</a> ， <a href="https://lists.w3.org/Archives/Public/public-device-apis/">存档</a> )。发送电子邮件时，请将文本 "orientation-event" 放在主题中，最好像这样: 
+    "[orientation-event] <i data-lt>...summary of comment...</i>" 。
+    欢迎所有讨论。 </p>
+    <p> 作为编辑草案出版并不意味着 <abbr title="World Wide Web Consortium">W3C</abbr> 及其成员的认可。 
+    这是一份草案文档，可以随时被其他文档更新、替换或作废。
+    本文档不适合被其它正在编写的规范作为引用。 </p>
+    <p> 本文档由一个根据 <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/"> <abbr title="World Wide Web Consortium">W3C</abbr> 专利政策</a> 运作的小组编写。 <abbr title="World Wide Web Consortium">W3C</abbr> 保留了一份与该小组可交付成果相关的 <a href="https://www.w3.org/2004/01/pp-impl/114929/status" rel="disclosure"> 所有可披露专利的公开列表 </a> ; 该页面还包括公开一份专利的说明。
+    对认为包含 <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#def-essential"> 基本权利要求 </a> （Essential Claim(s)）的专利有实际了解的个人必须根据 <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#sec-Disclosure"> <abbr title="World Wide Web Consortium">W3C</abbr>专利政策第6节 </a> 公开信息。 </p>
+    <p>本文件受 <a href="https://www.w3.org/2021/Process-20211102/" id="w3c_process_revision-cn"> 2021 11月2日 W3C处理文档</a> 规范管理。 </p>
+    <div class="note custom-note" role="note"> 本副本作为 <a href="https://www.w3.org/TR/orientation-event/"> DeviceOrientation Event Specification</a> 的非官方翻译草案，仅推荐学习使用。 </div>
+   </div>
+   <h2 class="heading settled" data-level="1" id="conformance-requirements"><span class="secno">1. </span><span class="content">一致性要求</span><a class="self-link" href="#conformance-requirements"></a></h2>
+   <p>本规范中的所有图表、示例和注释以及明确标记为非规范的所有章节均为非规范性的。
+本规范中的其他内容均为规范性内容。</p>
+   <p>本文件规范性部分中的关键词 "MUST" ， "MUST NOT" ， "REQUIRED" ， "SHOULD" ，
+"SHOULD NOT" ， "RECOMMENDED" ， "MAY" ，和 "OPTIONAL"
+应按照RFC2119中的描述进行解释。为了便于阅读，在本规范中，这些单词 <strong>不会</strong> 全部以大写字母出现。<a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a></p>
+   <p>作为及其重要的算法的一部分，命令式要求的措辞 (如 "去掉任何前导空格字符" 或
+"返回false并中止这些步骤" ) 应根据介绍算法时使用的关键字( "必须[must]" ，
+"应该[should]" ， "可以[may]" 等)的含义进行解释。</p>
+   <p>用算法或特定步骤表述的一致性要求可以以任何方式实现，只要最终的结果是等效的。
+(需要注意，本规范中定义的算法旨在易于遵循，而非性能。)</p>
+   <p>用户代理可以对其他非强制的(unconstrained)输入施加实现特定的
+(implementation-specific)限制，例如，防止服务攻击的拒接器(denial)，
+防止内存耗尽，或绕过平台特定的(platform-specific)限制。</p>
+   <p>使用 ECMAScript 来实现本规范中定义的API的实现时，必须以与Web IDL规范中所定义的
+ECMAScript Bindings 的实现方式一致，因为本规范使用该规范的术语。<a data-link-type="biblio" href="#biblio-webidl" title="Web IDL Standard">[WEBIDL]</a></p>
+   <p>本规范引入的事件实现了 DOM 规范 <a data-link-type="biblio" href="#biblio-dom" title="DOM Standard">[DOM]</a> 中定义的 Event 接口。因此，
+实现必须支持本规范。</p>
+   <h2 class="heading settled" data-level="2" id="introduction"><span class="secno">2. </span><span class="content">简介</span><a class="self-link" href="#introduction"></a></h2>
+   <p><em>本节不是规范的。</em></p>
+   <p>本规范提供了两个新的 DOM 事件，用于获得关于主机设备的物理方向(physical
+orientation)和移动(movement)的信息。事件提供的信息不是原始传感器数据，
+而是与底层信息源无关的高级数据。常见的信息来源包括陀螺仪、指南针和加速计。</p>
+   <p>规范提供的第一个 DOM 事件 <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation">deviceorientation</a></code> 提供设备的物理方向，
+表示为一个局部坐标系的一系列旋量(rotations)。</p>
+   <p>本规范提供的第二个 DOM 事件 <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion">devicemotion</a></code> 提供设备的加速度(acceleration)，
+该加速度在设备定义的坐标系中的以笛卡尔坐标(即直角坐标)表示。
+它还提供在设备定义的局部坐标系中的设备旋转速率。在实际可行的情况下，
+事件应提供设备质心的加速度。</p>
+   <p>以下代码摘录举例说明了事件的基本用法。</p>
+   <div class="example" id="example-76f4ce7e">
+    <a class="self-link" href="#example-76f4ce7e"></a> 注册以接收 <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation①">deviceorientation</a></code> 事件: 
 <pre class="lang-js highlight">window<c- p>.</c->addEventListener<c- p>(</c-><c- u>"deviceorientation"</c-><c- p>,</c-> <c- a>function</c-><c- p>(</c->event<c- p>)</c-> <c- p>{</c->
-    <c- c1>// process event.alpha, event.beta and event.gamma</c->
+    <c- c1>// 处理 event.alpha, event.beta 和 event.gamma</c->
 <c- p>},</c-> <c- kc>true</c-><c- p>);</c->
 </pre>
    </div>
-   <div class="example" id="example-f65d12d9">
-    <a class="self-link" href="#example-f65d12d9"></a> A device lying flat on a horizontal surface with the top of the screen pointing West has the following orientation: 
+   <div class="example" id="example-6f80f00e">
+    <a class="self-link" href="#example-6f80f00e"></a> 一个设备平放在水平表面上，屏幕顶部指向西方，其方向如下: 
 <pre class="lang-js highlight"><c- p>{</c->
   alpha<c- o>:</c-> <c- mf>90</c-><c- p>,</c->
   beta<c- o>:</c-> <c- mf>0</c-><c- p>,</c->
   gamma<c- o>:</c-> <c- mf>0</c->
 <c- p>};</c->
 </pre>
-    <p>To get the compass heading, one would simply subtract <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha">alpha</a></code> from 360 degrees. As the device is turned on the horizontal surface, the compass heading is (360 - alpha).</p>
+    <p>要获得指南针的方向度数，只需从360度中减去 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha">alpha</a></code> 即可。
+当设备在水平面上转动时，指南针的方向度数为(360-alpha)。</p>
    </div>
-   <div class="example" id="example-f560d6db"><a class="self-link" href="#example-f560d6db"></a> A user is holding the device in their hand, with the screen in a vertical plane and the top of the screen pointing upwards. The value of <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta">beta</a></code> is 90, irrespective of what <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①">alpha</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma">gamma</a></code> are. </div>
-   <div class="example" id="example-69c0a149">
-    <a class="self-link" href="#example-69c0a149"></a> A user facing a compass heading of alpha degrees is holding the device in their hand, with the screen in a vertical plane and the top of the screen pointing to their right. The orientation of the device is: 
+   <div class="example" id="example-57f3c524"><a class="self-link" href="#example-57f3c524"></a> 用户手里拿着设备，屏幕在垂直平面上，屏幕顶部向上。不管 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①">alpha</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma">gamma</a></code> 是什么， <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta">beta</a></code> 的值都是90。 </div>
+   <div class="example" id="example-3b3e11d1">
+    <a class="self-link" href="#example-3b3e11d1"></a> 面对 alpha 度指南针(compass)方位的用户手里拿着设备，设备屏幕在垂直平面上，
+屏幕顶部指向他们的右侧。设备的方向为: 
 <pre class="lang-js highlight"><c- p>{</c->
   alpha<c- o>:</c-> <c- mf>270</c-> <c- o>-</c-> alpha<c- p>,</c->
   beta<c- o>:</c-> <c- mf>0</c-><c- p>,</c->
@@ -715,10 +749,10 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <c- p>};</c->
 </pre>
    </div>
-   <div class="example" id="example-76fffcaa">
-    <a class="self-link" href="#example-76fffcaa"></a> Registering to receive <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion①">devicemotion</a></code> events: 
+   <div class="example" id="example-273e81e8">
+    <a class="self-link" href="#example-273e81e8"></a> 注册以接收 <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion①">devicemotion</a></code> 事件: 
 <pre class="lang-js highlight">window<c- p>.</c->addEventListener<c- p>(</c-><c- u>"devicemotion"</c-><c- p>,</c-> <c- a>function</c-><c- p>(</c->event<c- p>)</c-> <c- p>{</c->
-    <c- c1>// Process event.acceleration, event.accelerationIncludingGravity,</c->
+    <c- c1>// 处理 event.acceleration, event.accelerationIncludingGravity,</c->
     <c- c1>// event.rotationRate and event.interval</c->
 <c- p>},</c-> <c- kc>true</c-><c- p>);</c->
 </pre>
@@ -751,7 +785,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 </pre>
    </div>
    <h2 class="heading settled" data-level="3" id="scope"><span class="secno">3. </span><span class="content">Scope</span><a class="self-link" href="#scope"></a></h2>
-   <p><em>This section is non-normative.</em></p>
+   <p><em>本节不是规范的。</em></p>
    <p>This specification is limited to providing DOM events for retrieving information describing the physical orientation and motion of the hosting device. The intended purpose of this API is to enable simple use cases such as those in <a href="#use-cases">Use-Cases</a> section. The scope of this specification does not include providing utilities to manipulate this data, such as transformation libraries. Nor does it include providing access to low sensor data, or direct control of these sensors.</p>
    <h2 class="heading settled" data-level="4" id="description"><span class="secno">4. </span><span class="content">Description</span><a class="self-link" href="#description"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="deviceorientation"><span class="secno">4.1. </span><span class="content">deviceorientation Event</span><a class="self-link" href="#deviceorientation"></a></h3>
@@ -1004,18 +1038,18 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
    <p>Additionally, implementing these items may also have a beneficial impact on the battery life of mobile devices.</p>
    <h2 class="heading settled" data-level="6" id="use-cases-and-requirements"><span class="secno">6. </span><span class="content">Use-Cases and Requirements</span><a class="self-link" href="#use-cases-and-requirements"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="use-cases"><span class="secno">6.1. </span><span class="content">Use-Cases</span><a class="self-link" href="#use-cases"></a></h3>
-    <em>This section is non-normative.</em> 
+    <em>本节不是规范的。</em> 
    <h4 class="no-toc heading settled" data-level="6.1.1" id="controlling-a-game"><span class="secno">6.1.1. </span><span class="content">Controlling a game</span><a class="self-link" href="#controlling-a-game"></a></h4>
-    <em>This section is non-normative.</em> 
+    <em>本节不是规范的。</em> 
    <p>A gaming Web application monitors the device’s orientation and interprets tilting in a certain direction as a means to control an on-screen sprite.</p>
    <h4 class="no-toc heading settled" data-level="6.1.2" id="gesture-recognition"><span class="secno">6.1.2. </span><span class="content">Gesture recognition</span><a class="self-link" href="#gesture-recognition"></a></h4>
-    <em>This section is non-normative.</em> 
+    <em>本节不是规范的。</em> 
    <p>A Web application monitors the device’s acceleration and applies signal processing in order to recognize certain specific gestures. For example, using a shaking gesture to clear a web form.</p>
    <h4 class="no-toc heading settled" data-level="6.1.3" id="mapping"><span class="secno">6.1.3. </span><span class="content">Mapping</span><a class="self-link" href="#mapping"></a></h4>
-    <em>This section is non-normative.</em> 
+    <em>本节不是规范的。</em> 
    <p>A mapping Web application uses the device’s orientation to correctly align the map with reality.</p>
    <h3 class="heading settled" data-level="6.2" id="requirements"><span class="secno">6.2. </span><span class="content">Requirements</span><a class="self-link" href="#requirements"></a></h3>
-    <em>This section is non-normative.</em> 
+    <em>本节不是规范的。</em> 
    <ul>
     <li data-md>
      <p>The specification must provide data that describes the physical orientation in space of the device.</p>
@@ -1029,9 +1063,9 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
      <p>The specification must use the existing DOM event framework.</p>
    </ul>
    <h2 class="no-num heading settled" id="examples"><span class="content">A Examples</span><a class="self-link" href="#examples"></a></h2>
-    <em>This section is non-normative.</em> 
+    <em>本节不是规范的。</em> 
    <h3 class="heading settled" id="worked-example"><span class="content">A.1 Calculating compass heading</span><a class="self-link" href="#worked-example"></a></h3>
-   <p><em>This section is non-normative.</em></p>
+   <p><em>本节不是规范的。</em></p>
    <p>The following worked example is intended as an aid to users of the DeviceOrientation event.</p>
    <p><a href="#introduction">Introduction</a> section provided an example of using the DeviceOrientation event to obtain a compass heading when the device is held with the screen horizontal. This example shows how to determine the compass heading that the user is facing when holding the device with the screen approximately vertical in front of them. An application of this is an augmented-reality system.</p>
    <p>More precisely, we wish to determine the compass heading of the horizontal component of a vector which is orthogonal to the device’s screen and pointing out of the back of the screen.</p>
@@ -1098,7 +1132,7 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
    <object class="equation" data="equation8b.xhtml" type="application/mathml+xml"> <img alt="theta = atan(-sin(alpha+gamma)/cos(alpha+gamma)) = -(alpha+gamma)" height="61" src="equation8b.png" width="288"> </object>
    <p>as expected.</p>
    <h3 class="heading settled" id="worked-example-2"><span class="content">A.2 Alternate device orientation representations</span><a class="self-link" href="#worked-example-2"></a></h3>
-   <p><em>This section is non-normative.</em></p>
+   <p><em>本节不是规范的。</em></p>
    <p>Describing orientation using Tait-Bryan angles can have some disadvantages such as introducing gimbal lock <a data-link-type="biblio" href="#biblio-gimballock" title="Gimbal Lock">[GIMBALLOCK]</a>. Depending on the intended application it can be useful to convert the Device Orientation values to other rotation representations.</p>
    <p>The first alternate orientation representation uses rotation matrices. By combining the component rotation matrices provided in the <a href="#worked-example">worked example</a> above we can represent the orientation of the device body frame as a combined rotation matrix.</p>
    <p>If R represents the rotation matrix of the device in the earth frame XYZ, then since the initial body frame is aligned with the earth, R is as follows.</p>
@@ -1688,7 +1722,7 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-def-deviceorientation" class="dfn-panel" data-for="def-deviceorientation" id="infopanel-for-def-deviceorientation">
    <span id="infopaneltitle-for-def-deviceorientation" style="display:none">Info about the 'deviceorientation' definition.</span><b><a href="#def-deviceorientation">#def-deviceorientation</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-def-deviceorientation">2. Introduction</a> <a href="#ref-for-def-deviceorientation①">(2)</a>
+    <li><a href="#ref-for-def-deviceorientation">2. 简介</a> <a href="#ref-for-def-deviceorientation①">(2)</a>
     <li><a href="#ref-for-def-deviceorientation②">4.1. deviceorientation Event</a> <a href="#ref-for-def-deviceorientation③">(2)</a> <a href="#ref-for-def-deviceorientation④">(3)</a>
     <li><a href="#ref-for-def-deviceorientation⑤">4.2. deviceorientationabsolute Event</a>
    </ul>
@@ -1709,7 +1743,7 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-dom-deviceorientationevent-alpha" class="dfn-panel" data-for="dom-deviceorientationevent-alpha" id="infopanel-for-dom-deviceorientationevent-alpha">
    <span id="infopaneltitle-for-dom-deviceorientationevent-alpha" style="display:none">Info about the 'alpha' definition.</span><b><a href="#dom-deviceorientationevent-alpha">#dom-deviceorientationevent-alpha</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-deviceorientationevent-alpha">2. Introduction</a> <a href="#ref-for-dom-deviceorientationevent-alpha①">(2)</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-alpha">2. 简介</a> <a href="#ref-for-dom-deviceorientationevent-alpha①">(2)</a>
     <li><a href="#ref-for-dom-deviceorientationevent-alpha②">4.1. deviceorientation Event</a> <a href="#ref-for-dom-deviceorientationevent-alpha③">(2)</a> <a href="#ref-for-dom-deviceorientationevent-alpha④">(3)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑤">(4)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑥">(5)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑦">(6)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑧">(7)</a>
     <li><a href="#ref-for-dom-deviceorientationevent-alpha⑨">4.2. deviceorientationabsolute Event</a>
     <li><a href="#ref-for-dom-deviceorientationevent-alpha①⓪">4.3. devicemotion Event</a>
@@ -1718,7 +1752,7 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-dom-deviceorientationevent-beta" class="dfn-panel" data-for="dom-deviceorientationevent-beta" id="infopanel-for-dom-deviceorientationevent-beta">
    <span id="infopaneltitle-for-dom-deviceorientationevent-beta" style="display:none">Info about the 'beta' definition.</span><b><a href="#dom-deviceorientationevent-beta">#dom-deviceorientationevent-beta</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-deviceorientationevent-beta">2. Introduction</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-beta">2. 简介</a>
     <li><a href="#ref-for-dom-deviceorientationevent-beta①">4.1. deviceorientation Event</a> <a href="#ref-for-dom-deviceorientationevent-beta②">(2)</a> <a href="#ref-for-dom-deviceorientationevent-beta③">(3)</a> <a href="#ref-for-dom-deviceorientationevent-beta④">(4)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑤">(5)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑥">(6)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑦">(7)</a>
     <li><a href="#ref-for-dom-deviceorientationevent-beta⑧">4.2. deviceorientationabsolute Event</a>
     <li><a href="#ref-for-dom-deviceorientationevent-beta⑨">4.3. devicemotion Event</a>
@@ -1727,7 +1761,7 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-dom-deviceorientationevent-gamma" class="dfn-panel" data-for="dom-deviceorientationevent-gamma" id="infopanel-for-dom-deviceorientationevent-gamma">
    <span id="infopaneltitle-for-dom-deviceorientationevent-gamma" style="display:none">Info about the 'gamma' definition.</span><b><a href="#dom-deviceorientationevent-gamma">#dom-deviceorientationevent-gamma</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-deviceorientationevent-gamma">2. Introduction</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-gamma">2. 简介</a>
     <li><a href="#ref-for-dom-deviceorientationevent-gamma①">4.1. deviceorientation Event</a> <a href="#ref-for-dom-deviceorientationevent-gamma②">(2)</a> <a href="#ref-for-dom-deviceorientationevent-gamma③">(3)</a> <a href="#ref-for-dom-deviceorientationevent-gamma④">(4)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑤">(5)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑥">(6)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑦">(7)</a>
     <li><a href="#ref-for-dom-deviceorientationevent-gamma⑧">4.2. deviceorientationabsolute Event</a>
     <li><a href="#ref-for-dom-deviceorientationevent-gamma⑨">4.3. devicemotion Event</a>
@@ -1769,7 +1803,7 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-def-devicemotion" class="dfn-panel" data-for="def-devicemotion" id="infopanel-for-def-devicemotion">
    <span id="infopaneltitle-for-def-devicemotion" style="display:none">Info about the 'devicemotion' definition.</span><b><a href="#def-devicemotion">#def-devicemotion</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-def-devicemotion">2. Introduction</a> <a href="#ref-for-def-devicemotion①">(2)</a>
+    <li><a href="#ref-for-def-devicemotion">2. 简介</a> <a href="#ref-for-def-devicemotion①">(2)</a>
     <li><a href="#ref-for-def-devicemotion②">4.3. devicemotion Event</a>
    </ul>
   </aside>
@@ -1794,7 +1828,7 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotioneventrotationrate-gamma" class="dfn-panel" data-for="dom-devicemotioneventrotationrate-gamma" id="infopanel-for-dom-devicemotioneventrotationrate-gamma">
    <span id="infopaneltitle-for-dom-devicemotioneventrotationrate-gamma" style="display:none">Info about the 'gamma' definition.</span><b><a href="#dom-devicemotioneventrotationrate-gamma">#dom-devicemotioneventrotationrate-gamma</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-devicemotioneventrotationrate-gamma">2. Introduction</a>
+    <li><a href="#ref-for-dom-devicemotioneventrotationrate-gamma">2. 简介</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-devicemotionevent" class="dfn-panel" data-for="devicemotionevent" id="infopanel-for-devicemotionevent">
@@ -1806,21 +1840,21 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-acceleration" class="dfn-panel" data-for="dom-devicemotionevent-acceleration" id="infopanel-for-dom-devicemotionevent-acceleration">
    <span id="infopaneltitle-for-dom-devicemotionevent-acceleration" style="display:none">Info about the 'acceleration' definition.</span><b><a href="#dom-devicemotionevent-acceleration">#dom-devicemotionevent-acceleration</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-devicemotionevent-acceleration">2. Introduction</a> <a href="#ref-for-dom-devicemotionevent-acceleration①">(2)</a>
+    <li><a href="#ref-for-dom-devicemotionevent-acceleration">2. 简介</a> <a href="#ref-for-dom-devicemotionevent-acceleration①">(2)</a>
     <li><a href="#ref-for-dom-devicemotionevent-acceleration②">4.3. devicemotion Event</a> <a href="#ref-for-dom-devicemotionevent-acceleration③">(2)</a> <a href="#ref-for-dom-devicemotionevent-acceleration④">(3)</a> <a href="#ref-for-dom-devicemotionevent-acceleration⑤">(4)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-accelerationincludinggravity" class="dfn-panel" data-for="dom-devicemotionevent-accelerationincludinggravity" id="infopanel-for-dom-devicemotionevent-accelerationincludinggravity">
    <span id="infopaneltitle-for-dom-devicemotionevent-accelerationincludinggravity" style="display:none">Info about the 'accelerationIncludingGravity' definition.</span><b><a href="#dom-devicemotionevent-accelerationincludinggravity">#dom-devicemotionevent-accelerationincludinggravity</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity">2. Introduction</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity①">(2)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity②">(3)</a>
+    <li><a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity">2. 简介</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity①">(2)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity②">(3)</a>
     <li><a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity③">4.3. devicemotion Event</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity④">(2)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity⑤">(3)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity⑥">(4)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-rotationrate" class="dfn-panel" data-for="dom-devicemotionevent-rotationrate" id="infopanel-for-dom-devicemotionevent-rotationrate">
    <span id="infopaneltitle-for-dom-devicemotionevent-rotationrate" style="display:none">Info about the 'rotationRate' definition.</span><b><a href="#dom-devicemotionevent-rotationrate">#dom-devicemotionevent-rotationrate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-devicemotionevent-rotationrate">2. Introduction</a>
+    <li><a href="#ref-for-dom-devicemotionevent-rotationrate">2. 简介</a>
     <li><a href="#ref-for-dom-devicemotionevent-rotationrate①">4.3. devicemotion Event</a> <a href="#ref-for-dom-devicemotionevent-rotationrate②">(2)</a> <a href="#ref-for-dom-devicemotionevent-rotationrate③">(3)</a>
    </ul>
   </aside>

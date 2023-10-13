@@ -35,49 +35,138 @@ urlPrefix: https://www.w3.org/TR/page-visibility-2/; spec: PAGE-VISIBILITY
         text: visible; url: dom-visibilitystate-visible
 </pre>
 
-Conformance requirements {#conformance-requirements}
-====================================================
+<h2 class="no-num no-toc no-ref heading settled" id="sotd-cn">
+<span class="content">文档状态</span>
+</h2>
+<div data-fill-with="status-cn">
+    <p><em>本节介绍了本文件发布时的状态。当前 
+    <abbr title="World Wide Web Consortium">W3C</abbr> 
+    出版物列表和本技术报告的最新修订版可在 <a href="https://www.w3.org/TR/">
+    <abbr title="World Wide Web Consortium">W3C</abbr> 技术报告索引 </a>
+    中找到，网址为 https://www.w3.org/TR/ 。</em>
+    </p>
 
-All diagrams, examples, and notes in this specification are non-normative, as are all sections explicitly marked non-normative. Everything else in this specification is normative.
+    <p> 本文件由
+    <a href="https://www.w3.org/groups/wg/das">设备和传感器工作小组</a>
+    依据 <a href="https://www.w3.org/2021/Process-20211102/#w3c-recommendation-track">W3C 
+    推荐流程</a> 作为 <strong>工作草案</strong> (Working Draft)发布。
+    <span class="del-content">本文档旨在成为W3C推荐标准</span> 。
+    </p>
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in the normative parts of this document are to be interpreted as described in RFC2119. For readability, these words do not appear in all uppercase letters in this specification. [[!RFC2119]]
+    <p>
+    如果您想要对本规范提出反馈和意见，请使用向 
+    <a href="mailto:public-device-apis@w3.org?Subject=%5Borientation-event%5D%20PUT%20SUBJECT%20HERE"">
+    public-device-apis@w3.org</a> 发送邮件 (
+    <a href="mailto:public-device-apis-request@w3.org?subject=subscribe">
+    subscribe</a> ，
+    <a href="https://lists.w3.org/Archives/Public/public-device-apis/">存档</a>
+    )。发送电子邮件时，请将文本 "orientation-event" 放在主题中，最好像这样: 
+    "[orientation-event] <i data-lt>...summary of comment...</i>" 。
+    欢迎所有讨论。
+    </p>
 
-Requirements phrased in the imperative as part of algorithms (such as "strip any leading space characters" or "return false and abort these steps") are to be interpreted with the meaning of the key word ("must", "should", "may", etc) used in introducing the algorithm.
+    <p>
+    作为编辑草案出版并不意味着
+    <abbr title="World Wide Web Consortium">W3C</abbr>
+    及其成员的认可。 
+    这是一份草案文档，可以随时被其他文档更新、替换或作废。
+    本文档不适合被其它正在编写的规范作为引用。
+    </p>
 
-Conformance requirements phrased as algorithms or specific steps may be implemented in any manner, so long as the end result is equivalent. (In particular, the algorithms defined in this specification are intended to be easy to follow, and not intended to be performant.)
+    <p> 本文档由一个根据
+    <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/">
+    <abbr title="World Wide Web Consortium">W3C</abbr> 专利政策</a>
+    运作的小组编写。
+    <abbr title="World Wide Web Consortium">W3C</abbr>
+    保留了一份与该小组可交付成果相关的
+    <a href="https://www.w3.org/2004/01/pp-impl/114929/status" rel="disclosure">
+    所有可披露专利的公开列表
+    </a> ; 该页面还包括公开一份专利的说明。
+    对认为包含
+    <a 
+    href=
+    "https://www.w3.org/Consortium/Patent-Policy-20200915/#def-essential">
+    基本权利要求
+    </a>
+    （Essential Claim(s)）的专利有实际了解的个人必须根据
+    <a
+    href=
+    "https://www.w3.org/Consortium/Patent-Policy-20200915/#sec-Disclosure">
+    <abbr title="World Wide Web Consortium">W3C</abbr>专利政策第6节
+    </a> 
+    公开信息。
+    </p>
 
-User agents may impose implementation-specific limits on otherwise unconstrained inputs, e.g. to prevent denial of service attacks, to guard against running out of memory, or to work around platform-specific limitations.
+    <p>本文件受
+    <a href="https://www.w3.org/2021/Process-20211102/" id="w3c_process_revision-cn">
+    2021 11月2日 W3C处理文档</a> 规范管理。
+    </p>
 
-Implementations that use ECMAScript to implement the APIs defined in this specification must implement them in a manner consistent with the ECMAScript Bindings defined in the Web IDL specification, as this specification uses that specification's terminology. [[!WEBIDL]]
+    <div class="note custom-note">
+    本副本作为 <a href="https://www.w3.org/TR/orientation-event/">
+    DeviceOrientation Event Specification</a> 的非官方翻译草案，仅推荐学习使用。
+    </div>
+</div>
 
-The events introduced by this specification implement the Event interface defined in the DOM Specification, [[!DOM]]. Implementations must therefore support this specification.
+一致性要求 {#conformance-requirements}
+======================================
+
+本规范中的所有图表、示例和注释以及明确标记为非规范的所有章节均为非规范性的。
+本规范中的其他内容均为规范性内容。
+
+本文件规范性部分中的关键词 "MUST" ， "MUST NOT" ， "REQUIRED" ， "SHOULD" ， 
+"SHOULD NOT" ， "RECOMMENDED" ， "MAY" ，和 "OPTIONAL"
+应按照RFC2119中的描述进行解释。为了便于阅读，在本规范中，这些单词 
+<strong>不会</strong> 全部以大写字母出现。[[!RFC2119]]
+
+作为及其重要的算法的一部分，命令式要求的措辞 (如 "去掉任何前导空格字符" 或 
+"返回false并中止这些步骤" ) 应根据介绍算法时使用的关键字( "必须[must]" ，
+"应该[should]" ， "可以[may]" 等)的含义进行解释。
+
+用算法或特定步骤表述的一致性要求可以以任何方式实现，只要最终的结果是等效的。
+(需要注意，本规范中定义的算法旨在易于遵循，而非性能。)
+
+用户代理可以对其他非强制的(unconstrained)输入施加实现特定的
+(implementation-specific)限制，例如，防止服务攻击的拒接器(denial)，
+防止内存耗尽，或绕过平台特定的(platform-specific)限制。
+
+使用 ECMAScript 来实现本规范中定义的API的实现时，必须以与Web IDL规范中所定义的
+ECMAScript Bindings 的实现方式一致，因为本规范使用该规范的术语。[[!WEBIDL]]
+
+本规范引入的事件实现了 DOM 规范 [[!DOM]] 中定义的 Event 接口。因此，
+实现必须支持本规范。
 
 
-
-Introduction {#introduction}
+简介 {#introduction}
 ============================
 
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
-This specification provides two new DOM events for obtaining information about the physical orientation and movement of the hosting device. The information provided by the events is not raw sensor data, but rather high-level data which is agnostic to the underlying source of information. Common sources of information include gyroscopes, compasses and accelerometers.
+本规范提供了两个新的 DOM 事件，用于获得关于主机设备的物理方向(physical 
+orientation)和移动(movement)的信息。事件提供的信息不是原始传感器数据，
+而是与底层信息源无关的高级数据。常见的信息来源包括陀螺仪、指南针和加速计。
 
-The first DOM event provided by the specification, {{deviceorientation}}, supplies the physical orientation of the device, expressed as a series of rotations from a local coordinate frame.
+规范提供的第一个 DOM 事件 {{deviceorientation}} 提供设备的物理方向，
+表示为一个局部坐标系的一系列旋量(rotations)。
 
-The second DOM event provided by this specification, {{devicemotion}}, supplies the acceleration of the device, expressed in Cartesian coordinates in a coordinate frame defined in the device. It also supplies the rotation rate of the device about a local coordinate frame. Where practically possible, the event should provide the acceleration of the device's center of mass.
+本规范提供的第二个 DOM 事件 {{devicemotion}} 提供设备的加速度(acceleration)，
+该加速度在设备定义的坐标系中的以笛卡尔坐标(即直角坐标)表示。
+它还提供在设备定义的局部坐标系中的设备旋转速率。在实际可行的情况下，
+事件应提供设备质心的加速度。
 
-The following code extracts illustrate basic use of the events.
+以下代码摘录举例说明了事件的基本用法。
 
 <div class="example">
-Registering to receive {{deviceorientation}} events:
+注册以接收 {{deviceorientation}} 事件:
 <pre class="lang-js">
 window.addEventListener("deviceorientation", function(event) {
-    // process event.alpha, event.beta and event.gamma
+    // 处理 event.alpha, event.beta 和 event.gamma
 }, true);
 </pre>
 </div>
 
 <div class="example">
-A device lying flat on a horizontal surface with the top of the screen pointing West has the following orientation:
+一个设备平放在水平表面上，屏幕顶部指向西方，其方向如下: 
 <pre class="lang-js">
 {
   alpha: 90,
@@ -85,15 +174,19 @@ A device lying flat on a horizontal surface with the top of the screen pointing 
   gamma: 0
 };
 </pre>
-To get the compass heading, one would simply subtract {{DeviceOrientationEvent/alpha}} from 360 degrees. As the device is turned on the horizontal surface, the compass heading is (360 - alpha).
+要获得指南针的方向度数，只需从360度中减去 {{DeviceOrientationEvent/alpha}} 即可。
+当设备在水平面上转动时，指南针的方向度数为(360-alpha)。
 </div>
 
 <div class="example">
-A user is holding the device in their hand, with the screen in a vertical plane and the top of the screen pointing upwards. The value of {{DeviceOrientationEvent/beta}} is 90, irrespective of what {{DeviceOrientationEvent/alpha}} and {{DeviceOrientationEvent/gamma}} are.
+用户手里拿着设备，屏幕在垂直平面上，屏幕顶部向上。不管 
+{{DeviceOrientationEvent/alpha}} 和 {{DeviceOrientationEvent/gamma}} 是什么，
+{{DeviceOrientationEvent/beta}} 的值都是90。
 </div>
 
 <div class="example">
-A user facing a compass heading of alpha degrees is holding the device in their hand, with the screen in a vertical plane and the top of the screen pointing to their right. The orientation of the device is:
+面对 alpha 度指南针(compass)方位的用户手里拿着设备，设备屏幕在垂直平面上，
+屏幕顶部指向他们的右侧。设备的方向为:
 <pre class="lang-js">
 {
   alpha: 270 - alpha,
@@ -104,11 +197,11 @@ A user facing a compass heading of alpha degrees is holding the device in their 
 </div>
 
 <div class="example">
-Registering to receive {{devicemotion}} events:
+注册以接收 {{devicemotion}} 事件:
 <pre class="lang-js">
 window.addEventListener("devicemotion", function(event) {
-    // Process event.acceleration, event.accelerationIncludingGravity,
-    // event.rotationRate and event.interval
+    // 处理 event.acceleration, event.accelerationIncludingGravity,
+    // event.rotationRate 和 event.interval
 }, true);
 </pre>
 </div>
@@ -149,7 +242,7 @@ A device is mounted in a vehicle, with the screen in a vertical plane, the top u
 Scope {#scope}
 ==============
 
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 This specification is limited to providing DOM events for retrieving information describing the physical orientation and motion of the hosting device. The intended purpose of this API is to enable simple use cases such as those in [[#use-cases|Use-Cases]] section. The scope of this specification does not include providing utilities to manipulate this data, such as transformation libraries. Nor does it include providing access to low sensor data, or direct control of these sensors.
 
@@ -463,25 +556,25 @@ Use-Cases and Requirements {#use-cases-and-requirements}
 ========================================================
 
 <h3 id="use-cases">Use-Cases</h3>
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 <h4 class="no-toc" id="controlling-a-game">Controlling a game</h4>
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 A gaming Web application monitors the device's orientation and interprets tilting in a certain direction as a means to control an on-screen sprite.
 
 <h4 class="no-toc" id="gesture-recognition">Gesture recognition</h4>
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 A Web application monitors the device's acceleration and applies signal processing in order to recognize certain specific gestures. For example, using a shaking gesture to clear a web form.
 
 <h4 class="no-toc" id="mapping">Mapping</h4>
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 A mapping Web application uses the device's orientation to correctly align the map with reality.
 
 <h3 id="requirements">Requirements</h3>
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 * The specification must provide data that describes the physical orientation in space of the device.
 * The specification must provide data that describes the motion in space of the device.
@@ -490,11 +583,11 @@ A mapping Web application uses the device's orientation to correctly align the m
 * The specification must use the existing DOM event framework.
 
 <h2 class="no-num" id="examples">A Examples</h2>
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 <h3 id="worked-example">A.1 Calculating compass heading</h3>
 
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 The following worked example is intended as an aid to users of the DeviceOrientation event.
 
@@ -611,7 +704,7 @@ as expected.
 
 <h3 id="worked-example-2">A.2 Alternate device orientation representations</h3>
 
-<em>This section is non-normative.</em>
+<em>本节不是规范的。</em>
 
 Describing orientation using Tait-Bryan angles can have some disadvantages such as introducing gimbal lock [[GIMBALLOCK]]. Depending on the intended application it can be useful to convert the Device Orientation values to other rotation representations.
 

@@ -2,7 +2,7 @@
  * @Author: mangwu                                                             *
  * @File: custom-script.js                                                     *
  * @Date: 2023-05-01 02:02:19                                                  *
- * @LastModifiedDate: 2023-10-12 17:58:18                                      *
+ * @LastModifiedDate: 2023-10-13 11:15:26                                      *
  * @ModifiedBy: mangwu                                                         *
  * -----------------------                                                     *
  * Copyright (c) 2023 mangwu                                                   *
@@ -145,7 +145,7 @@ function translatePanel(dfn) {
 /**
  * @description 翻译目录英文部分
  */
-function tranlateToc() {
+function translateToc() {
   const tocTitle = getElement("#contents");
   tocTitle.textContent = "目录";
   const tocJump = getElement("#toc-jump > span + span");
@@ -208,21 +208,21 @@ function translateDfnType(originDfn) {
 /**
  * @description 翻译索引
  */
-function tranlateIndex() {
+function translateIndex() {
   // 目录
-  tranlateIndexBySeletor("a[href='#index'] .content", "索引");
-  tranlateIndexBySeletor(
+  translateIndexBySeletor("a[href='#index'] .content", "索引");
+  translateIndexBySeletor(
     "a[href='#index-defined-here'] .content",
     "本规范定义的术语"
   );
-  tranlateIndexBySeletor(
+  translateIndexBySeletor(
     "a[href='#index-defined-elsewhere'] .content",
     "引用其他规范定义的术语"
   );
   // 标题
-  tranlateIndexBySeletor("#index .content", "索引");
-  tranlateIndexBySeletor("#index-defined-here .content", "本规范定义的术语");
-  tranlateIndexBySeletor(
+  translateIndexBySeletor("#index .content", "索引");
+  translateIndexBySeletor("#index-defined-here .content", "本规范定义的术语");
+  translateIndexBySeletor(
     "#index-defined-elsewhere .content",
     "引用其他规范定义的术语"
   );
@@ -240,7 +240,7 @@ function tranlateIndex() {
  * @param {string} translateZh 翻译文本
  * @param {HTMLElement} parent 查询父节点
  */
-function tranlateIndexBySeletor(seletor, translateZh = "", parent = document) {
+function translateIndexBySeletor(seletor, translateZh = "", parent = document) {
   const element = getElement(seletor, parent);
   if (element) {
     // 找到就进行翻译
@@ -254,7 +254,7 @@ function tranlateIndexBySeletor(seletor, translateZh = "", parent = document) {
  * @param {string} translateInnerZh 翻译的HTML文本
  * @param {HTMLElement} parent 查询父节点
  */
-function tranlateByInnerHTML(
+function translateByInnerHTML(
   seletor,
   translateInnerZh = "",
   parent = document
@@ -269,16 +269,16 @@ function tranlateByInnerHTML(
 /**
  * @description 翻译引用
  */
-function tranlateReferences() {
+function translateReferences() {
   // 目录
-  tranlateIndexBySeletor("a[href='#references'] .content", "引用");
-  tranlateIndexBySeletor("a[href='#normative'] .content", "规范性引用");
-  tranlateIndexBySeletor("a[href='#informative'] .content", "资料性引用");
+  translateIndexBySeletor("a[href='#references'] .content", "引用");
+  translateIndexBySeletor("a[href='#normative'] .content", "规范性引用");
+  translateIndexBySeletor("a[href='#informative'] .content", "资料性引用");
 
   // 标题
-  tranlateIndexBySeletor("#references .content", "引用");
-  tranlateIndexBySeletor("#normative .content", "规范性引用");
-  tranlateIndexBySeletor("#informative .content", "资料性引用");
+  translateIndexBySeletor("#references .content", "引用");
+  translateIndexBySeletor("#normative .content", "规范性引用");
+  translateIndexBySeletor("#informative .content", "资料性引用");
 }
 
 /**
@@ -311,15 +311,15 @@ function addZhComformance() {
   }
 }
 
-function tranlateMetaData() {
-  tranlateIndexBySeletor("details > summary", "有关此文档的更多详细信息");
-  tranlateIndexBySeletor("details > div > dl dt:nth-child(1)", "本版本: ");
-  tranlateIndexBySeletor(
+function translateMetaData() {
+  translateIndexBySeletor("details > summary", "有关此文档的更多详细信息");
+  translateIndexBySeletor("details > div > dl dt:nth-child(1)", "本版本: ");
+  translateIndexBySeletor(
     "details > div > dl dt:nth-child(3)",
     "最新发布版本: "
   );
-  tranlateIndexBySeletor("details > div > dl dt:nth-child(5)", "反馈: ");
-  tranlateByInnerHTML(
+  translateIndexBySeletor("details > div > dl dt:nth-child(5)", "反馈: ");
+  translateByInnerHTML(
     "details > div > dl dd:nth-child(6) > span",
     `@
     <a href="mailto:public-device-apis@w3.org?subject=%5Borientation-event%5D%20YOUR%20TOPIC%20HERE">
@@ -329,13 +329,18 @@ function tranlateMetaData() {
   );
 }
 
+function translateContent() {
+  translateIndexBySeletor("#abstract .content", "摘要");
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   tryCatch(figureAllChange, "figureAllChange方法执行错误:");
   tryCatch(translatePanels, "translatePanels方法执行错误:");
-  tryCatch(tranlateToc, "tranlateToc方法执行错误:");
+  tryCatch(translateToc, "translateToc方法执行错误:");
   tryCatch(translateDfnTypes, "translateDfnTypes方法执行错误:");
-  tryCatch(tranlateIndex, "tranlateIndex方法执行错误:");
-  tryCatch(tranlateReferences, "tranlateReferences方法执行错误:");
+  tryCatch(translateIndex, "translateIndex方法执行错误:");
+  tryCatch(translateReferences, "translateReferences方法执行错误:");
   tryCatch(addZhComformance, "addZhComformance方法执行错误:");
-  tryCatch(tranlateMetaData, "tranlateMetaData方法执行错误:");
+  tryCatch(translateMetaData, "translateMetaData方法执行错误:");
+  tryCatch(translateContent, "translateContent方法执行错误:");
 });

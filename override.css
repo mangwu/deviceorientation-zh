@@ -269,7 +269,7 @@ body {
 }
 
 /* 无法直接翻译的标题可以直接隐藏替换 */
-#abstract,
+/* #abstract, // 使用JavaScript替换文本 */
 #sotd,
 div[data-fill-with="status"] {
   display: none;
