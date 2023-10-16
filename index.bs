@@ -178,6 +178,34 @@ window.addEventListener("deviceorientation", function(event) {
 当设备在水平面上转动时，指南针的方向度数为(360-alpha)。
 </div>
 
+<div class="note custom-note">
+当设备顶部直接指向地球北极时， {{DeviceOrientationEvent/alpha}} 角为0°，
+并且随着设备向左旋转而增加。{{DeviceOrientationEvent/alpha}} 的方位角度表示如下: 
+<pre class="lang-js">
+           0 北
+            |
+            |
+            |
+90 西 -------------- 东 270
+            |
+            |
+            |
+          180 南
+</pre>
+而指南针的方位角度是顺时针的，如下:
+<pre class="lang-js">
+            0 北
+             |
+             |
+             |
+270 西 --------------- 东 90
+             |
+             |
+             |
+           180 南
+</pre>
+</div>
+
 <div class="example">
 用户手里拿着设备，屏幕在垂直平面上，屏幕顶部向上。不管 
 {{DeviceOrientationEvent/alpha}} 和 {{DeviceOrientationEvent/gamma}} 是什么，
@@ -196,6 +224,66 @@ window.addEventListener("deviceorientation", function(event) {
 </pre>
 </div>
 
+<div class="note custom-note">
+设备坐标系是固定在设备中心的坐标系。我们使用小写字母("x"、"y"和"z")
+来描述设备坐标系的轴。
+<figure id="figure-axes">
+    <img
+        src="images/axes.png"
+        width="415"
+        height="388"
+        alt="设备坐标系"
+    />
+    <div class="custom-figcaption">
+    设备坐标系
+    </div>
+</figure>
+绕z轴旋转，也就是转动设备，会导致 {{DeviceOrientationEvent/alpha}} 
+旋转角度发生变化:
+<figure id="figure-alpha">
+    <img
+        src="images/alpha.png"
+        width="415"
+        height="388"
+        alt="当设备顶部直接指向地球北极时，阿尔法角为0°，并且随着设备向左旋转而增加"
+    />
+    <div class="custom-figcaption">
+    当设备顶部直接指向地球北极时，阿尔法角为0°，并且随着设备向左旋转而增加
+    </div>
+</figure>
+绕x轴旋转，也就是说，将设备从用户身边或朝向用户倾斜——会导致 
+{{DeviceOrientationEvent/beta}} 旋转角度发生变化:
+<figure id="figure-beta2">
+    <img
+        src="images/beta2.png"
+        width="415"
+        height="388"
+        alt="当设备的顶部和底部距离地球表面相同时，β角为0°; 当设备向前朝用户倾斜时，它向180°增加，当设备向后远离用户倾斜时它向-180°减少。"
+    />
+    <div class="custom-figcaption">
+    当设备的顶部和底部距离地球表面相同时，β角为0°; 当设备向前朝用户倾斜时，
+    它向180°增加，当设备向后远离用户倾斜时它向-180°减少。
+    </div>
+</figure>
+绕y轴旋转，即向左或向右倾斜设备，会导致 {{DeviceOrientationEvent/gamma}} 
+旋转角度发生变化:
+<figure id="figure-gamma">
+    <img
+        src="images/gamma.png"
+        width="415"
+        height="388"
+        alt="当设备的左侧和右侧距离地球表面相同时，γ角为0°，当设备向右倾斜时，γ角度向90°增加，当设备向左倾斜时，γ角度向-90°增加。"
+    />
+    <div class="custom-figcaption">
+    当设备的左侧和右侧距离地球表面相同时，γ角为0°，当设备向右倾斜时，
+    γ角度向90°增加，当设备向左倾斜时，γ角度向-90°增加。
+    </div>
+</figure>
+关于方位和移动数据的更通俗解释，可以查看 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained">
+MDN-Orientation_and_motion_data_explained</a> 
+</div>
+
 <div class="example">
 注册以接收 {{devicemotion}} 事件:
 <pre class="lang-js">
@@ -207,7 +295,8 @@ window.addEventListener("devicemotion", function(event) {
 </div>
 
 <div class="example">
-A device lying flat on a horizontal surface with the screen upmost has an {{DeviceMotionEvent/acceleration}} of zero and the following value for {{DeviceMotionEvent/accelerationIncludingGravity}}:
+平放在水平表面上、屏幕向上的设备的 {{DeviceMotionEvent/acceleration}} 为零，
+加速度值如下 {{DeviceMotionEvent/accelerationIncludingGravity}} (包括重力加速度):
 <pre class="lang-js">
 {
   x: 0,
@@ -218,7 +307,8 @@ A device lying flat on a horizontal surface with the screen upmost has an {{Devi
 </div>
 
 <div class="example">
-A device in free-fall, with the screen horizontal and upmost, has an {{DeviceMotionEvent/accelerationIncludingGravity}} of zero and the following value for acceleration:
+屏幕水平且向上的自由落体设备的 
+{{DeviceMotionEvent/accelerationIncludingGravity}} 为零，加速度值如下: 
 <pre class="lang-js">
 {
   x: 0,
@@ -229,7 +319,11 @@ A device in free-fall, with the screen horizontal and upmost, has an {{DeviceMot
 </div>
 
 <div class="example">
-A device is mounted in a vehicle, with the screen in a vertical plane, the top uppermost and facing the rear of the vehicle. The vehicle is travelling at speed v around a right-hand bend of radius r. The device records a positive x component for both {{DeviceMotionEvent/acceleration}} and {{DeviceMotionEvent/accelerationIncludingGravity}}. The device also records a negative value for {{DeviceMotionEvent/rotationRate!!attribute}}.{{DeviceMotionEventRotationRate/gamma}}:
+一个放置在车辆上的设备，屏幕在垂直平面上，设备顶部朝上，并且屏幕面向车辆后部。
+车辆以速度v绕半径为r的右侧弯道行驶。该设备在 {{DeviceMotionEvent/acceleration}} 
+和 {{DeviceMotionEvent/accelerationIncludingGravity}} 记录了正x分量。
+该设备还记录了 {{DeviceMotionEvent/rotationRate!!attribute}}.
+{{DeviceMotionEventRotationRate/gamma}} 的负值:
 <pre class="lang-js">
 {
   acceleration: {x: v^2/r, y: 0, z: 0},
@@ -239,21 +333,28 @@ A device is mounted in a vehicle, with the screen in a vertical plane, the top u
 </pre>
 </div>
 
-Scope {#scope}
+适用范围 {#scope}
 ==============
 
 <em>本节不是规范的。</em>
 
-This specification is limited to providing DOM events for retrieving information describing the physical orientation and motion of the hosting device. The intended purpose of this API is to enable simple use cases such as those in [[#use-cases|Use-Cases]] section. The scope of this specification does not include providing utilities to manipulate this data, such as transformation libraries. Nor does it include providing access to low sensor data, or direct control of these sensors.
+该规范限于提供 DOM 事件，用于检索描述主机设备的物理方向和运动的信息。
+本规范的 API 的预期目的是使简单的用例有效，例如 [[#use-cases|Use-Cases]] 
+部分中的用例。本规范的适用范围不包括提供操作这些数据的实用程序，例如转换库。
+它也不包括提供对低传感器数据的访问或对这些传感器的直接控制。
 
-Description {#description}
+说明 {#description}
 ==========================
 
 <h3 id="deviceorientation">deviceorientation Event</h3>
 
-User agents implementing this specification must provide a new DOM event, named <dfn event for=Window id="def-deviceorientation"><code>deviceorientation</code></dfn>.
+实现本规范的用户代理必须提供一个名为 
+<dfn event for=Window id="def-deviceorientation"><code>
+deviceorientation</code></dfn> 的新DOM事件。
 
-User agents must also provide an event handler IDL attribute [[!HTML]] named {{Window/ondeviceorientation}} on the {{window!!attribute}} object. The type of the corresponding [=event handler event type=] must be {{deviceorientation}}.
+用户代理还必须在 {{window!!attribute}} 对象上提供一个名为 
+{{Window/ondeviceorientation}} 的事件处理程序(类型的) IDL 属性 [[!HTML]] 。
+它对应的 [=event handler event type=] 的类型必须是 {{deviceorientation}} 。
 
 <pre class="idl">
 partial interface Window {
@@ -279,95 +380,163 @@ dictionary DeviceOrientationEventInit : EventInit {
 };
 </pre>
 
-The {{DeviceOrientationEvent/alpha}} attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.
+{{DeviceOrientationEvent/alpha}} 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>null</code> 。
 
-The {{DeviceOrientationEvent/beta}} attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.
+{{DeviceOrientationEvent/beta}} 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>null</code> 。
 
-The {{DeviceOrientationEvent/gamma}} attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.
+{{DeviceOrientationEvent/gamma}} 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>null</code> 。
 
-The {{DeviceOrientationEvent/absolute}} attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to false.
+{{DeviceOrientationEvent/absolute}} 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>false</code> 。
 
-The static {{DeviceOrientationEvent/requestPermission()}} operation, when invoked, must run these steps:
+调用静态方法 {{DeviceOrientationEvent/requestPermission()}} 时，
+必须运行以下步骤:
 <ol>
- <li><p>Let <var>promise</var> be a new promise.
+ <li><p>赋值 <var>promise</var> 为一个新的期约对象。
 
  <li>
-  <p>Run these steps <a>in parallel</a>:
+  <p><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">同步</a> 
+  运行下列步骤:
 
   <ol>
-   <li><p>Let <var>permission</var> be <a>permission</a> for
-   <a>relevant settings object</a>'s <a for="environment settings object">origin</a>.
+   <li><p>赋值 <var>permission</var> 为一个 
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
+   相关设置对象(relevant-settings-objec)</a> 
+   的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
+   源(origin)</a> 的 <a href="#permission">枚举值(permission)</a> 。
 
-   <li><p>If <var>permission</var> is "<code>default</code>" and the <a>relevant global object</a> does not have <a>transient activation</a>, then reject <var>promise</var> with a
-   {{NotAllowedError!!exception}} {{DOMException}} and abort these steps.
+   <li><p>如果 <var>permission</var> 值为 "<code>default</code>" 并且 
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">
+   相关全局对象(relevant global object)</a> 没有 
+   <a href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation">
+   短暂激活(transient activation)</a> ，那么使用一个 
+   {{NotAllowedError!!exception}} {{DOMException}} 错误拒绝(reject) 
+   <var>promise</var> 并且中止步骤运行。
 
-   <li><p>If <var>permission</var> is "<code>default</code>", ask the user whether sharing device orientation
-   for the <a>relevant settings object</a>'s
-   <a for="environment settings object">origin</a> is acceptable. If it is, set
-   <var>permission</var> to "<code>granted</code>", and "<code>denied</code>" otherwise.
+   <li><p>如果 <var>permission</var> 值为 "<code>default</code>"，询问用户
+   对于 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
+   相关设置对象(relevant-settings-objec)</a> 
+   的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
+   源(origin)</a> 的设备方向共享是否可以接受。如果可以接受，设置 
+   <var>permission</var> 值为 "<code>granted</code>" ，否则设置为 
+   "<code>denied</code>" 。
 
    <li>
-    <p><a>Queue a task</a> to run these steps:
+    <p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">
+    设置一个任务队列</a> 来运行如下步骤:
 
     <ol>
-     <li><p>Set <a>permission</a> for the <a>relevant settings object</a>'s
-     <a for="environment settings object">origin</a> to <var>permission</var>.
+     <li><p>将 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
+     相关设置对象(relevant-settings-objec)</a> 
+     的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
+     源(origin)</a> 的 <a href="#permission">枚举值(permission)</a> 赋予 
+     <var>permission</var>。
 
-     <li><p>Fulfill <var>promise</var> with <var>permission</var>.
+     <li><p>根据 <var>permission</var> 的值兑现(Fulfill) <var>promise</var> 。
     </ol>
   </ol>
 
- <li><p>Return <var>promise</var>.
+ <li><p>返回 <var>promise</var> 。
 </ol>
 
-Whenever a significant change in orientation occurs, the User Agent must [=fire an event=] named {{deviceorientation}} using {{DeviceOrientationEvent}} on the {{window!!attribute}} object. The definition of a significant change in this context is left to the implementation, though a maximum threshold for change of one degree is recommended. Implementations may also fire the event if they have reason to believe that the page does not have sufficiently fresh data.
+每当方向发生显著变化时，用户代理必须在 {{window!!attribute}} 对象上使用 
+{{DeviceOrientationEvent}} 
+<a href="https://dom.spec.whatwg.org/#concept-event-fire">激发(fire an event)
+</a> 名为 {{deviceorientation}} 的事件。在这种情况下，
+显著变化的定义留给具体的实现，不过本规范建议将方向变化的最大阈值设置为一度。
+如果具体实现有页面没有足够的新数据的检测逻辑，那么它们也可触发事件。
 
-The {{DeviceOrientationEvent/alpha}}, {{DeviceOrientationEvent/beta}} and {{DeviceOrientationEvent/gamma}} attributes of the event must specify the orientation of the device in terms of the transformation from a coordinate frame fixed on the Earth to a coordinate frame fixed in the device. The {{DeviceOrientationEvent/alpha}}, {{DeviceOrientationEvent/beta}} and {{DeviceOrientationEvent/gamma}} attributes must be expressed in degrees and must not be more precise than 0.1 degrees. The coordinate frames must be oriented as described below.
+事件的 {{DeviceOrientationEvent/alpha}} 、 {{DeviceOrientationEvent/beta}} 和 
+{{DeviceOrientationEvent/gamma}} 
+属性必须根据从固定在地球上的坐标系到固定在设备中的坐标系的转换，
+来明确指出设备的方向。{{DeviceOrientationEvent/alpha}} 、 
+{{DeviceOrientationEvent/beta}} 和 {{DeviceOrientationEvent/gamma}} 
+属性必须以度表示，并且不得精确到0.1度。坐标系的方位必须如下所述。
 
-The Earth coordinate frame is a 'East, North, Up' frame at the user's location. It has the following 3 axes, where the ground plane is tangent to the spheriod of the World Geodetic System 1984 [[WGS84]], at the user's location.
+地球坐标系是用户所在位置的 '东、北、上' 坐标系。它有以下3个轴，
+其中在用户位置的地平面与1984年世界测地系统(World Geodetic System) 
+[[WGS84]] 的球面相切。
 
-* East (X) is in the ground plane, perpendicular to the North axis and positive towards the East.
-* North (Y) is in the ground plane and positive towards True North (towards the North Pole).
-* Up (Z) is perpendicular to the ground plane and positive upwards.
+* 东轴(X) 在地平面上，垂直于北轴，向东为正。
+* 北轴(Y) 在地平面上，向北为正(朝向北极)。
+* 上轴(Z) 垂直于地平面，像上为正。
 
-For a mobile device such as a phone or tablet, the device coordinate frame is defined relative to the screen in its standard orientation, typically portrait. This means that slide-out elements such as keyboards are not deployed, and swiveling elements such as displays are folded to their default position. If the orientation of the screen changes when the device is rotated or a slide-out keyboard is deployed, this does not affect the orientation of the coordinate frame relative to the device. Users wishing to detect these changes in screen orientation may be able to do so with the existing {{orientationchange}} event. For a laptop computer, the device coordinate frame is defined relative to the integrated keyboard.
+对于手机或平板电脑等移动设备，设备坐标系是在其标准方向(通常是纵向)
+相对于屏幕定义的。这意味着诸如键盘之类的抽屉式(slide-out)元件不被部署(deployed)，
+并且诸如显示器之类的旋转(swiveling)元件被折叠到它们的默认位置。
+如果在旋转设备或部署抽屉式键盘时屏幕的方向发生变化，
+则不会影响坐标系相对于设备的方向。希望检测屏幕方向的变化的用户可以通过现有的 
+{{orientationchange}} 事件来进行检测。对于笔记本电脑，
+设备坐标系是相对于集成键盘定义的。
 
-* x is in the plane of the screen or keyboard and is positive towards the right hand side of the screen or keyboard.
-* y is in the plane of the screen or keyboard and is positive towards the top of the screen or keyboard.
-* z is perpendicular to the screen or keyboard, positive out of the screen or keyboard.
+<div class="note custom-note">
+这段话要表达的意思是移动设备在向用户显示内容时的方向的变化和设备自身的方向无关，
+可以见 {{ScreenOrientation}} 接口查阅信息。不过需要注意的是，
+{{orientationchange}} 事件已被弃用，想要监听显示内容的方向变化，
+可以编写如下代码:
+<pre class="lang-js">
+screen.orientation.addEventListener("change", (event) => {
+  const type = event.target.type;
+  const angle = event.target.angle;
+  console.log(`ScreenOrientation change: ${type}, ${angle} degrees.`);
+});
+</pre>
+</div>
 
-The transformation from the Earth coordinate frame to the device coordinate frame must use the following system of rotations.
 
-Rotations must use the right-hand convention, such that positive rotation around an axis is clockwise when viewed along the positive direction of the axis.
+* x轴在屏幕或键盘的平面内，并且朝向屏幕或键盘的右手侧为正。
+* y轴在屏幕或键盘的平面内，并且朝向屏幕或键盘的顶部为正。
+* z轴垂直于屏幕或键盘，朝屏幕或键盘外侧为正。
 
-Note: the coordinate system used by this specification differs from [[css-transforms-2#transform-rendering]], where the y axis is positive to the bottom and rotations follow the left-hand convention. Additionally, {{DOMMatrix/rotateSelf()}} and {{DOMMatrixReadOnly/rotate()}}, specified in [[GEOMETRY-1]], apply rotations in an Z - Y' - X'' order, which differs from the order specified here.
+从地球坐标系到设备坐标系的转换(transformation)必须使用以下旋转系统。
 
-Starting with the two frames aligned, the rotations are applied in the following order:
+旋转必须使用右手约定，这样，当沿着轴的正方向观察时，绕轴的正旋转是顺时针方向。
+
+<div class="note custom-note" data-content="注释:">
+本规范使用的坐标系不同于 [[css-transforms-2#transform-rendering]] ，
+其y轴朝向底部为正，旋转遵循左手约定。此外，在 [[GEOMETRY-1]] 中指定的 
+{{DOMMatrix/rotateSelf()}} 和 {{DOMMatrixReadOnly/rotate()}} 以
+Z - Y' - X'' 的顺序应用旋转，这与此处指定的顺序不同。
+</div>
+
+从两个坐标系对齐开始，按以下顺序应用旋转:
 
 <ol id="rotations">
 <li>
-    <p>Rotate the device frame around its z axis by {{DeviceOrientationEvent/alpha}} degrees, with {{DeviceOrientationEvent/alpha}} in [0, 360).</p>
+    <p>将设备坐标系绕其Z轴旋转 {{DeviceOrientationEvent/alpha}} 度，
+    {{DeviceOrientationEvent/alpha}} 值范围为 [0, 360) 。</p>
     <div>
     <img src="start.png" alt="start orientation">
-    <div>Device in the initial position, with Earth (XYZ) and body (xyz) frames aligned.</div>
+    <div>设备处于初始位置，地球坐标系(XYZ)和设备坐标系(XYZ)对齐。</div>
     </div>
     <div>
     <img src="c-rotation.png" alt="rotation about z axis">
-    <div>Device rotated through angle alpha about z axis, with previous locations of x and y axes shown as x<sub>0</sub> and y<sub>0</sub>.</div>
+    <div>
+    设备绕Z轴旋转角度α，x轴和y轴的先前位置显示为 x<sub>0</sub> 和 y<sub>0</sub> 
+    。</div>
     </div>
 </li>
 <li>
-    <p>Rotate the device frame around its x axis by {{DeviceOrientationEvent/beta}} degrees, with {{DeviceOrientationEvent/beta}} in [-180, 180).</p>
+    <p>
+    将设备坐标系绕其X轴旋转 {{DeviceOrientationEvent/beta}} 度， 
+    {{DeviceOrientationEvent/beta}} 值范围为 [-180, 180) 。 </p>
     <div>
     <img src="a-rotation.png" alt="rotation about x axis">
-    <div>Device rotated through angle beta about new x axis, with previous locations of y and z axes shown as y<sub>0</sub> and z<sub>0</sub>.</div>
+    <div>设备围绕新的X轴旋转角度β，y轴和z轴的先前位置显示为 y<sub>0</sub> 和 
+    z<sub>0</sub> 。</div>
     </div>
 </li>
 <li>
-    <p>Rotate the device frame around its y axis by {{DeviceOrientationEvent/gamma}} degrees, with {{DeviceOrientationEvent/gamma}} in [-90, 90).</p>
+    <p>
+    将设备坐标系绕其Y轴旋转 {{DeviceOrientationEvent/gamma}} 度，
+    {{DeviceOrientationEvent/gamma}} 值范围为 [-90，90) 。</p>
     <div>
     <img src="b-rotation.png" alt="rotation about y axis">
-    <div>Device rotated through angle gamma about new y axis, with previous locations of x and z axes shown as x<sub>0</sub> and z<sub>0</sub>.</div>
+    <div>设备围绕新的Y轴旋转角度γ，x轴和z轴的先前位置显示为 x<sub>0</sub> 和 
+    z<sub>0</sub> 。</div>
     </div>
 </li>
 </ol>

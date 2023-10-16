@@ -2,7 +2,7 @@
  * @Author: mangwu                                                             *
  * @File: custom-script.js                                                     *
  * @Date: 2023-05-01 02:02:19                                                  *
- * @LastModifiedDate: 2023-10-13 11:15:26                                      *
+ * @LastModifiedDate: 2023-10-16 09:43:57                                      *
  * @ModifiedBy: mangwu                                                         *
  * -----------------------                                                     *
  * Copyright (c) 2023 mangwu                                                   *
@@ -321,7 +321,7 @@ function translateMetaData() {
   translateIndexBySeletor("details > div > dl dt:nth-child(5)", "反馈: ");
   translateByInnerHTML(
     "details > div > dl dd:nth-child(6) > span",
-    `@
+    `邮件
     <a href="mailto:public-device-apis@w3.org?subject=%5Borientation-event%5D%20YOUR%20TOPIC%20HERE">
     public-device-apis@w3.org</a> 附带主题行 “<kbd>[orientation-event] 
     <i data-lt>… message topic …</i></kbd>” 
