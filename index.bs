@@ -346,7 +346,7 @@ window.addEventListener("devicemotion", function(event) {
 说明 {#description}
 ==========================
 
-<h3 id="deviceorientation">deviceorientation Event</h3>
+<h3 id="deviceorientation">deviceorientation 事件</h3>
 
 实现本规范的用户代理必须提供一个名为 
 <dfn event for=Window id="def-deviceorientation"><code>
@@ -454,7 +454,7 @@ dictionary DeviceOrientationEventInit : EventInit {
 属性必须根据从固定在地球上的坐标系到固定在设备中的坐标系的转换，
 来明确指出设备的方向。{{DeviceOrientationEvent/alpha}} 、 
 {{DeviceOrientationEvent/beta}} 和 {{DeviceOrientationEvent/gamma}} 
-属性必须以度表示，并且不得精确到0.1度。坐标系的方位必须如下所述。
+属性必须以度为单位，并且精确度不得超过0.1度。坐标系的方位必须如下所述。
 
 地球坐标系是用户所在位置的 '东、北、上' 坐标系。它有以下3个轴，
 其中在用户位置的地平面与1984年世界测地系统(World Geodetic System) 
@@ -493,14 +493,21 @@ screen.orientation.addEventListener("change", (event) => {
 
 从地球坐标系到设备坐标系的转换(transformation)必须使用以下旋转系统。
 
-旋转必须使用右手约定，这样，当沿着轴的正方向观察时，绕轴的正旋转是顺时针方向。
+旋转必须使用右手定则，这样，当沿着轴的正方向观察时，绕轴的正旋转是顺时针方向。
 
 <div class="note custom-note" data-content="注释:">
 本规范使用的坐标系不同于 [[css-transforms-2#transform-rendering]] ，
-其y轴朝向底部为正，旋转遵循左手约定。此外，在 [[GEOMETRY-1]] 中指定的 
+其y轴朝向底部为正，旋转遵循左手定则。此外，在 [[GEOMETRY-1]] 中指定的 
 {{DOMMatrix/rotateSelf()}} 和 {{DOMMatrixReadOnly/rotate()}} 以
 Z - Y' - X'' 的顺序应用旋转，这与此处指定的顺序不同。
 </div>
+
+<div class="note custom-note">
+这里说的右手定则和左手定则都是用于判断绕一个轴旋转时，对应的角度值正负的，
+如右手大拇指指向Z轴，四指弯曲的旋转方向为α正方向(沿Z轴正方向观察为顺时针，
+沿Z轴负方向观察为逆时针)
+</div>
+
 
 从两个坐标系对齐开始，按以下顺序应用旋转:
 
@@ -541,21 +548,85 @@ Z - Y' - X'' 的顺序应用旋转，这与此处指定的顺序不同。
 </li>
 </ol>
 
-Thus the angles {{DeviceOrientationEvent/alpha}}, {{DeviceOrientationEvent/beta}} and {{DeviceOrientationEvent/gamma}} form a set of intrinsic Tait-Bryan angles of type Z - X' - Y''. [[EULERANGLES]] Note that this choice of angles follows mathematical convention, but means that alpha is in the opposite sense to a compass heading. It also means that the angles do not match the roll-pitch-yaw convention used in vehicle dynamics.
-
-The {{deviceorientation}} event tries to provide relative values for the three angles (relative to some arbitrary orientation), based on just the accelerometer and the gyroscope. The implementation can still decide to provide absolute orientation if relative is not available or the resulting data is more accurate. In either case, the {{DeviceOrientationEvent/absolute}} property must be set accordingly to reflect the choice.
-
-Implementations that are unable to provide all three angles must set the values of the unknown angles to null. If any angles are provided, the {{DeviceOrientationEvent/absolute}} property must be set appropriately. If an implementation can never provide orientation information, the event should be fired with the {{DeviceOrientationEvent/alpha}}, {{DeviceOrientationEvent/beta}} and {{DeviceOrientationEvent/gamma}} attributes set to null.
-
-<h3 id="deviceorientationabsolute">deviceorientationabsolute Event</h3>
-
-<div class="issue">
-The {{deviceorientationabsolute}} event and its {{Window/ondeviceorientationabsolute}} event handler IDL attribute have <a href="https://wpt.fyi/results/orientation-event/ondeviceorientationabsolute.https.html">limited implementation experience</a>.
+因此，{{DeviceOrientationEvent/alpha}} 、 {{DeviceOrientationEvent/beta}} 
+和 {{DeviceOrientationEvent/gamma}} 角形成了一组 Z - X' - Y'' 
+类型的动态(intrinsic)泰特布莱恩(Tait-Bryan)角。[[EULERANGLES]] 请注意，
+角度的(正负)选择遵循数学惯例(右手定则)，这意味着阿尔法角与指南针的方向相反。
+这也意味着这些角度与车辆动力学中使用的侧倾-俯仰-偏航(roll-pitch-yaw)约定不匹配。
+<div class="note custom-note">
+对于一个三维空间的参考系，任何其它坐标系的取向，都可以用三个欧拉角来表示，
+参考系是静止不动的，而坐标系固定于刚体，随着刚体的旋转而旋转。<br/> 在本规范中，
+参考系就是地球坐标系，而刚体就是移动设备，坐标系就是设备坐标系。
+欧拉角可以用来表示三维坐标系中的方向和方向变换，它细分为经典欧拉角(Proper Euler 
+angles)和泰特布莱恩角(Tait-Bryan angles)，
+这两种方法都利用了笛卡尔坐标系的三轴作为旋转轴，主要区别在于选取旋转轴的顺序。
+<br/> 欧拉角的轴选取顺序有6种: XYX ， YXY ， XZX ， ZXZ ， YZY ， ZYZ，
+以ZYZ为例，静态地(extrinsic)旋转方式如图:
+<figure id="figure-ZXZ">
+    <img
+        src="images/ZXZ.png"
+        width="454"
+        height="480"
+        alt="经典欧拉角绕轴静态旋转的一种方式，先绕z轴，再绕x轴，最后再绕z轴旋转"
+    />
+    <div class="custom-figcaption">
+    经典欧拉角绕轴静态旋转的一种方式，先绕z轴，再绕x轴，最后再绕z轴旋转
+    </div>
+</figure>
+动态地(intrinsic)旋转方式如图:
+<figure id="figure-ZXZ'">
+    <img
+        src="images/ZXZ'.png"
+        width="300"
+        height="338"
+        alt="经典欧拉角绕轴动态旋转地一种方式，先绕Z轴，再绕旋转后地Y轴，再绕旋转后地Z轴旋转"
+    />
+    <div class="custom-figcaption">
+    经典欧拉角绕轴动态旋转的一种方式，先绕Z轴，再绕旋转后的Y轴，
+    再绕旋转后的Z轴旋转，可以用Z - X' - Z''表示
+    </div>
+</figure>
+泰特布莱恩(Tait-Bryan)角的轴选取方式也有6种: XYZ ， XZY ， YXZ ， YZX ， ZXY ，
+ZYX，本规范已经以旋转移动设备为例子，指出了一种Z - X' - Y''的动态旋转方式。<br/>
+所谓的动态和静态地旋转方式，也可以称为内旋(intrinsic rotation)和外旋(extrinsic 
+rotation)，前者在旋转过程中，相对于变换后的(当前)坐标系做变换，以 x - y' - z''
+的方式表示， <code>'</code> 表达该次旋转以上一次旋转后的坐标轴为参考;
+后者在旋转过程中，相对于初始(固定的)坐标系做变换，以x-y-z的方式表示。
 </div>
 
-User agents implementing this specification must [=fire an event=] named <dfn event for="Window" id="def-deviceorientationabsolute"><code>deviceorientationabsolute</code></dfn> using {{DeviceOrientationEvent}} on the {{window!!attribute}} object whenever a significant change in orientation occurs.
 
-User agents must also provide an event handler IDL attribute [[!HTML]] named {{Window/ondeviceorientationabsolute}} on the {{window!!attribute}} object. The type of the corresponding [=event handler event type=] must be {{deviceorientationabsolute}}.
+{{deviceorientation}} 事件试图仅基于加速度计和陀螺仪来提供(相对于某个任意方向的)
+三个角度的相对(relative)值。如果无法获取相对值或者绝对值数据更精确，
+则具体实现仍然可以决定提供绝对方向(absolute orientation)。无论在哪种情况下，
+都必须相应地设置 {{DeviceOrientationEvent/absolute}} 
+属性以反映实现获取的方向数据的类型。
+
+无法提供全部三个角度的实现必须将未知角度的值设置为 <code>null</code> 。
+如果提供了其中一个角度，则必须恰当地设置 {{DeviceOrientationEvent/absolute}} 
+属性。如果一个实现永远不能提供方向信息，那么在触发 {{deviceorientation}} 
+事件时， {{DeviceOrientationEvent/alpha}} 、 {{DeviceOrientationEvent/beta}} 和 
+{{DeviceOrientationEvent/gamma}} 属性应该设置为 <code>null</code> 。
+
+<h3 id="deviceorientationabsolute">deviceorientationabsolute 事件</h3>
+
+<div class="issue">
+{{deviceorientationabsolute}} 事件及其 {{Window/ondeviceorientationabsolute}} 
+事件处理程序(类型的) IDL 属性的
+<a href="https://wpt.fyi/results/orientation-event/ondeviceorientationabsolute.https.html">
+实现经验有限</a>。
+</div>
+
+每当方向发生显著变化时，
+实现本规范的用户代理必须在 {{window!!attribute}} 对象上使用 
+{{DeviceOrientationEvent}} 
+<a href="https://dom.spec.whatwg.org/#concept-event-fire">激发(fire an event)
+</a>名为 <dfn event for="Window" id="def-deviceorientationabsolute">
+<code>deviceorientationabsolute</code></dfn> 的事件。
+
+用户代理还必须在 {{window!!attribute}} 对象上提供名为 
+{{Window/ondeviceorientationabsolute}} 的事件处理程序(类型的) IDL 属性 [[!HTML]]
+。它对应的 [=event handler event type=] 的类型必须是 
+{{deviceorientationabsolute}} 。
 
 <pre class="idl">
 partial interface Window {
@@ -563,13 +634,24 @@ partial interface Window {
 };
 </pre>
 
-The {{deviceorientationabsolute}} event is completely analogous to the {{deviceorientation}} event, except additional sensors like the magnetometer can be used to provide an absolute orientation. The {{DeviceOrientationEvent/absolute}} property must be set to true. If an implementation can never provide absolute orientation information, the event should be fired with the {{DeviceOrientationEvent/alpha}}, {{DeviceOrientationEvent/beta}} and {{DeviceOrientationEvent/gamma}} attributes set to null.
+{{deviceorientationabsolute}} 事件与 {{deviceorientation}} 事件完全类似
+(analogous)，只是前者可以使用磁力计(magnetometer)等附加传感器来提供绝对方向信息。
+{{DeviceOrientationEvent/absolute}} 属性必须设置为 <code>true</code> 。
+如果一个实现永远不能提供方向信息，那么在触发 {{deviceorientationabsolute}}
+事件时， {{DeviceOrientationEvent/alpha}} 、 {{DeviceOrientationEvent/beta}} 和 
+{{DeviceOrientationEvent/gamma}} 属性应该设置为 <code>null</code> 。
 
-<h3 id="devicemotion">devicemotion Event</h3>
+<h3 id="devicemotion">devicemotion 事件</h3>
 
-User agents implementing this specification must [=fire an event=] named <dfn event for=Window id="def-devicemotion"><code>devicemotion</code></dfn> using {{DeviceMotionEvent}} on the {{window!!attribute}} object.
+实现本规范的用户代理必须在 {{window!!attribute}} 对象上使用 
+{{DeviceMotionEvent}} <a href="https://dom.spec.whatwg.org/#concept-event-fire">
+激发(fire an event)</a> 名为 
+<dfn event for=Window id="def-devicemotion"><code>devicemotion</code></dfn> 
+的事件。
 
-User agents must also provide an event handler IDL attribute [[!HTML]] named {{Window/ondevicemotion}} on the {{window!!attribute}} object. The type of the corresponding [=event handler event type=] must be {{devicemotion}}.
+用户代理还必须在 {{window!!attribute}} 对象上提供一个名为 
+{{Window/ondevicemotion}} 的事件处理程序(类型的) IDL 属性 [[!HTML]] 。
+它对应的 [=event handler event type=] 的类型必须是 {{devicemotion}} 。
 
 <pre class="idl">
 partial interface Window {
@@ -621,69 +703,122 @@ dictionary DeviceMotionEventInit : EventInit {
 };
 </pre>
 
-The {{DeviceMotionEvent/acceleration}} attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.
+{{DeviceMotionEvent/acceleration}} 属性必须返回其初始化的值。创建对象时，
+此属性必须初始化为 <code>null</code> 。
 
-The {{DeviceMotionEvent/accelerationIncludingGravity}} attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.
+{{DeviceMotionEvent/accelerationIncludingGravity}} 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>null</code> 。
 
-The {{DeviceMotionEvent/rotationRate}} attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.
+{{DeviceMotionEvent/rotationRate}} 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>null</code> 。
 
-The {{DeviceMotionEvent/interval}} attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to 0.
+{{DeviceMotionEvent/interval}} 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>0</code> 。
 
-The static {{DeviceMotionEvent/requestPermission()}} operation, when invoked, must run these steps:
+调用静态方法 {{DeviceMotionEvent/requestPermission()}} 时，必须运行以下步骤:
+
 <ol>
- <li><p>Let <var>promise</var> be a new promise.
+ <li><p>赋值 <var>promise</var> 为一个新的期约对象。
 
  <li>
-  <p>Run these steps <a>in parallel</a>:
+  <p><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">同步</a> 
+  运行下列步骤:
 
   <ol>
-   <li><p>Let <var>permission</var> be <a>permission</a> for
-   <a>relevant settings object</a>'s <a for="environment settings object">origin</a>.
+   <li><p>赋值 <var>permission</var> 为一个 
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
+   相关设置对象(relevant-settings-objec)</a> 
+   的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
+   源(origin)</a> 的 <a href="#permission">枚举值(permission)</a> 。
 
-   <li><p>If <var>permission</var> is "<code>default</code>" and the <a>relevant global object</a> does not have <a>transient activation</a>, then reject <var>promise</var> with a
-   {{NotAllowedError!!exception}} {{DOMException}} and abort these steps.
+   <li><p>如果 <var>permission</var> 值为 "<code>default</code>" 并且 
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">
+   相关全局对象(relevant global object)</a> 没有 
+   <a href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation">
+   短暂激活(transient activation)</a> ，那么使用一个 
+   {{NotAllowedError!!exception}} {{DOMException}} 错误拒绝(reject) 
+   <var>promise</var> 并且中止步骤运行。
 
-   <li><p>If <var>permission</var> is "<code>default</code>", ask the user whether sharing device motion
-   for the <a>relevant settings object</a>'s
-   <a for="environment settings object">origin</a> is acceptable. If it is, set
-   <var>permission</var> to "<code>granted</code>", and "<code>denied</code>" otherwise.
+   <li><p>如果 <var>permission</var> 值为 "<code>default</code>"，询问用户
+   对于 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
+   相关设置对象(relevant-settings-objec)</a> 
+   的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
+   源(origin)</a> 的设备方向共享是否可以接受。如果可以接受，设置 
+   <var>permission</var> 值为 "<code>granted</code>" ，否则设置为 
+   "<code>denied</code>" 。
 
    <li>
-    <p><a>Queue a task</a> to run these steps:
+    <p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">
+    设置一个任务队列</a> 来运行如下步骤:
 
     <ol>
-     <li><p>Set <a>permission</a> for the <a>relevant settings object</a>'s
-     <a for="environment settings object">origin</a> to <var>permission</var>.
+     <li><p>将 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
+     相关设置对象(relevant-settings-objec)</a> 
+     的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
+     源(origin)</a> 的 <a href="#permission">枚举值(permission)</a> 赋予 
+     <var>permission</var>。
 
-     <li><p>Fulfill <var>promise</var> with <var>permission</var>.
+     <li><p>根据 <var>permission</var> 的值兑现(Fulfill) <var>promise</var> 。
     </ol>
   </ol>
 
- <li><p>Return <var>promise</var>.
+ <li><p>返回 <var>promise</var> 。
 </ol>
 
 In the {{DeviceMotionEvent}} events fired by the user agent, the following requirements must apply:
+在用户代理触发的 {{DeviceMotionEvent}} 事件中，必须满足以下要求:
 
-The {{DeviceMotionEvent/acceleration}} attribute must be initialized with the acceleration of the hosting device relative to the Earth frame, expressed in the body frame, as defined in [[#deviceorientation|deviceorientation Event]] section. The acceleration must be expressed in meters per second squared (m/s<sup>2</sup>) and must not be more precise than 0.1 m/s<sup>2</sup>.
+{{DeviceMotionEvent/acceleration}} 属性必须使用主机设备相对于地球坐标系
+(Earth frame)的加速度进行初始化，并以自身坐标系(设备坐标系)表示，
+正如 [[#deviceorientation|deviceorientation Event]] 部分中定义的那样。
+加速度必须以米/秒平方 (m/s<sup>2</sup>) 为单位，且精确度不得超过 
+0.1 m/s<sup>2</sup> 。
 
-Implementations that are unable to provide acceleration data without the effect of gravity (due, for example, to the lack of a gyroscope) may instead supply the acceleration including the effect of gravity. This is less useful in many applications but is provided as a means of providing best-effort support. In this case, the {{DeviceMotionEvent/accelerationIncludingGravity}} attribute must be initialized with the acceleration of the hosting device, plus an acceleration equal and opposite to the acceleration due to gravity. Again, the acceleration must be given in the body frame defined in [[#deviceorientation|deviceorientation Event]] section and must be expressed in meters per second squared (m/s<sup>2</sup>) and must not be more precise than 0.1 m/s<sup>2</sup>.
+对于不能在没有重力(gravity)影响的情况下提供加速度数据的实现(例如，
+由于缺乏陀螺仪)，可以提供包括重力影响的加速度。虽然在许多应用场景中用处不大，
+但这也是尽最大努力支持进行数据提供的一种方式。在这种情况下，
+{{DeviceMotionEvent/accelerationIncludingGravity}} 
+属性必须使用主机设备的加速度加上与重力加速度相等或相反的加速度进行初始化。
+同样，加速度必须在 [[#deviceorientation|deviceorientation Event]] (设备方向事件)
+部分中定义的自身坐标系(设备坐标系)中给出，必须以米/秒平方 (m/s<sup>2</sup>) 
+为单位，且精确度不得超过 0.1 m/s<sup>2</sup> 。
 
-<p class=note>Note: in practice, {{DeviceMotionEvent/accelerationIncludingGravity}} represents the raw readings obtained from an [[MOTION-SENSORS#accelerometer]], or the [[G-FORCE]] while {{DeviceMotionEvent/acceleration}} provides the readings of a [[MOTION-SENSORS#linear-acceleration-sensor]] and is likely a sensor fusion.
+<div class="note custom-note" data-content="注释:">
+在实践中， {{DeviceMotionEvent/accelerationIncludingGravity}} 表示从 
+<a href="https://w3c.github.io/motion-sensors/#accelerometer">
+运动传感器解释器 § 加速度计</a> 中获得的原始数据或 [[G-FORCE]] ，而 
+{{DeviceMotionEvent/acceleration}} 提供
+<a href="https://w3c.github.io/motion-sensors/#linear-acceleration-sensor">
+运动传感器解释器 § 线性加速度传感器</a> 的数据，
+并且这个数据很可能是将多个传感器的数据进行整合和处理(的结果)。
+</div>
 
-The {{DeviceMotionEvent/rotationRate}} attribute must be initialized with the rate of rotation of the hosting device in space. It must be expressed as the rate of change of the angles defined as {{DeviceOrientationEvent/alpha}} (x axis), {{DeviceOrientationEvent/beta}} (y axis), {{DeviceOrientationEvent/gamma}} (z axis). Each attribute must be expressed in degrees per second (deg/s) and must not be more precise than 0.1 degrees per second.
+属性必须使用主机设备在空间中的旋转速率进行初始化。它必须表示为之前定义的 
+{{DeviceOrientationEvent/alpha}} (x轴)、 {{DeviceOrientationEvent/beta}} (y轴)、
+{{DeviceOrientationEvent/gamma}} (z轴)的角度的变化率。
+每个属性必须以度数/度数(deg/s)为单位，并且精确度不得超过 0.1deg/s 。
 
-The {{DeviceMotionEvent/interval}} attribute must be initialized with the interval at which data is obtained from the underlying hardware and must be expressed in milliseconds (ms). It must be a constant, to simplify filtering of the data by the Web application.
+{{DeviceMotionEvent/interval}} 属性必须使用从底层硬件获取的间隔数据进行初始化，
+并且必须以毫秒(ms)为单位。它必须是一个常量，以简化 Web 应用程序对数据的筛选。
 
-Implementations that are unable to provide all attributes must initialize the values of the unknown attributes to null. If an implementation can never provide motion information, the event should be fired with the {{DeviceMotionEvent/acceleration}}, {{DeviceMotionEvent/accelerationIncludingGravity}} and {{DeviceMotionEvent/rotationRate}} attributes set to null.
+无法提供全部属性值的实现必须将未知属性的值初始化为 <code>null</code> 。
+如果一个实现永远无法提供运动信息，那么在触发 {{devicemotion}} 事件时， 
+{{DeviceMotionEvent/acceleration}} 、 
+{{DeviceMotionEvent/accelerationIncludingGravity}} 和 
+{{DeviceMotionEvent/rotationRate}} 属性应该设置为 <code>null</code> 。
 
-<h3 id="id=permission-model">Permission model</h3>
+<h3 id="id=permission-model">权限模型(Permission model)</h3>
 
-<div class="issue">Further implementation experience is being gathered for the permission model and specification clarifications informed by this experience are being discussed in <a href="https://github.com/w3c/deviceorientation/issues/74">GitHub issue #74</a>.</div>
+<div class="issue">正在为权限模型的实现收集进一步的经验，
+并且根据实现经验获知的规范阐述(clarifications)正在
+<a href="https://github.com/w3c/deviceorientation/issues/74">GitHub问题#74</a>
+中进行讨论。</div>
 
-<p>Implementations may choose to share device orientation &amp; motion only if the
-user (or user agent on behalf of the user) has granted <dfn>permission</dfn>.
-The <a>permission</a> to share device orientation &amp; motion
-for a given <a for=/>origin</a> is one of three strings:
+<p>仅当用户(或代表用户的用户代理)已授予 <dfn>permission</dfn> (权限)时，
+实现可以选择共享设备的方向和运动信息。对于一个给定
+<a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">
+源(origin)</a> 共享的设备方向和运动信息的 <a href="#permission">权限</a> 
+是如下三个字符串之一:
 
 <dl>
   <dt>"<code>default</code>"

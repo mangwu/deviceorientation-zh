@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/orientation-event/" rel="canonical">
-  <meta content="5592e1a1f2b82c3786a643300dc149d219cf2f0f" name="document-revision">
+  <meta content="0f5bda9ec78244ffff69a84161d6cf416415e26a" name="document-revision">
   <link href="./override.css" rel="stylesheet">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -590,7 +590,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">设备方向事件(DeviceOrientation Event)规范</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#UD">翻译草案</a>, <time class="dt-updated" datetime="2023-10-16">2023年10月12日</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#UD">翻译草案</a>, <time class="dt-updated" datetime="2023-10-17">2023年10月12日</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -637,10 +637,10 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <li>
      <a href="#description"><span class="secno">4</span> <span class="content">说明</span></a>
      <ol class="toc">
-      <li><a href="#deviceorientation"><span class="secno">4.1</span> <span class="content">deviceorientation Event</span></a>
-      <li><a href="#deviceorientationabsolute"><span class="secno">4.2</span> <span class="content">deviceorientationabsolute Event</span></a>
-      <li><a href="#devicemotion"><span class="secno">4.3</span> <span class="content">devicemotion Event</span></a>
-      <li><a href="#id=permission-model"><span class="secno">4.4</span> <span class="content">Permission model</span></a>
+      <li><a href="#deviceorientation"><span class="secno">4.1</span> <span class="content">deviceorientation 事件</span></a>
+      <li><a href="#deviceorientationabsolute"><span class="secno">4.2</span> <span class="content">deviceorientationabsolute 事件</span></a>
+      <li><a href="#devicemotion"><span class="secno">4.3</span> <span class="content">devicemotion 事件</span></a>
+      <li><a href="#id=permission-model"><span class="secno">4.4</span> <span class="content">权限模型(Permission model)</span></a>
      </ol>
     <li><a href="#security-and-privacy"><span class="secno">5</span> <span class="content">Security and privacy considerations</span></a>
     <li>
@@ -844,7 +844,7 @@ orientation)和移动(movement)的信息。事件提供的信息不是原始传�
 本规范的 API 的预期目的是使简单的用例有效，例如 <a href="#use-cases">Use-Cases</a> 部分中的用例。本规范的适用范围不包括提供操作这些数据的实用程序，例如转换库。
 它也不包括提供对低传感器数据的访问或对这些传感器的直接控制。</p>
    <h2 class="heading settled" data-level="4" id="description"><span class="secno">4. </span><span class="content">说明</span><a class="self-link" href="#description"></a></h2>
-   <h3 class="heading settled" data-level="4.1" id="deviceorientation"><span class="secno">4.1. </span><span class="content">deviceorientation Event</span><a class="self-link" href="#deviceorientation"></a></h3>
+   <h3 class="heading settled" data-level="4.1" id="deviceorientation"><span class="secno">4.1. </span><span class="content">deviceorientation 事件</span><a class="self-link" href="#deviceorientation"></a></h3>
    <p>实现本规范的用户代理必须提供一个名为 <dfn class="dfn-paneled idl-code" data-dfn-for="Window" data-dfn-type="event" data-export data-lt="deviceorientation" id="def-deviceorientation"><code> deviceorientation</code></dfn> 的新DOM事件。</p>
    <p>用户代理还必须在 <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window">window</a></code> 对象上提供一个名为 <code class="idl"><a data-link-type="idl" href="#dom-window-ondeviceorientation" id="ref-for-dom-window-ondeviceorientation">ondeviceorientation</a></code> 的事件处理程序(类型的) IDL 属性 <a data-link-type="biblio" href="#biblio-html" title="HTML Standard">[HTML]</a> 。
 它对应的 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type" id="ref-for-event-handler-event-type">event handler event type</a> 的类型必须是 <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation②">deviceorientation</a></code> 。</p>
@@ -884,21 +884,21 @@ orientation)和移动(movement)的信息。事件提供的信息不是原始传�
     <li>
      <p>赋值 <var>promise</var> 为一个新的期约对象。 </p>
     <li>
-     <p><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-3a2763fcaa6bc82693554cf36780c0dd">同步</a> 运行下列步骤: </p>
+     <p><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">同步</a> 运行下列步骤: </p>
      <ol>
       <li>
-       <p>赋值 <var>permission</var> 为一个 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-bfb9cb6617f81a424ab20212af73bae3"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-a95cc6f0be910557a60537e0256920b2"> 源(origin)</a> 的 <a href="#permission" id="ref-for-permission">枚举值(permission)</a> 。 </p>
+       <p>赋值 <var>permission</var> 为一个 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin"> 源(origin)</a> 的 <a href="#permission" id="ref-for-permission">枚举值(permission)</a> 。 </p>
       <li>
-       <p>如果 <var>permission</var> 值为 "<code>default</code>" 并且 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-2233058c8f0998915af8393ee2abbc1d"> 相关全局对象(relevant global object)</a> 没有 <a href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation" id="ref-for-5b762d09d78e8674458b84982b3cb3c9"> 短暂激活(transient activation)</a> ，那么使用一个 <code class="idl"><a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notallowederror" id="ref-for-notallowederror">NotAllowedError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code> 错误拒绝(reject) <var>promise</var> 并且中止步骤运行。 </p>
+       <p>如果 <var>permission</var> 值为 "<code>default</code>" 并且 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global"> 相关全局对象(relevant global object)</a> 没有 <a href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation"> 短暂激活(transient activation)</a> ，那么使用一个 <code class="idl"><a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notallowederror" id="ref-for-notallowederror">NotAllowedError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException">DOMException</a></code> 错误拒绝(reject) <var>promise</var> 并且中止步骤运行。 </p>
       <li>
        <p>如果 <var>permission</var> 值为 "<code>default</code>"，询问用户
-   对于 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-bfb9cb6617f81a424ab20212af73bae3①"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-a95cc6f0be910557a60537e0256920b2①"> 源(origin)</a> 的设备方向共享是否可以接受。如果可以接受，设置 <var>permission</var> 值为 "<code>granted</code>" ，否则设置为 
+   对于 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin"> 源(origin)</a> 的设备方向共享是否可以接受。如果可以接受，设置 <var>permission</var> 值为 "<code>granted</code>" ，否则设置为 
    "<code>denied</code>" 。 </p>
       <li>
-       <p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-da7ed5f190c4eedd375552d6f7876301"> 设置一个任务队列</a> 来运行如下步骤: </p>
+       <p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task"> 设置一个任务队列</a> 来运行如下步骤: </p>
        <ol>
         <li>
-         <p>将 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-bfb9cb6617f81a424ab20212af73bae3②"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-a95cc6f0be910557a60537e0256920b2②"> 源(origin)</a> 的 <a href="#permission" id="ref-for-permission④">枚举值(permission)</a> 赋予 <var>permission</var>。 </p>
+         <p>将 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin"> 源(origin)</a> 的 <a href="#permission" id="ref-for-permission①">枚举值(permission)</a> 赋予 <var>permission</var>。 </p>
         <li>
          <p>根据 <var>permission</var> 的值兑现(Fulfill) <var>promise</var> 。 </p>
        </ol>
@@ -906,11 +906,11 @@ orientation)和移动(movement)的信息。事件提供的信息不是原始传�
     <li>
      <p>返回 <var>promise</var> 。 </p>
    </ol>
-   <p>每当方向发生显著变化时，用户代理必须在 <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window①">window</a></code> 对象上使用 <code class="idl"><a data-link-type="idl" href="#deviceorientationevent" id="ref-for-deviceorientationevent">DeviceOrientationEvent</a></code> <a href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-15045c15505e025cd6b6d0f134b7c986">激发(fire an event) </a> 名为 <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation③">deviceorientation</a></code> 的事件。在这种情况下，
+   <p>每当方向发生显著变化时，用户代理必须在 <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window①">window</a></code> 对象上使用 <code class="idl"><a data-link-type="idl" href="#deviceorientationevent" id="ref-for-deviceorientationevent">DeviceOrientationEvent</a></code> <a href="https://dom.spec.whatwg.org/#concept-event-fire">激发(fire an event) </a> 名为 <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation③">deviceorientation</a></code> 的事件。在这种情况下，
 显著变化的定义留给具体的实现，不过本规范建议将方向变化的最大阈值设置为一度。
 如果具体实现有页面没有足够的新数据的检测逻辑，那么它们也可触发事件。</p>
    <p>事件的 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha⑥">alpha</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta③">beta</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma③">gamma</a></code> 属性必须根据从固定在地球上的坐标系到固定在设备中的坐标系的转换，
-来明确指出设备的方向。<code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha⑦">alpha</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta④">beta</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma④">gamma</a></code> 属性必须以度表示，并且不得精确到0.1度。坐标系的方位必须如下所述。</p>
+来明确指出设备的方向。<code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha⑦">alpha</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta④">beta</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma④">gamma</a></code> 属性必须以度为单位，并且精确度不得超过0.1度。坐标系的方位必须如下所述。</p>
    <p>地球坐标系是用户所在位置的 '东、北、上' 坐标系。它有以下3个轴，
 其中在用户位置的地平面与1984年世界测地系统(World Geodetic System) <a data-link-type="biblio" href="#biblio-wgs84" title="Department of Defence World Geodetic System 1984">[WGS84]</a> 的球面相切。</p>
    <ul>
@@ -947,10 +947,13 @@ orientation)和移动(movement)的信息。事件提供的信息不是原始传�
      <p>z轴垂直于屏幕或键盘，朝屏幕或键盘外侧为正。</p>
    </ul>
    <p>从地球坐标系到设备坐标系的转换(transformation)必须使用以下旋转系统。</p>
-   <p>旋转必须使用右手约定，这样，当沿着轴的正方向观察时，绕轴的正旋转是顺时针方向。</p>
+   <p>旋转必须使用右手定则，这样，当沿着轴的正方向观察时，绕轴的正旋转是顺时针方向。</p>
    <div class="note custom-note" data-content="注释:" role="note"> 本规范使用的坐标系不同于 <a href="https://drafts.csswg.org/css-transforms-2/#transform-rendering"><cite>CSS Transforms 2</cite> § 4 The Transform Rendering Model</a> ，
-其y轴朝向底部为正，旋转遵循左手约定。此外，在 <a data-link-type="biblio" href="#biblio-geometry-1" title="Geometry Interfaces Module Level 1">[GEOMETRY-1]</a> 中指定的 <code class="idl"><a data-link-type="idl" href="https://drafts.fxtf.org/geometry-1/#dom-dommatrix-rotateself" id="ref-for-dom-dommatrix-rotateself">rotateSelf()</a></code> 和 <code class="idl"><a data-link-type="idl" href="https://drafts.fxtf.org/geometry-1/#dom-dommatrixreadonly-rotate" id="ref-for-dom-dommatrixreadonly-rotate">rotate()</a></code> 以
+其y轴朝向底部为正，旋转遵循左手定则。此外，在 <a data-link-type="biblio" href="#biblio-geometry-1" title="Geometry Interfaces Module Level 1">[GEOMETRY-1]</a> 中指定的 <code class="idl"><a data-link-type="idl" href="https://drafts.fxtf.org/geometry-1/#dom-dommatrix-rotateself" id="ref-for-dom-dommatrix-rotateself">rotateSelf()</a></code> 和 <code class="idl"><a data-link-type="idl" href="https://drafts.fxtf.org/geometry-1/#dom-dommatrixreadonly-rotate" id="ref-for-dom-dommatrixreadonly-rotate">rotate()</a></code> 以
 Z - Y' - X'' 的顺序应用旋转，这与此处指定的顺序不同。 </div>
+   <div class="note custom-note" role="note"> 这里说的右手定则和左手定则都是用于判断绕一个轴旋转时，对应的角度值正负的，
+如右手大拇指指向Z轴，四指弯曲的旋转方向为α正方向(沿Z轴正方向观察为顺时针，
+沿Z轴负方向观察为逆时针) </div>
    <p>从两个坐标系对齐开始，按以下顺序应用旋转:</p>
    <ol id="rotations">
     <li>
@@ -978,21 +981,56 @@ Z - Y' - X'' 的顺序应用旋转，这与此处指定的顺序不同。 </div>
     z<sub>0</sub> 。</div>
      </div>
    </ol>
-   <p>Thus the angles <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①⓪">alpha</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta⑦">beta</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma⑦">gamma</a></code> form a set of intrinsic Tait-Bryan angles of type Z - X' - Y''. <a data-link-type="biblio" href="#biblio-eulerangles" title="Euler Angles">[EULERANGLES]</a> Note that this choice of angles follows mathematical convention, but means that alpha is in the opposite sense to a compass heading. It also means that the angles do not match the roll-pitch-yaw convention used in vehicle dynamics.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation④">deviceorientation</a></code> event tries to provide relative values for the three angles (relative to some arbitrary orientation), based on just the accelerometer and the gyroscope. The implementation can still decide to provide absolute orientation if relative is not available or the resulting data is more accurate. In either case, the <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-absolute" id="ref-for-dom-deviceorientationevent-absolute①">absolute</a></code> property must be set accordingly to reflect the choice.</p>
-   <p>Implementations that are unable to provide all three angles must set the values of the unknown angles to null. If any angles are provided, the <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-absolute" id="ref-for-dom-deviceorientationevent-absolute②">absolute</a></code> property must be set appropriately. If an implementation can never provide orientation information, the event should be fired with the <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①①">alpha</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta⑧">beta</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma⑧">gamma</a></code> attributes set to null.</p>
-   <h3 class="heading settled" data-level="4.2" id="deviceorientationabsolute"><span class="secno">4.2. </span><span class="content">deviceorientationabsolute Event</span><a class="self-link" href="#deviceorientationabsolute"></a></h3>
-   <div class="issue" id="issue-58b60688"><a class="self-link" href="#issue-58b60688"></a> The <code class="idl"><a data-link-type="idl" href="#def-deviceorientationabsolute" id="ref-for-def-deviceorientationabsolute">deviceorientationabsolute</a></code> event and its <code class="idl"><a data-link-type="idl" href="#dom-window-ondeviceorientationabsolute" id="ref-for-dom-window-ondeviceorientationabsolute">ondeviceorientationabsolute</a></code> event handler IDL attribute have <a href="https://wpt.fyi/results/orientation-event/ondeviceorientationabsolute.https.html">limited implementation experience</a>. </div>
-   <p>User agents implementing this specification must <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire">fire an event</a> named <dfn class="dfn-paneled idl-code" data-dfn-for="Window" data-dfn-type="event" data-export id="def-deviceorientationabsolute"><code>deviceorientationabsolute</code></dfn> using <code class="idl"><a data-link-type="idl" href="#deviceorientationevent" id="ref-for-deviceorientationevent①">DeviceOrientationEvent</a></code> on the <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window②">window</a></code> object whenever a significant change in orientation occurs.</p>
-   <p>User agents must also provide an event handler IDL attribute <a data-link-type="biblio" href="#biblio-html" title="HTML Standard">[HTML]</a> named <code class="idl"><a data-link-type="idl" href="#dom-window-ondeviceorientationabsolute" id="ref-for-dom-window-ondeviceorientationabsolute①">ondeviceorientationabsolute</a></code> on the <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window③">window</a></code> object. The type of the corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type" id="ref-for-event-handler-event-type①">event handler event type</a> must be <code class="idl"><a data-link-type="idl" href="#def-deviceorientationabsolute" id="ref-for-def-deviceorientationabsolute①">deviceorientationabsolute</a></code>.</p>
+   <p>因此，<code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①⓪">alpha</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta⑦">beta</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma⑦">gamma</a></code> 角形成了一组 Z - X' - Y'' 
+类型的动态(intrinsic)泰特布莱恩(Tait-Bryan)角。<a data-link-type="biblio" href="#biblio-eulerangles" title="Euler Angles">[EULERANGLES]</a> 请注意，
+角度的(正负)选择遵循数学惯例(右手定则)，这意味着阿尔法角与指南针的方向相反。
+这也意味着这些角度与车辆动力学中使用的侧倾-俯仰-偏航(roll-pitch-yaw)约定不匹配。</p>
+   <div class="note custom-note" role="note">
+     对于一个三维空间的参考系，任何其它坐标系的取向，都可以用三个欧拉角来表示，
+参考系是静止不动的，而坐标系固定于刚体，随着刚体的旋转而旋转。<br> 在本规范中，
+参考系就是地球坐标系，而刚体就是移动设备，坐标系就是设备坐标系。
+欧拉角可以用来表示三维坐标系中的方向和方向变换，它细分为经典欧拉角(Proper Euler 
+angles)和泰特布莱恩角(Tait-Bryan angles)，
+这两种方法都利用了笛卡尔坐标系的三轴作为旋转轴，主要区别在于选取旋转轴的顺序。 <br> 欧拉角的轴选取顺序有6种: XYX ， YXY ， XZX ， ZXZ ， YZY ， ZYZ，
+以ZYZ为例，静态地(extrinsic)旋转方式如图: 
+    <figure id="figure-ZXZ">
+      <img alt="经典欧拉角绕轴静态旋转的一种方式，先绕z轴，再绕x轴，最后再绕z轴旋转" height="480" src="images/ZXZ.png" width="454"> 
+     <div class="custom-figcaption"> 经典欧拉角绕轴静态旋转的一种方式，先绕z轴，再绕x轴，最后再绕z轴旋转 </div>
+    </figure>
+     动态地(intrinsic)旋转方式如图: 
+    <figure id="figure-ZXZ&apos;">
+      <img alt="经典欧拉角绕轴动态旋转地一种方式，先绕Z轴，再绕旋转后地Y轴，再绕旋转后地Z轴旋转" height="338" src="images/ZXZ&apos;.png" width="300"> 
+     <div class="custom-figcaption"> 经典欧拉角绕轴动态旋转的一种方式，先绕Z轴，再绕旋转后的Y轴，
+    再绕旋转后的Z轴旋转，可以用Z - X' - Z''表示 </div>
+    </figure>
+     泰特布莱恩(Tait-Bryan)角的轴选取方式也有6种: XYZ ， XZY ， YXZ ， YZX ， ZXY ，
+ZYX，本规范已经以旋转移动设备为例子，指出了一种Z - X' - Y''的动态旋转方式。<br> 所谓的动态和静态地旋转方式，也可以称为内旋(intrinsic rotation)和外旋(extrinsic 
+rotation)，前者在旋转过程中，相对于变换后的(当前)坐标系做变换，以 x - y' - z''
+的方式表示， <code>'</code> 表达该次旋转以上一次旋转后的坐标轴为参考;
+后者在旋转过程中，相对于初始(固定的)坐标系做变换，以x-y-z的方式表示。 
+   </div>
+   <p><code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation④">deviceorientation</a></code> 事件试图仅基于加速度计和陀螺仪来提供(相对于某个任意方向的)
+三个角度的相对(relative)值。如果无法获取相对值或者绝对值数据更精确，
+则具体实现仍然可以决定提供绝对方向(absolute orientation)。无论在哪种情况下，
+都必须相应地设置 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-absolute" id="ref-for-dom-deviceorientationevent-absolute①">absolute</a></code> 属性以反映实现获取的方向数据的类型。</p>
+   <p>无法提供全部三个角度的实现必须将未知角度的值设置为 <code>null</code> 。
+如果提供了其中一个角度，则必须恰当地设置 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-absolute" id="ref-for-dom-deviceorientationevent-absolute②">absolute</a></code> 属性。如果一个实现永远不能提供方向信息，那么在触发 <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation⑤">deviceorientation</a></code> 事件时， <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①①">alpha</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta⑧">beta</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma⑧">gamma</a></code> 属性应该设置为 <code>null</code> 。</p>
+   <h3 class="heading settled" data-level="4.2" id="deviceorientationabsolute"><span class="secno">4.2. </span><span class="content">deviceorientationabsolute 事件</span><a class="self-link" href="#deviceorientationabsolute"></a></h3>
+   <div class="issue" id="issue-54055bae"><a class="self-link" href="#issue-54055bae"></a> <code class="idl"><a data-link-type="idl" href="#def-deviceorientationabsolute" id="ref-for-def-deviceorientationabsolute">deviceorientationabsolute</a></code> 事件及其 <code class="idl"><a data-link-type="idl" href="#dom-window-ondeviceorientationabsolute" id="ref-for-dom-window-ondeviceorientationabsolute">ondeviceorientationabsolute</a></code> 事件处理程序(类型的) IDL 属性的 <a href="https://wpt.fyi/results/orientation-event/ondeviceorientationabsolute.https.html"> 实现经验有限</a>。 </div>
+   <p>每当方向发生显著变化时，
+实现本规范的用户代理必须在 <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window②">window</a></code> 对象上使用 <code class="idl"><a data-link-type="idl" href="#deviceorientationevent" id="ref-for-deviceorientationevent①">DeviceOrientationEvent</a></code> <a href="https://dom.spec.whatwg.org/#concept-event-fire">激发(fire an event) </a>名为 <dfn class="dfn-paneled idl-code" data-dfn-for="Window" data-dfn-type="event" data-export data-lt="deviceorientationabsolute" id="def-deviceorientationabsolute"> <code>deviceorientationabsolute</code></dfn> 的事件。</p>
+   <p>用户代理还必须在 <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window③">window</a></code> 对象上提供名为 <code class="idl"><a data-link-type="idl" href="#dom-window-ondeviceorientationabsolute" id="ref-for-dom-window-ondeviceorientationabsolute①">ondeviceorientationabsolute</a></code> 的事件处理程序(类型的) IDL 属性 <a data-link-type="biblio" href="#biblio-html" title="HTML Standard">[HTML]</a> 。它对应的 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type" id="ref-for-event-handler-event-type①">event handler event type</a> 的类型必须是 <code class="idl"><a data-link-type="idl" href="#def-deviceorientationabsolute" id="ref-for-def-deviceorientationabsolute①">deviceorientationabsolute</a></code> 。</p>
 <pre class="idl highlight def"><c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#window" id="ref-for-window①"><c- g>Window</c-></a> {
     [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext②"><c- g>SecureContext</c-></a>] <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler①"><c- n>EventHandler</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Window" data-dfn-type="attribute" data-export data-type="EventHandler" id="dom-window-ondeviceorientationabsolute"><code><c- g>ondeviceorientationabsolute</c-></code></dfn>;
 };
 </pre>
-   <p>The <code class="idl"><a data-link-type="idl" href="#def-deviceorientationabsolute" id="ref-for-def-deviceorientationabsolute②">deviceorientationabsolute</a></code> event is completely analogous to the <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation⑤">deviceorientation</a></code> event, except additional sensors like the magnetometer can be used to provide an absolute orientation. The <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-absolute" id="ref-for-dom-deviceorientationevent-absolute③">absolute</a></code> property must be set to true. If an implementation can never provide absolute orientation information, the event should be fired with the <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①②">alpha</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta⑨">beta</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma⑨">gamma</a></code> attributes set to null.</p>
-   <h3 class="heading settled" data-level="4.3" id="devicemotion"><span class="secno">4.3. </span><span class="content">devicemotion Event</span><a class="self-link" href="#devicemotion"></a></h3>
-   <p>User agents implementing this specification must <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire①">fire an event</a> named <dfn class="dfn-paneled idl-code" data-dfn-for="Window" data-dfn-type="event" data-export id="def-devicemotion"><code>devicemotion</code></dfn> using <code class="idl"><a data-link-type="idl" href="#devicemotionevent" id="ref-for-devicemotionevent">DeviceMotionEvent</a></code> on the <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window④">window</a></code> object.</p>
-   <p>User agents must also provide an event handler IDL attribute <a data-link-type="biblio" href="#biblio-html" title="HTML Standard">[HTML]</a> named <code class="idl"><a data-link-type="idl" href="#dom-window-ondevicemotion" id="ref-for-dom-window-ondevicemotion">ondevicemotion</a></code> on the <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window⑤">window</a></code> object. The type of the corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type" id="ref-for-event-handler-event-type②">event handler event type</a> must be <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion②">devicemotion</a></code>.</p>
+   <p><code class="idl"><a data-link-type="idl" href="#def-deviceorientationabsolute" id="ref-for-def-deviceorientationabsolute②">deviceorientationabsolute</a></code> 事件与 <code class="idl"><a data-link-type="idl" href="#def-deviceorientation" id="ref-for-def-deviceorientation⑥">deviceorientation</a></code> 事件完全类似
+(analogous)，只是前者可以使用磁力计(magnetometer)等附加传感器来提供绝对方向信息。 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-absolute" id="ref-for-dom-deviceorientationevent-absolute③">absolute</a></code> 属性必须设置为 <code>true</code> 。
+如果一个实现永远不能提供方向信息，那么在触发 <code class="idl"><a data-link-type="idl" href="#def-deviceorientationabsolute" id="ref-for-def-deviceorientationabsolute③">deviceorientationabsolute</a></code> 事件时， <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①②">alpha</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta⑨">beta</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma⑨">gamma</a></code> 属性应该设置为 <code>null</code> 。</p>
+   <h3 class="heading settled" data-level="4.3" id="devicemotion"><span class="secno">4.3. </span><span class="content">devicemotion 事件</span><a class="self-link" href="#devicemotion"></a></h3>
+   <p>实现本规范的用户代理必须在 <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window④">window</a></code> 对象上使用 <code class="idl"><a data-link-type="idl" href="#devicemotionevent" id="ref-for-devicemotionevent">DeviceMotionEvent</a></code> <a href="https://dom.spec.whatwg.org/#concept-event-fire"> 激发(fire an event)</a> 名为 <dfn class="dfn-paneled idl-code" data-dfn-for="Window" data-dfn-type="event" data-export id="def-devicemotion"><code>devicemotion</code></dfn> 的事件。</p>
+   <p>用户代理还必须在 <code class="idl"><a class="idl-code" data-link-type="attribute" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window" id="ref-for-dom-window⑤">window</a></code> 对象上提供一个名为 <code class="idl"><a data-link-type="idl" href="#dom-window-ondevicemotion" id="ref-for-dom-window-ondevicemotion">ondevicemotion</a></code> 的事件处理程序(类型的) IDL 属性 <a data-link-type="biblio" href="#biblio-html" title="HTML Standard">[HTML]</a> 。
+它对应的 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type" id="ref-for-event-handler-event-type②">event handler event type</a> 的类型必须是 <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion②">devicemotion</a></code> 。</p>
 <pre class="idl highlight def"><c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#window" id="ref-for-window②"><c- g>Window</c-></a> {
     [<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext③"><c- g>SecureContext</c-></a>] <c- b>attribute</c-> <a data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler②"><c- n>EventHandler</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="Window" data-dfn-type="attribute" data-export data-type="EventHandler" id="dom-window-ondevicemotion"><code><c- g>ondevicemotion</c-></code></dfn>;
 };
@@ -1041,49 +1079,67 @@ Z - Y' - X'' 的顺序应用旋转，这与此处指定的顺序不同。 </div>
     <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double①⑨"><c- b>double</c-></a> <dfn class="idl-code" data-default="0" data-dfn-for="DeviceMotionEventInit" data-dfn-type="dict-member" data-export data-type="double " id="dom-devicemotioneventinit-interval"><code><c- g>interval</c-></code><a class="self-link" href="#dom-devicemotioneventinit-interval"></a></dfn> = 0;
 };
 </pre>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration②">acceleration</a></code> attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity③">accelerationIncludingGravity</a></code> attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-rotationrate" id="ref-for-dom-devicemotionevent-rotationrate①">rotationRate</a></code> attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to null.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-interval" id="ref-for-dom-devicemotionevent-interval">interval</a></code> attribute must return the value it was initialized to. When the object is created, this attribute must be initialized to 0.</p>
-   <p>The static <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-requestpermission" id="ref-for-dom-devicemotionevent-requestpermission">requestPermission()</a></code> operation, when invoked, must run these steps:</p>
+   <p><code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration②">acceleration</a></code> 属性必须返回其初始化的值。创建对象时，
+此属性必须初始化为 <code>null</code> 。</p>
+   <p><code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity③">accelerationIncludingGravity</a></code> 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>null</code> 。</p>
+   <p><code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-rotationrate" id="ref-for-dom-devicemotionevent-rotationrate①">rotationRate</a></code> 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>null</code> 。</p>
+   <p><code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-interval" id="ref-for-dom-devicemotionevent-interval">interval</a></code> 属性必须返回其初始化的值。
+创建对象时，此属性必须初始化为 <code>0</code> 。</p>
+   <p>调用静态方法 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-requestpermission" id="ref-for-dom-devicemotionevent-requestpermission">requestPermission()</a></code> 时，必须运行以下步骤:</p>
    <ol>
     <li>
-     <p>Let <var>promise</var> be a new promise. </p>
+     <p>赋值 <var>promise</var> 为一个新的期约对象。 </p>
     <li>
-     <p>Run these steps <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>: </p>
+     <p><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">同步</a> 运行下列步骤: </p>
      <ol>
       <li>
-       <p>Let <var>permission</var> be <a data-link-type="dfn" href="#permission" id="ref-for-permission⑤">permission</a> for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-concept-settings-object-origin">origin</a>. </p>
+       <p>赋值 <var>permission</var> 为一个 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin"> 源(origin)</a> 的 <a href="#permission" id="ref-for-permission②">枚举值(permission)</a> 。 </p>
       <li>
-       <p>If <var>permission</var> is "<code>default</code>" and the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global">relevant global object</a> does not have <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation" id="ref-for-transient-activation">transient activation</a>, then reject <var>promise</var> with a <code class="idl"><a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notallowederror" id="ref-for-notallowederror①">NotAllowedError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code> and abort these steps. </p>
+       <p>如果 <var>permission</var> 值为 "<code>default</code>" 并且 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global"> 相关全局对象(relevant global object)</a> 没有 <a href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation"> 短暂激活(transient activation)</a> ，那么使用一个 <code class="idl"><a class="idl-code" data-link-type="exception" href="https://webidl.spec.whatwg.org/#notallowederror" id="ref-for-notallowederror①">NotAllowedError</a></code> <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException①">DOMException</a></code> 错误拒绝(reject) <var>promise</var> 并且中止步骤运行。 </p>
       <li>
-       <p>If <var>permission</var> is "<code>default</code>", ask the user whether sharing device motion
-   for the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object①">relevant settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-concept-settings-object-origin①">origin</a> is acceptable. If it is, set <var>permission</var> to "<code>granted</code>", and "<code>denied</code>" otherwise. </p>
+       <p>如果 <var>permission</var> 值为 "<code>default</code>"，询问用户
+   对于 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin"> 源(origin)</a> 的设备方向共享是否可以接受。如果可以接受，设置 <var>permission</var> 值为 "<code>granted</code>" ，否则设置为 
+   "<code>denied</code>" 。 </p>
       <li>
-       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task">Queue a task</a> to run these steps: </p>
+       <p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task"> 设置一个任务队列</a> 来运行如下步骤: </p>
        <ol>
         <li>
-         <p>Set <a data-link-type="dfn" href="#permission" id="ref-for-permission①">permission</a> for the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object②">relevant settings object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin" id="ref-for-concept-settings-object-origin②">origin</a> to <var>permission</var>. </p>
+         <p>将 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"> 相关设置对象(relevant-settings-objec)</a> 的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin"> 源(origin)</a> 的 <a href="#permission" id="ref-for-permission③">枚举值(permission)</a> 赋予 <var>permission</var>。 </p>
         <li>
-         <p>Fulfill <var>promise</var> with <var>permission</var>. </p>
+         <p>根据 <var>permission</var> 的值兑现(Fulfill) <var>promise</var> 。 </p>
        </ol>
      </ol>
     <li>
-     <p>Return <var>promise</var>. </p>
+     <p>返回 <var>promise</var> 。 </p>
    </ol>
-   <p>In the <code class="idl"><a data-link-type="idl" href="#devicemotionevent" id="ref-for-devicemotionevent①">DeviceMotionEvent</a></code> events fired by the user agent, the following requirements must apply:</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration③">acceleration</a></code> attribute must be initialized with the acceleration of the hosting device relative to the Earth frame, expressed in the body frame, as defined in <a href="#deviceorientation">deviceorientation Event</a> section. The acceleration must be expressed in meters per second squared (m/s<sup>2</sup>) and must not be more precise than 0.1 m/s<sup>2</sup>.</p>
-   <p>Implementations that are unable to provide acceleration data without the effect of gravity (due, for example, to the lack of a gyroscope) may instead supply the acceleration including the effect of gravity. This is less useful in many applications but is provided as a means of providing best-effort support. In this case, the <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity④">accelerationIncludingGravity</a></code> attribute must be initialized with the acceleration of the hosting device, plus an acceleration equal and opposite to the acceleration due to gravity. Again, the acceleration must be given in the body frame defined in <a href="#deviceorientation">deviceorientation Event</a> section and must be expressed in meters per second squared (m/s<sup>2</sup>) and must not be more precise than 0.1 m/s<sup>2</sup>.</p>
-   <p class="note" role="note">Note: in practice, <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity⑤">accelerationIncludingGravity</a></code> represents the raw readings obtained from an <a href="https://w3c.github.io/motion-sensors/#accelerometer">Motion Sensors Explainer § accelerometer</a>, or the <a data-link-type="biblio" href="#biblio-g-force" title="G-Force">[G-FORCE]</a> while <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration④">acceleration</a></code> provides the readings of a <a href="https://w3c.github.io/motion-sensors/#linear-acceleration-sensor">Motion Sensors Explainer § linear-acceleration-sensor</a> and is likely a sensor fusion. </p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-rotationrate" id="ref-for-dom-devicemotionevent-rotationrate②">rotationRate</a></code> attribute must be initialized with the rate of rotation of the hosting device in space. It must be expressed as the rate of change of the angles defined as <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①③">alpha</a></code> (x axis), <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta①⓪">beta</a></code> (y axis), <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma①⓪">gamma</a></code> (z axis). Each attribute must be expressed in degrees per second (deg/s) and must not be more precise than 0.1 degrees per second.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-interval" id="ref-for-dom-devicemotionevent-interval①">interval</a></code> attribute must be initialized with the interval at which data is obtained from the underlying hardware and must be expressed in milliseconds (ms). It must be a constant, to simplify filtering of the data by the Web application.</p>
-   <p>Implementations that are unable to provide all attributes must initialize the values of the unknown attributes to null. If an implementation can never provide motion information, the event should be fired with the <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration⑤">acceleration</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity⑥">accelerationIncludingGravity</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-rotationrate" id="ref-for-dom-devicemotionevent-rotationrate③">rotationRate</a></code> attributes set to null.</p>
-   <h3 class="heading settled" data-level="4.4" id="id=permission-model"><span class="secno">4.4. </span><span class="content">Permission model</span><a class="self-link" href="#id=permission-model"></a></h3>
-   <div class="issue" id="issue-53485653"><a class="self-link" href="#issue-53485653"></a>Further implementation experience is being gathered for the permission model and specification clarifications informed by this experience are being discussed in <a href="https://github.com/w3c/deviceorientation/issues/74">GitHub issue #74</a>.</div>
-   <p>Implementations may choose to share device orientation &amp; motion only if the
-user (or user agent on behalf of the user) has granted <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="permission">permission</dfn>.
-The <a data-link-type="dfn" href="#permission" id="ref-for-permission②">permission</a> to share device orientation &amp; motion
-for a given <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin" id="ref-for-concept-origin">origin</a> is one of three strings: </p>
+   <p>In the <code class="idl"><a data-link-type="idl" href="#devicemotionevent" id="ref-for-devicemotionevent①">DeviceMotionEvent</a></code> events fired by the user agent, the following requirements must apply:
+在用户代理触发的 <code class="idl"><a data-link-type="idl" href="#devicemotionevent" id="ref-for-devicemotionevent②">DeviceMotionEvent</a></code> 事件中，必须满足以下要求:</p>
+   <p><code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration③">acceleration</a></code> 属性必须使用主机设备相对于地球坐标系
+(Earth frame)的加速度进行初始化，并以自身坐标系(设备坐标系)表示，
+正如 <a href="#deviceorientation">deviceorientation Event</a> 部分中定义的那样。
+加速度必须以米/秒平方 (m/s<sup>2</sup>) 为单位，且精确度不得超过 
+0.1 m/s<sup>2</sup> 。</p>
+   <p>对于不能在没有重力(gravity)影响的情况下提供加速度数据的实现(例如，
+由于缺乏陀螺仪)，可以提供包括重力影响的加速度。虽然在许多应用场景中用处不大，
+但这也是尽最大努力支持进行数据提供的一种方式。在这种情况下， <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity④">accelerationIncludingGravity</a></code> 属性必须使用主机设备的加速度加上与重力加速度相等或相反的加速度进行初始化。
+同样，加速度必须在 <a href="#deviceorientation">deviceorientation Event</a> (设备方向事件)
+部分中定义的自身坐标系(设备坐标系)中给出，必须以米/秒平方 (m/s<sup>2</sup>) 
+为单位，且精确度不得超过 0.1 m/s<sup>2</sup> 。</p>
+   <div class="note custom-note" data-content="注释:" role="note"> 在实践中， <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity⑤">accelerationIncludingGravity</a></code> 表示从 <a href="https://w3c.github.io/motion-sensors/#accelerometer"> 运动传感器解释器 § 加速度计</a> 中获得的原始数据或 <a data-link-type="biblio" href="#biblio-g-force" title="G-Force">[G-FORCE]</a> ，而 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration④">acceleration</a></code> 提供 <a href="https://w3c.github.io/motion-sensors/#linear-acceleration-sensor"> 运动传感器解释器 § 线性加速度传感器</a> 的数据，
+并且这个数据很可能是将多个传感器的数据进行整合和处理(的结果)。 </div>
+   <p>属性必须使用主机设备在空间中的旋转速率进行初始化。它必须表示为之前定义的 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①③">alpha</a></code> (x轴)、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta①⓪">beta</a></code> (y轴)、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma①⓪">gamma</a></code> (z轴)的角度的变化率。
+每个属性必须以度数/度数(deg/s)为单位，并且精确度不得超过 0.1deg/s 。</p>
+   <p><code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-interval" id="ref-for-dom-devicemotionevent-interval①">interval</a></code> 属性必须使用从底层硬件获取的间隔数据进行初始化，
+并且必须以毫秒(ms)为单位。它必须是一个常量，以简化 Web 应用程序对数据的筛选。</p>
+   <p>无法提供全部属性值的实现必须将未知属性的值初始化为 <code>null</code> 。
+如果一个实现永远无法提供运动信息，那么在触发 <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion③">devicemotion</a></code> 事件时， <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration⑤">acceleration</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity⑥">accelerationIncludingGravity</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-rotationrate" id="ref-for-dom-devicemotionevent-rotationrate②">rotationRate</a></code> 属性应该设置为 <code>null</code> 。</p>
+   <h3 class="heading settled" data-level="4.4" id="id=permission-model"><span class="secno">4.4. </span><span class="content">权限模型(Permission model)</span><a class="self-link" href="#id=permission-model"></a></h3>
+   <div class="issue" id="issue-a68af727"><a class="self-link" href="#issue-a68af727"></a>正在为权限模型的实现收集进一步的经验，
+并且根据实现经验获知的规范阐述(clarifications)正在 <a href="https://github.com/w3c/deviceorientation/issues/74">GitHub问题#74</a> 中进行讨论。</div>
+   <p>仅当用户(或代表用户的用户代理)已授予 <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="permission">permission</dfn> (权限)时，
+实现可以选择共享设备的方向和运动信息。对于一个给定 <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin"> 源(origin)</a> 共享的设备方向和运动信息的 <a href="#permission" id="ref-for-permission④">权限</a> 是如下三个字符串之一: </p>
    <dl>
     <dt>"<code>default</code>" 
     <dd>
@@ -1100,7 +1156,7 @@ for a given <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage
    <p class="note" role="note">There is no equivalent to "<code>default</code>"
 meaning "<code>granted</code>". In that case
 "<code>granted</code>" is simply returned as there would be no reason
-for the application to ask for <a data-link-type="dfn" href="#permission" id="ref-for-permission③">permission</a>. </p>
+for the application to ask for <a data-link-type="dfn" href="#permission" id="ref-for-permission⑤">permission</a>. </p>
    <h2 class="heading settled" data-level="5" id="security-and-privacy"><span class="secno">5. </span><span class="content">Security and privacy considerations</span><a class="self-link" href="#security-and-privacy"></a></h2>
    <p>The API defined in this specification can be used to obtain information from hardware sensors, such as accelerometer, gyroscope and magnetometer. Provided data may be considered as sensitive and could become a subject of attack from malicious web pages. The calibration of accelerometers, gyroscopes and magnetometers may reveal persistent details about the particular sensor hardware <a data-link-type="biblio" href="#biblio-sensorid" title="SensorID: Sensor Calibration Fingerprinting for Smartphones">[SENSORID]</a>. The main attack vectors can be categorized into following categories:</p>
    <ul>
@@ -1420,67 +1476,52 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
      <li><a href="#dom-devicemotioneventaccelerationinit-z">dict-member for DeviceMotionEventAccelerationInit</a><span>, in § 4.3</span>
     </ul>
   </ul>
-  <aside aria-labelledby="infopaneltitle-for-bfb9cb6617f81a424ab20212af73bae3" class="dfn-panel" data-for="bfb9cb6617f81a424ab20212af73bae3" id="infopanel-for-bfb9cb6617f81a424ab20212af73bae3">
-   <span id="infopaneltitle-for-bfb9cb6617f81a424ab20212af73bae3" style="display:none">Info about the 'relevant settings object' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-bfb9cb6617f81a424ab20212af73bae3">4.1. deviceorientation Event</a> <a href="#ref-for-bfb9cb6617f81a424ab20212af73bae3">(2)</a> <a href="#ref-for-bfb9cb6617f81a424ab20212af73bae3">(3)</a>
-    <li><a href="#ref-for-relevant-settings-object">4.3. devicemotion Event</a> <a href="#ref-for-relevant-settings-object①">(2)</a> <a href="#ref-for-relevant-settings-object②">(3)</a>
-   </ul>
-  </aside>
   <aside aria-labelledby="infopaneltitle-for-f283775a81d0563c993cea58ec943179" class="dfn-panel" data-for="f283775a81d0563c993cea58ec943179" id="infopanel-for-f283775a81d0563c993cea58ec943179">
    <span id="infopaneltitle-for-f283775a81d0563c993cea58ec943179" style="display:none">Info about the 'orientationchange' external reference.</span><a href="https://compat.spec.whatwg.org/#event-orientationchange">https://compat.spec.whatwg.org/#event-orientationchange</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-event-orientationchange">4.1. deviceorientation Event</a> <a href="#ref-for-event-orientationchange①">(2)</a>
+    <li><a href="#ref-for-event-orientationchange">4.1. deviceorientation 事件</a> <a href="#ref-for-event-orientationchange①">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-316772b0029bcc028521d2db08fd3717" class="dfn-panel" data-for="316772b0029bcc028521d2db08fd3717" id="infopanel-for-316772b0029bcc028521d2db08fd3717">
    <span id="infopaneltitle-for-316772b0029bcc028521d2db08fd3717" style="display:none">Info about the 'Event' external reference.</span><a href="https://dom.spec.whatwg.org/#event">https://dom.spec.whatwg.org/#event</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-event">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-event①">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-event">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-event①">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-a41247dbf908b8c39ef1dea1be6618d3" class="dfn-panel" data-for="a41247dbf908b8c39ef1dea1be6618d3" id="infopanel-for-a41247dbf908b8c39ef1dea1be6618d3">
    <span id="infopaneltitle-for-a41247dbf908b8c39ef1dea1be6618d3" style="display:none">Info about the 'EventInit' external reference.</span><a href="https://dom.spec.whatwg.org/#dictdef-eventinit">https://dom.spec.whatwg.org/#dictdef-eventinit</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-eventinit">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-dictdef-eventinit①">4.3. devicemotion Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-15045c15505e025cd6b6d0f134b7c986" class="dfn-panel" data-for="15045c15505e025cd6b6d0f134b7c986" id="infopanel-for-15045c15505e025cd6b6d0f134b7c986">
-   <span id="infopaneltitle-for-15045c15505e025cd6b6d0f134b7c986" style="display:none">Info about the 'fire an event' external reference.</span><a href="https://dom.spec.whatwg.org/#concept-event-fire">https://dom.spec.whatwg.org/#concept-event-fire</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-15045c15505e025cd6b6d0f134b7c986">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-concept-event-fire">4.2. deviceorientationabsolute Event</a>
-    <li><a href="#ref-for-concept-event-fire①">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dictdef-eventinit">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-dictdef-eventinit①">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-bfe0c4d537f03725f934e3724399e137" class="dfn-panel" data-for="bfe0c4d537f03725f934e3724399e137" id="infopanel-for-bfe0c4d537f03725f934e3724399e137">
    <span id="infopaneltitle-for-bfe0c4d537f03725f934e3724399e137" style="display:none">Info about the 'rotate()' external reference.</span><a href="https://drafts.fxtf.org/geometry-1/#dom-dommatrixreadonly-rotate">https://drafts.fxtf.org/geometry-1/#dom-dommatrixreadonly-rotate</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-dommatrixreadonly-rotate">4.1. deviceorientation Event</a>
+    <li><a href="#ref-for-dom-dommatrixreadonly-rotate">4.1. deviceorientation 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-3354142cb2791289662f372d990b6994" class="dfn-panel" data-for="3354142cb2791289662f372d990b6994" id="infopanel-for-3354142cb2791289662f372d990b6994">
    <span id="infopaneltitle-for-3354142cb2791289662f372d990b6994" style="display:none">Info about the 'rotateSelf()' external reference.</span><a href="https://drafts.fxtf.org/geometry-1/#dom-dommatrix-rotateself">https://drafts.fxtf.org/geometry-1/#dom-dommatrix-rotateself</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-dommatrix-rotateself">4.1. deviceorientation Event</a>
+    <li><a href="#ref-for-dom-dommatrix-rotateself">4.1. deviceorientation 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-716703f1068cc638b4235f83154eff6c" class="dfn-panel" data-for="716703f1068cc638b4235f83154eff6c" id="infopanel-for-716703f1068cc638b4235f83154eff6c">
    <span id="infopaneltitle-for-716703f1068cc638b4235f83154eff6c" style="display:none">Info about the 'EventHandler' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-eventhandler">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-eventhandler①">4.2. deviceorientationabsolute Event</a>
-    <li><a href="#ref-for-eventhandler②">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-eventhandler">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-eventhandler①">4.2. deviceorientationabsolute 事件</a>
+    <li><a href="#ref-for-eventhandler②">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-d1f0a86fd49be388d8b0159e241a1172" class="dfn-panel" data-for="d1f0a86fd49be388d8b0159e241a1172" id="infopanel-for-d1f0a86fd49be388d8b0159e241a1172">
    <span id="infopaneltitle-for-d1f0a86fd49be388d8b0159e241a1172" style="display:none">Info about the 'Window' external reference.</span><a href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#window">https://html.spec.whatwg.org/multipage/nav-history-apis.html#window</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-window">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-window①">4.2. deviceorientationabsolute Event</a>
-    <li><a href="#ref-for-window②">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-window">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-window①">4.2. deviceorientationabsolute 事件</a>
+    <li><a href="#ref-for-window②">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-de11cdc07a64c79878f1c3074e81554a" class="dfn-panel" data-for="de11cdc07a64c79878f1c3074e81554a" id="infopanel-for-de11cdc07a64c79878f1c3074e81554a">
@@ -1492,43 +1533,9 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-63ae16e3c4cc120a678b317e8329b704" class="dfn-panel" data-for="63ae16e3c4cc120a678b317e8329b704" id="infopanel-for-63ae16e3c4cc120a678b317e8329b704">
    <span id="infopaneltitle-for-63ae16e3c4cc120a678b317e8329b704" style="display:none">Info about the 'event handler event type' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type">https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-event-handler-event-type">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-event-handler-event-type①">4.2. deviceorientationabsolute Event</a>
-    <li><a href="#ref-for-event-handler-event-type②">4.3. devicemotion Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-3a2763fcaa6bc82693554cf36780c0dd" class="dfn-panel" data-for="3a2763fcaa6bc82693554cf36780c0dd" id="infopanel-for-3a2763fcaa6bc82693554cf36780c0dd">
-   <span id="infopaneltitle-for-3a2763fcaa6bc82693554cf36780c0dd" style="display:none">Info about the 'in parallel' external reference.</span><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-3a2763fcaa6bc82693554cf36780c0dd">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-in-parallel">4.3. devicemotion Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-e66f9f7d45934e77669cb907bd0c7636" class="dfn-panel" data-for="e66f9f7d45934e77669cb907bd0c7636" id="infopanel-for-e66f9f7d45934e77669cb907bd0c7636">
-   <span id="infopaneltitle-for-e66f9f7d45934e77669cb907bd0c7636" style="display:none">Info about the 'origin' external reference.</span><a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">https://html.spec.whatwg.org/multipage/browsers.html#concept-origin</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-concept-origin">4.4. Permission model</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-a95cc6f0be910557a60537e0256920b2" class="dfn-panel" data-for="a95cc6f0be910557a60537e0256920b2" id="infopanel-for-a95cc6f0be910557a60537e0256920b2">
-   <span id="infopaneltitle-for-a95cc6f0be910557a60537e0256920b2" style="display:none">Info about the 'origin (for environment settings object)' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-a95cc6f0be910557a60537e0256920b2">4.1. deviceorientation Event</a> <a href="#ref-for-a95cc6f0be910557a60537e0256920b2">(2)</a> <a href="#ref-for-a95cc6f0be910557a60537e0256920b2">(3)</a>
-    <li><a href="#ref-for-concept-settings-object-origin">4.3. devicemotion Event</a> <a href="#ref-for-concept-settings-object-origin①">(2)</a> <a href="#ref-for-concept-settings-object-origin②">(3)</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-da7ed5f190c4eedd375552d6f7876301" class="dfn-panel" data-for="da7ed5f190c4eedd375552d6f7876301" id="infopanel-for-da7ed5f190c4eedd375552d6f7876301">
-   <span id="infopaneltitle-for-da7ed5f190c4eedd375552d6f7876301" style="display:none">Info about the 'queue a task' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-da7ed5f190c4eedd375552d6f7876301">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-queue-a-task">4.3. devicemotion Event</a>
-   </ul>
-  </aside>
-  <aside aria-labelledby="infopaneltitle-for-2233058c8f0998915af8393ee2abbc1d" class="dfn-panel" data-for="2233058c8f0998915af8393ee2abbc1d" id="infopanel-for-2233058c8f0998915af8393ee2abbc1d">
-   <span id="infopaneltitle-for-2233058c8f0998915af8393ee2abbc1d" style="display:none">Info about the 'relevant global object' external reference.</span><a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-2233058c8f0998915af8393ee2abbc1d">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-concept-relevant-global">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-event-handler-event-type">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-event-handler-event-type①">4.2. deviceorientationabsolute 事件</a>
+    <li><a href="#ref-for-event-handler-event-type②">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-c104b697744f6f246969dcc26b898f11" class="dfn-panel" data-for="c104b697744f6f246969dcc26b898f11" id="infopanel-for-c104b697744f6f246969dcc26b898f11">
@@ -1537,19 +1544,12 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
     <li><a href="#ref-for-top-level-browsing-context">5. Security and privacy considerations</a>
    </ul>
   </aside>
-  <aside aria-labelledby="infopaneltitle-for-5b762d09d78e8674458b84982b3cb3c9" class="dfn-panel" data-for="5b762d09d78e8674458b84982b3cb3c9" id="infopanel-for-5b762d09d78e8674458b84982b3cb3c9">
-   <span id="infopaneltitle-for-5b762d09d78e8674458b84982b3cb3c9" style="display:none">Info about the 'transient activation' external reference.</span><a href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation">https://html.spec.whatwg.org/multipage/interaction.html#transient-activation</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-5b762d09d78e8674458b84982b3cb3c9">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-transient-activation">4.3. devicemotion Event</a>
-   </ul>
-  </aside>
   <aside aria-labelledby="infopaneltitle-for-70cc826a4635f67d3a89efe7d82b5c3d" class="dfn-panel" data-for="70cc826a4635f67d3a89efe7d82b5c3d" id="infopanel-for-70cc826a4635f67d3a89efe7d82b5c3d">
    <span id="infopaneltitle-for-70cc826a4635f67d3a89efe7d82b5c3d" style="display:none">Info about the 'window' external reference.</span><a href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window">https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-window</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-window">4.1. deviceorientation Event</a> <a href="#ref-for-dom-window①">(2)</a>
-    <li><a href="#ref-for-dom-window②">4.2. deviceorientationabsolute Event</a> <a href="#ref-for-dom-window③">(2)</a>
-    <li><a href="#ref-for-dom-window④">4.3. devicemotion Event</a> <a href="#ref-for-dom-window⑤">(2)</a>
+    <li><a href="#ref-for-dom-window">4.1. deviceorientation 事件</a> <a href="#ref-for-dom-window①">(2)</a>
+    <li><a href="#ref-for-dom-window②">4.2. deviceorientationabsolute 事件</a> <a href="#ref-for-dom-window③">(2)</a>
+    <li><a href="#ref-for-dom-window④">4.3. devicemotion 事件</a> <a href="#ref-for-dom-window⑤">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-f47c6b7bec032f7561067bec7ae1e9d5" class="dfn-panel" data-for="f47c6b7bec032f7561067bec7ae1e9d5" id="infopanel-for-f47c6b7bec032f7561067bec7ae1e9d5">
@@ -1561,79 +1561,74 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
   <aside aria-labelledby="infopaneltitle-for-20c4831d4e513411042dd78668922d25" class="dfn-panel" data-for="20c4831d4e513411042dd78668922d25" id="infopanel-for-20c4831d4e513411042dd78668922d25">
    <span id="infopaneltitle-for-20c4831d4e513411042dd78668922d25" style="display:none">Info about the 'PermissionState' external reference.</span><a href="https://w3c.github.io/permissions/#dom-permissionstate">https://w3c.github.io/permissions/#dom-permissionstate</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-permissionstate">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-dom-permissionstate①">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dom-permissionstate">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-dom-permissionstate①">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-6cf8d14c9b406ea2db85d71cd0186b0f" class="dfn-panel" data-for="6cf8d14c9b406ea2db85d71cd0186b0f" id="infopanel-for-6cf8d14c9b406ea2db85d71cd0186b0f">
    <span id="infopaneltitle-for-6cf8d14c9b406ea2db85d71cd0186b0f" style="display:none">Info about the 'ScreenOrientation' external reference.</span><a href="https://w3c.github.io/screen-orientation/#dom-screenorientation">https://w3c.github.io/screen-orientation/#dom-screenorientation</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-screenorientation">4.1. deviceorientation Event</a>
+    <li><a href="#ref-for-dom-screenorientation">4.1. deviceorientation 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-0ab204fb9cc9a746edaff83c0db0740a" class="dfn-panel" data-for="0ab204fb9cc9a746edaff83c0db0740a" id="infopanel-for-0ab204fb9cc9a746edaff83c0db0740a">
    <span id="infopaneltitle-for-0ab204fb9cc9a746edaff83c0db0740a" style="display:none">Info about the 'DOMException' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-DOMException">https://webidl.spec.whatwg.org/#idl-DOMException</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-DOMException">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-idl-DOMException①">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-idl-DOMException">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-idl-DOMException①">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-d0f238a61de9310f1738a214749fab18" class="dfn-panel" data-for="d0f238a61de9310f1738a214749fab18" id="infopanel-for-d0f238a61de9310f1738a214749fab18">
    <span id="infopaneltitle-for-d0f238a61de9310f1738a214749fab18" style="display:none">Info about the 'DOMString' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-DOMString">https://webidl.spec.whatwg.org/#idl-DOMString</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-DOMString">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-idl-DOMString①">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-idl-DOMString">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-idl-DOMString①">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dde049eb112f043fc45407ec0d4cb457" class="dfn-panel" data-for="dde049eb112f043fc45407ec0d4cb457" id="infopanel-for-dde049eb112f043fc45407ec0d4cb457">
    <span id="infopaneltitle-for-dde049eb112f043fc45407ec0d4cb457" style="display:none">Info about the 'Exposed' external reference.</span><a href="https://webidl.spec.whatwg.org/#Exposed">https://webidl.spec.whatwg.org/#Exposed</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-Exposed">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-Exposed①">4.3. devicemotion Event</a> <a href="#ref-for-Exposed②">(2)</a> <a href="#ref-for-Exposed③">(3)</a>
+    <li><a href="#ref-for-Exposed">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-Exposed①">4.3. devicemotion 事件</a> <a href="#ref-for-Exposed②">(2)</a> <a href="#ref-for-Exposed③">(3)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-aa43258e2b51dc6ebe6268a36e6fd733" class="dfn-panel" data-for="aa43258e2b51dc6ebe6268a36e6fd733" id="infopanel-for-aa43258e2b51dc6ebe6268a36e6fd733">
    <span id="infopaneltitle-for-aa43258e2b51dc6ebe6268a36e6fd733" style="display:none">Info about the 'NotAllowedError' external reference.</span><a href="https://webidl.spec.whatwg.org/#notallowederror">https://webidl.spec.whatwg.org/#notallowederror</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-notallowederror">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-notallowederror①">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-notallowederror">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-notallowederror①">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-93669c631ec1ef8e696b4c083bdbe12c" class="dfn-panel" data-for="93669c631ec1ef8e696b4c083bdbe12c" id="infopanel-for-93669c631ec1ef8e696b4c083bdbe12c">
    <span id="infopaneltitle-for-93669c631ec1ef8e696b4c083bdbe12c" style="display:none">Info about the 'Promise' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-promise">https://webidl.spec.whatwg.org/#idl-promise</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-promise">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-idl-promise①">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-idl-promise">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-idl-promise①">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-cdf224ec60dc3b08449a2fbdf3a90406" class="dfn-panel" data-for="cdf224ec60dc3b08449a2fbdf3a90406" id="infopanel-for-cdf224ec60dc3b08449a2fbdf3a90406">
    <span id="infopaneltitle-for-cdf224ec60dc3b08449a2fbdf3a90406" style="display:none">Info about the 'SecureContext' external reference.</span><a href="https://webidl.spec.whatwg.org/#SecureContext">https://webidl.spec.whatwg.org/#SecureContext</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-SecureContext">4.1. deviceorientation Event</a> <a href="#ref-for-SecureContext①">(2)</a>
-    <li><a href="#ref-for-SecureContext②">4.2. deviceorientationabsolute Event</a>
-    <li><a href="#ref-for-SecureContext③">4.3. devicemotion Event</a> <a href="#ref-for-SecureContext④">(2)</a> <a href="#ref-for-SecureContext⑤">(3)</a> <a href="#ref-for-SecureContext⑥">(4)</a>
+    <li><a href="#ref-for-SecureContext">4.1. deviceorientation 事件</a> <a href="#ref-for-SecureContext①">(2)</a>
+    <li><a href="#ref-for-SecureContext②">4.2. deviceorientationabsolute 事件</a>
+    <li><a href="#ref-for-SecureContext③">4.3. devicemotion 事件</a> <a href="#ref-for-SecureContext④">(2)</a> <a href="#ref-for-SecureContext⑤">(3)</a> <a href="#ref-for-SecureContext⑥">(4)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-f8062b07e25ed0281f5cbfb9a54070b4" class="dfn-panel" data-for="f8062b07e25ed0281f5cbfb9a54070b4" id="infopanel-for-f8062b07e25ed0281f5cbfb9a54070b4">
    <span id="infopaneltitle-for-f8062b07e25ed0281f5cbfb9a54070b4" style="display:none">Info about the 'boolean' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-boolean">https://webidl.spec.whatwg.org/#idl-boolean</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-boolean">4.1. deviceorientation Event</a> <a href="#ref-for-idl-boolean①">(2)</a>
+    <li><a href="#ref-for-idl-boolean">4.1. deviceorientation 事件</a> <a href="#ref-for-idl-boolean①">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-d3fd0dc5b12c87e613395fec1824ac77" class="dfn-panel" data-for="d3fd0dc5b12c87e613395fec1824ac77" id="infopanel-for-d3fd0dc5b12c87e613395fec1824ac77">
    <span id="infopaneltitle-for-d3fd0dc5b12c87e613395fec1824ac77" style="display:none">Info about the 'double' external reference.</span><a href="https://webidl.spec.whatwg.org/#idl-double">https://webidl.spec.whatwg.org/#idl-double</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-double">4.1. deviceorientation Event</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-double②">(3)</a> <a href="#ref-for-idl-double③">(4)</a> <a href="#ref-for-idl-double④">(5)</a> <a href="#ref-for-idl-double⑤">(6)</a>
-    <li><a href="#ref-for-idl-double⑥">4.3. devicemotion Event</a> <a href="#ref-for-idl-double⑦">(2)</a> <a href="#ref-for-idl-double⑧">(3)</a> <a href="#ref-for-idl-double⑨">(4)</a> <a href="#ref-for-idl-double①⓪">(5)</a> <a href="#ref-for-idl-double①①">(6)</a> <a href="#ref-for-idl-double①②">(7)</a> <a href="#ref-for-idl-double①③">(8)</a> <a href="#ref-for-idl-double①④">(9)</a> <a href="#ref-for-idl-double①⑤">(10)</a> <a href="#ref-for-idl-double①⑥">(11)</a> <a href="#ref-for-idl-double①⑦">(12)</a> <a href="#ref-for-idl-double①⑧">(13)</a> <a href="#ref-for-idl-double①⑨">(14)</a>
+    <li><a href="#ref-for-idl-double">4.1. deviceorientation 事件</a> <a href="#ref-for-idl-double①">(2)</a> <a href="#ref-for-idl-double②">(3)</a> <a href="#ref-for-idl-double③">(4)</a> <a href="#ref-for-idl-double④">(5)</a> <a href="#ref-for-idl-double⑤">(6)</a>
+    <li><a href="#ref-for-idl-double⑥">4.3. devicemotion 事件</a> <a href="#ref-for-idl-double⑦">(2)</a> <a href="#ref-for-idl-double⑧">(3)</a> <a href="#ref-for-idl-double⑨">(4)</a> <a href="#ref-for-idl-double①⓪">(5)</a> <a href="#ref-for-idl-double①①">(6)</a> <a href="#ref-for-idl-double①②">(7)</a> <a href="#ref-for-idl-double①③">(8)</a> <a href="#ref-for-idl-double①④">(9)</a> <a href="#ref-for-idl-double①⑤">(10)</a> <a href="#ref-for-idl-double①⑥">(11)</a> <a href="#ref-for-idl-double①⑦">(12)</a> <a href="#ref-for-idl-double①⑧">(13)</a> <a href="#ref-for-idl-double①⑨">(14)</a>
    </ul>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
-   <li>
-    <a data-link-type="biblio">[]</a> defines the following terms:
-    <ul>
-     <li><span class="dfn-paneled" id="bfb9cb6617f81a424ab20212af73bae3">relevant settings object</span>
-    </ul>
    <li>
     <a data-link-type="biblio">[COMPATIBILITY]</a> defines the following terms:
     <ul>
@@ -1644,7 +1639,6 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
     <ul>
      <li><span class="dfn-paneled" id="316772b0029bcc028521d2db08fd3717">Event</span>
      <li><span class="dfn-paneled" id="a41247dbf908b8c39ef1dea1be6618d3">EventInit</span>
-     <li><span class="dfn-paneled" id="15045c15505e025cd6b6d0f134b7c986">fire an event</span>
     </ul>
    <li>
     <a data-link-type="biblio">[GEOMETRY-1]</a> defines the following terms:
@@ -1659,13 +1653,7 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
      <li><span class="dfn-paneled" id="d1f0a86fd49be388d8b0159e241a1172">Window</span>
      <li><span class="dfn-paneled" id="de11cdc07a64c79878f1c3074e81554a">active document</span>
      <li><span class="dfn-paneled" id="63ae16e3c4cc120a678b317e8329b704">event handler event type</span>
-     <li><span class="dfn-paneled" id="3a2763fcaa6bc82693554cf36780c0dd">in parallel</span>
-     <li><span class="dfn-paneled" id="e66f9f7d45934e77669cb907bd0c7636">origin</span>
-     <li><span class="dfn-paneled" id="a95cc6f0be910557a60537e0256920b2">origin <small>(for environment settings object)</small></span>
-     <li><span class="dfn-paneled" id="da7ed5f190c4eedd375552d6f7876301">queue a task</span>
-     <li><span class="dfn-paneled" id="2233058c8f0998915af8393ee2abbc1d">relevant global object</span>
      <li><span class="dfn-paneled" id="c104b697744f6f246969dcc26b898f11">top-level browsing context</span>
-     <li><span class="dfn-paneled" id="5b762d09d78e8674458b84982b3cb3c9">transient activation</span>
      <li><span class="dfn-paneled" id="70cc826a4635f67d3a89efe7d82b5c3d">window</span>
     </ul>
    <li>
@@ -1730,8 +1718,6 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
    <dd><a href="https://en.wikipedia.org/wiki/Gimbal_Lock"><cite>Gimbal Lock</cite></a>. URL: <a href="https://en.wikipedia.org/wiki/Gimbal_Lock">https://en.wikipedia.org/wiki/Gimbal_Lock</a>
    <dt id="biblio-indoorpos">[INDOORPOS]
    <dd>Shala, Ubejd; Angel Rodriguez. <a href="http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A475619&amp;dswid=9050"><cite>Indoor positioning using sensor-fusion in android devices</cite></a>. 2011. URL: <a href="http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A475619&amp;dswid=9050">http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A475619&amp;dswid=9050</a>
-   <dt id="biblio-motion-sensors">[MOTION-SENSORS]
-   <dd>Kenneth Christiansen; Alexander Shalamov. <a href="https://w3c.github.io/motion-sensors/"><cite>Motion Sensors Explainer</cite></a>. URL: <a href="https://w3c.github.io/motion-sensors/">https://w3c.github.io/motion-sensors/</a>
    <dt id="biblio-quaternions">[QUATERNIONS]
    <dd><a href="https://en.wikipedia.org/wiki/Quaternion"><cite>Quaternions</cite></a>. URL: <a href="https://en.wikipedia.org/wiki/Quaternion">https://en.wikipedia.org/wiki/Quaternion</a>
    <dt id="biblio-screen-orientation">[SCREEN-ORIENTATION]
@@ -1824,55 +1810,55 @@ for the application to ask for <a data-link-type="dfn" href="#permission" id="re
 deviceorientation' definition.</span><b><a href="#def-deviceorientation">#def-deviceorientation</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-def-deviceorientation">2. 简介</a> <a href="#ref-for-def-deviceorientation①">(2)</a>
-    <li><a href="#ref-for-def-deviceorientation②">4.1. deviceorientation Event</a> <a href="#ref-for-def-deviceorientation③">(2)</a> <a href="#ref-for-def-deviceorientation④">(3)</a>
-    <li><a href="#ref-for-def-deviceorientation⑤">4.2. deviceorientationabsolute Event</a>
+    <li><a href="#ref-for-def-deviceorientation②">4.1. deviceorientation 事件</a> <a href="#ref-for-def-deviceorientation③">(2)</a> <a href="#ref-for-def-deviceorientation④">(3)</a> <a href="#ref-for-def-deviceorientation⑤">(4)</a>
+    <li><a href="#ref-for-def-deviceorientation⑥">4.2. deviceorientationabsolute 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-window-ondeviceorientation" class="dfn-panel" data-for="dom-window-ondeviceorientation" id="infopanel-for-dom-window-ondeviceorientation">
    <span id="infopaneltitle-for-dom-window-ondeviceorientation" style="display:none">Info about the 'ondeviceorientation' definition.</span><b><a href="#dom-window-ondeviceorientation">#dom-window-ondeviceorientation</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-window-ondeviceorientation">4.1. deviceorientation Event</a>
+    <li><a href="#ref-for-dom-window-ondeviceorientation">4.1. deviceorientation 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-deviceorientationevent" class="dfn-panel" data-for="deviceorientationevent" id="infopanel-for-deviceorientationevent">
    <span id="infopaneltitle-for-deviceorientationevent" style="display:none">Info about the 'DeviceOrientationEvent' definition.</span><b><a href="#deviceorientationevent">#deviceorientationevent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-deviceorientationevent">4.1. deviceorientation Event</a>
-    <li><a href="#ref-for-deviceorientationevent①">4.2. deviceorientationabsolute Event</a>
+    <li><a href="#ref-for-deviceorientationevent">4.1. deviceorientation 事件</a>
+    <li><a href="#ref-for-deviceorientationevent①">4.2. deviceorientationabsolute 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-deviceorientationevent-alpha" class="dfn-panel" data-for="dom-deviceorientationevent-alpha" id="infopanel-for-dom-deviceorientationevent-alpha">
    <span id="infopaneltitle-for-dom-deviceorientationevent-alpha" style="display:none">Info about the 'alpha' definition.</span><b><a href="#dom-deviceorientationevent-alpha">#dom-deviceorientationevent-alpha</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-deviceorientationevent-alpha">2. 简介</a> <a href="#ref-for-dom-deviceorientationevent-alpha①">(2)</a> <a href="#ref-for-dom-deviceorientationevent-alpha②">(3)</a> <a href="#ref-for-dom-deviceorientationevent-alpha③">(4)</a> <a href="#ref-for-dom-deviceorientationevent-alpha④">(5)</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-alpha⑤">4.1. deviceorientation Event</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑥">(2)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑦">(3)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑧">(4)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑨">(5)</a> <a href="#ref-for-dom-deviceorientationevent-alpha①⓪">(6)</a> <a href="#ref-for-dom-deviceorientationevent-alpha①①">(7)</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-alpha①②">4.2. deviceorientationabsolute Event</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-alpha①③">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-alpha⑤">4.1. deviceorientation 事件</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑥">(2)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑦">(3)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑧">(4)</a> <a href="#ref-for-dom-deviceorientationevent-alpha⑨">(5)</a> <a href="#ref-for-dom-deviceorientationevent-alpha①⓪">(6)</a> <a href="#ref-for-dom-deviceorientationevent-alpha①①">(7)</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-alpha①②">4.2. deviceorientationabsolute 事件</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-alpha①③">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-deviceorientationevent-beta" class="dfn-panel" data-for="dom-deviceorientationevent-beta" id="infopanel-for-dom-deviceorientationevent-beta">
    <span id="infopaneltitle-for-dom-deviceorientationevent-beta" style="display:none">Info about the 'beta' definition.</span><b><a href="#dom-deviceorientationevent-beta">#dom-deviceorientationevent-beta</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-deviceorientationevent-beta">2. 简介</a> <a href="#ref-for-dom-deviceorientationevent-beta①">(2)</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-beta②">4.1. deviceorientation Event</a> <a href="#ref-for-dom-deviceorientationevent-beta③">(2)</a> <a href="#ref-for-dom-deviceorientationevent-beta④">(3)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑤">(4)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑥">(5)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑦">(6)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑧">(7)</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-beta⑨">4.2. deviceorientationabsolute Event</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-beta①⓪">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-beta②">4.1. deviceorientation 事件</a> <a href="#ref-for-dom-deviceorientationevent-beta③">(2)</a> <a href="#ref-for-dom-deviceorientationevent-beta④">(3)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑤">(4)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑥">(5)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑦">(6)</a> <a href="#ref-for-dom-deviceorientationevent-beta⑧">(7)</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-beta⑨">4.2. deviceorientationabsolute 事件</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-beta①⓪">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-deviceorientationevent-gamma" class="dfn-panel" data-for="dom-deviceorientationevent-gamma" id="infopanel-for-dom-deviceorientationevent-gamma">
    <span id="infopaneltitle-for-dom-deviceorientationevent-gamma" style="display:none">Info about the 'gamma' definition.</span><b><a href="#dom-deviceorientationevent-gamma">#dom-deviceorientationevent-gamma</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-deviceorientationevent-gamma">2. 简介</a> <a href="#ref-for-dom-deviceorientationevent-gamma①">(2)</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-gamma②">4.1. deviceorientation Event</a> <a href="#ref-for-dom-deviceorientationevent-gamma③">(2)</a> <a href="#ref-for-dom-deviceorientationevent-gamma④">(3)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑤">(4)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑥">(5)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑦">(6)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑧">(7)</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-gamma⑨">4.2. deviceorientationabsolute Event</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-gamma①⓪">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-gamma②">4.1. deviceorientation 事件</a> <a href="#ref-for-dom-deviceorientationevent-gamma③">(2)</a> <a href="#ref-for-dom-deviceorientationevent-gamma④">(3)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑤">(4)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑥">(5)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑦">(6)</a> <a href="#ref-for-dom-deviceorientationevent-gamma⑧">(7)</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-gamma⑨">4.2. deviceorientationabsolute 事件</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-gamma①⓪">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-deviceorientationevent-absolute" class="dfn-panel" data-for="dom-deviceorientationevent-absolute" id="infopanel-for-dom-deviceorientationevent-absolute">
    <span id="infopaneltitle-for-dom-deviceorientationevent-absolute" style="display:none">Info about the 'absolute' definition.</span><b><a href="#dom-deviceorientationevent-absolute">#dom-deviceorientationevent-absolute</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-deviceorientationevent-absolute">4.1. deviceorientation Event</a> <a href="#ref-for-dom-deviceorientationevent-absolute①">(2)</a> <a href="#ref-for-dom-deviceorientationevent-absolute②">(3)</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-absolute③">4.2. deviceorientationabsolute Event</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-absolute">4.1. deviceorientation 事件</a> <a href="#ref-for-dom-deviceorientationevent-absolute①">(2)</a> <a href="#ref-for-dom-deviceorientationevent-absolute②">(3)</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-absolute③">4.2. deviceorientationabsolute 事件</a>
     <li><a href="#ref-for-dom-deviceorientationevent-absolute④">A.1 Calculating compass heading</a>
     <li><a href="#ref-for-dom-deviceorientationevent-absolute⑤">A.2 Alternate device orientation representations</a> <a href="#ref-for-dom-deviceorientationevent-absolute⑥">(2)</a>
    </ul>
@@ -1880,50 +1866,51 @@ deviceorientation' definition.</span><b><a href="#def-deviceorientation">#def-de
   <aside aria-labelledby="infopaneltitle-for-dom-deviceorientationevent-requestpermission" class="dfn-panel" data-for="dom-deviceorientationevent-requestpermission" id="infopanel-for-dom-deviceorientationevent-requestpermission">
    <span id="infopaneltitle-for-dom-deviceorientationevent-requestpermission" style="display:none">Info about the 'requestPermission' definition.</span><b><a href="#dom-deviceorientationevent-requestpermission">#dom-deviceorientationevent-requestpermission</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-deviceorientationevent-requestpermission">4.1. deviceorientation Event</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-requestpermission">4.1. deviceorientation 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dictdef-deviceorientationeventinit" class="dfn-panel" data-for="dictdef-deviceorientationeventinit" id="infopanel-for-dictdef-deviceorientationeventinit">
    <span id="infopaneltitle-for-dictdef-deviceorientationeventinit" style="display:none">Info about the 'DeviceOrientationEventInit' definition.</span><b><a href="#dictdef-deviceorientationeventinit">#dictdef-deviceorientationeventinit</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-deviceorientationeventinit">4.1. deviceorientation Event</a>
+    <li><a href="#ref-for-dictdef-deviceorientationeventinit">4.1. deviceorientation 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-def-deviceorientationabsolute" class="dfn-panel" data-for="def-deviceorientationabsolute" id="infopanel-for-def-deviceorientationabsolute">
-   <span id="infopaneltitle-for-def-deviceorientationabsolute" style="display:none">Info about the 'deviceorientationabsolute' definition.</span><b><a href="#def-deviceorientationabsolute">#def-deviceorientationabsolute</a></b><b>Referenced in:</b>
+   <span id="infopaneltitle-for-def-deviceorientationabsolute" style="display:none">Info about the '
+deviceorientationabsolute' definition.</span><b><a href="#def-deviceorientationabsolute">#def-deviceorientationabsolute</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-def-deviceorientationabsolute">4.2. deviceorientationabsolute Event</a> <a href="#ref-for-def-deviceorientationabsolute①">(2)</a> <a href="#ref-for-def-deviceorientationabsolute②">(3)</a>
+    <li><a href="#ref-for-def-deviceorientationabsolute">4.2. deviceorientationabsolute 事件</a> <a href="#ref-for-def-deviceorientationabsolute①">(2)</a> <a href="#ref-for-def-deviceorientationabsolute②">(3)</a> <a href="#ref-for-def-deviceorientationabsolute③">(4)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-window-ondeviceorientationabsolute" class="dfn-panel" data-for="dom-window-ondeviceorientationabsolute" id="infopanel-for-dom-window-ondeviceorientationabsolute">
    <span id="infopaneltitle-for-dom-window-ondeviceorientationabsolute" style="display:none">Info about the 'ondeviceorientationabsolute' definition.</span><b><a href="#dom-window-ondeviceorientationabsolute">#dom-window-ondeviceorientationabsolute</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-window-ondeviceorientationabsolute">4.2. deviceorientationabsolute Event</a> <a href="#ref-for-dom-window-ondeviceorientationabsolute①">(2)</a>
+    <li><a href="#ref-for-dom-window-ondeviceorientationabsolute">4.2. deviceorientationabsolute 事件</a> <a href="#ref-for-dom-window-ondeviceorientationabsolute①">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-def-devicemotion" class="dfn-panel" data-for="def-devicemotion" id="infopanel-for-def-devicemotion">
    <span id="infopaneltitle-for-def-devicemotion" style="display:none">Info about the 'devicemotion' definition.</span><b><a href="#def-devicemotion">#def-devicemotion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-def-devicemotion">2. 简介</a> <a href="#ref-for-def-devicemotion①">(2)</a>
-    <li><a href="#ref-for-def-devicemotion②">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-def-devicemotion②">4.3. devicemotion 事件</a> <a href="#ref-for-def-devicemotion③">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-window-ondevicemotion" class="dfn-panel" data-for="dom-window-ondevicemotion" id="infopanel-for-dom-window-ondevicemotion">
    <span id="infopaneltitle-for-dom-window-ondevicemotion" style="display:none">Info about the 'ondevicemotion' definition.</span><b><a href="#dom-window-ondevicemotion">#dom-window-ondevicemotion</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-window-ondevicemotion">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dom-window-ondevicemotion">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-devicemotioneventacceleration" class="dfn-panel" data-for="devicemotioneventacceleration" id="infopanel-for-devicemotioneventacceleration">
    <span id="infopaneltitle-for-devicemotioneventacceleration" style="display:none">Info about the 'DeviceMotionEventAcceleration' definition.</span><b><a href="#devicemotioneventacceleration">#devicemotioneventacceleration</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-devicemotioneventacceleration">4.3. devicemotion Event</a> <a href="#ref-for-devicemotioneventacceleration①">(2)</a>
+    <li><a href="#ref-for-devicemotioneventacceleration">4.3. devicemotion 事件</a> <a href="#ref-for-devicemotioneventacceleration①">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-devicemotioneventrotationrate" class="dfn-panel" data-for="devicemotioneventrotationrate" id="infopanel-for-devicemotioneventrotationrate">
    <span id="infopaneltitle-for-devicemotioneventrotationrate" style="display:none">Info about the 'DeviceMotionEventRotationRate' definition.</span><b><a href="#devicemotioneventrotationrate">#devicemotioneventrotationrate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-devicemotioneventrotationrate">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-devicemotioneventrotationrate">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotioneventrotationrate-gamma" class="dfn-panel" data-for="dom-devicemotioneventrotationrate-gamma" id="infopanel-for-dom-devicemotioneventrotationrate-gamma">
@@ -1935,66 +1922,66 @@ deviceorientation' definition.</span><b><a href="#def-deviceorientation">#def-de
   <aside aria-labelledby="infopaneltitle-for-devicemotionevent" class="dfn-panel" data-for="devicemotionevent" id="infopanel-for-devicemotionevent">
    <span id="infopaneltitle-for-devicemotionevent" style="display:none">Info about the 'DeviceMotionEvent' definition.</span><b><a href="#devicemotionevent">#devicemotionevent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-devicemotionevent">4.3. devicemotion Event</a> <a href="#ref-for-devicemotionevent①">(2)</a>
+    <li><a href="#ref-for-devicemotionevent">4.3. devicemotion 事件</a> <a href="#ref-for-devicemotionevent①">(2)</a> <a href="#ref-for-devicemotionevent②">(3)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-acceleration" class="dfn-panel" data-for="dom-devicemotionevent-acceleration" id="infopanel-for-dom-devicemotionevent-acceleration">
    <span id="infopaneltitle-for-dom-devicemotionevent-acceleration" style="display:none">Info about the 'acceleration' definition.</span><b><a href="#dom-devicemotionevent-acceleration">#dom-devicemotionevent-acceleration</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-devicemotionevent-acceleration">2. 简介</a> <a href="#ref-for-dom-devicemotionevent-acceleration①">(2)</a>
-    <li><a href="#ref-for-dom-devicemotionevent-acceleration②">4.3. devicemotion Event</a> <a href="#ref-for-dom-devicemotionevent-acceleration③">(2)</a> <a href="#ref-for-dom-devicemotionevent-acceleration④">(3)</a> <a href="#ref-for-dom-devicemotionevent-acceleration⑤">(4)</a>
+    <li><a href="#ref-for-dom-devicemotionevent-acceleration②">4.3. devicemotion 事件</a> <a href="#ref-for-dom-devicemotionevent-acceleration③">(2)</a> <a href="#ref-for-dom-devicemotionevent-acceleration④">(3)</a> <a href="#ref-for-dom-devicemotionevent-acceleration⑤">(4)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-accelerationincludinggravity" class="dfn-panel" data-for="dom-devicemotionevent-accelerationincludinggravity" id="infopanel-for-dom-devicemotionevent-accelerationincludinggravity">
    <span id="infopaneltitle-for-dom-devicemotionevent-accelerationincludinggravity" style="display:none">Info about the 'accelerationIncludingGravity' definition.</span><b><a href="#dom-devicemotionevent-accelerationincludinggravity">#dom-devicemotionevent-accelerationincludinggravity</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity">2. 简介</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity①">(2)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity②">(3)</a>
-    <li><a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity③">4.3. devicemotion Event</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity④">(2)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity⑤">(3)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity⑥">(4)</a>
+    <li><a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity③">4.3. devicemotion 事件</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity④">(2)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity⑤">(3)</a> <a href="#ref-for-dom-devicemotionevent-accelerationincludinggravity⑥">(4)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-rotationrate" class="dfn-panel" data-for="dom-devicemotionevent-rotationrate" id="infopanel-for-dom-devicemotionevent-rotationrate">
    <span id="infopaneltitle-for-dom-devicemotionevent-rotationrate" style="display:none">Info about the 'rotationRate' definition.</span><b><a href="#dom-devicemotionevent-rotationrate">#dom-devicemotionevent-rotationrate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-devicemotionevent-rotationrate">2. 简介</a>
-    <li><a href="#ref-for-dom-devicemotionevent-rotationrate①">4.3. devicemotion Event</a> <a href="#ref-for-dom-devicemotionevent-rotationrate②">(2)</a> <a href="#ref-for-dom-devicemotionevent-rotationrate③">(3)</a>
+    <li><a href="#ref-for-dom-devicemotionevent-rotationrate①">4.3. devicemotion 事件</a> <a href="#ref-for-dom-devicemotionevent-rotationrate②">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-interval" class="dfn-panel" data-for="dom-devicemotionevent-interval" id="infopanel-for-dom-devicemotionevent-interval">
    <span id="infopaneltitle-for-dom-devicemotionevent-interval" style="display:none">Info about the 'interval' definition.</span><b><a href="#dom-devicemotionevent-interval">#dom-devicemotionevent-interval</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-devicemotionevent-interval">4.3. devicemotion Event</a> <a href="#ref-for-dom-devicemotionevent-interval①">(2)</a>
+    <li><a href="#ref-for-dom-devicemotionevent-interval">4.3. devicemotion 事件</a> <a href="#ref-for-dom-devicemotionevent-interval①">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-requestpermission" class="dfn-panel" data-for="dom-devicemotionevent-requestpermission" id="infopanel-for-dom-devicemotionevent-requestpermission">
    <span id="infopaneltitle-for-dom-devicemotionevent-requestpermission" style="display:none">Info about the 'requestPermission' definition.</span><b><a href="#dom-devicemotionevent-requestpermission">#dom-devicemotionevent-requestpermission</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-devicemotionevent-requestpermission">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dom-devicemotionevent-requestpermission">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dictdef-devicemotioneventaccelerationinit" class="dfn-panel" data-for="dictdef-devicemotioneventaccelerationinit" id="infopanel-for-dictdef-devicemotioneventaccelerationinit">
    <span id="infopaneltitle-for-dictdef-devicemotioneventaccelerationinit" style="display:none">Info about the 'DeviceMotionEventAccelerationInit' definition.</span><b><a href="#dictdef-devicemotioneventaccelerationinit">#dictdef-devicemotioneventaccelerationinit</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-devicemotioneventaccelerationinit">4.3. devicemotion Event</a> <a href="#ref-for-dictdef-devicemotioneventaccelerationinit①">(2)</a>
+    <li><a href="#ref-for-dictdef-devicemotioneventaccelerationinit">4.3. devicemotion 事件</a> <a href="#ref-for-dictdef-devicemotioneventaccelerationinit①">(2)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dictdef-devicemotioneventrotationrateinit" class="dfn-panel" data-for="dictdef-devicemotioneventrotationrateinit" id="infopanel-for-dictdef-devicemotioneventrotationrateinit">
    <span id="infopaneltitle-for-dictdef-devicemotioneventrotationrateinit" style="display:none">Info about the 'DeviceMotionEventRotationRateInit' definition.</span><b><a href="#dictdef-devicemotioneventrotationrateinit">#dictdef-devicemotioneventrotationrateinit</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-devicemotioneventrotationrateinit">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dictdef-devicemotioneventrotationrateinit">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dictdef-devicemotioneventinit" class="dfn-panel" data-for="dictdef-devicemotioneventinit" id="infopanel-for-dictdef-devicemotioneventinit">
    <span id="infopaneltitle-for-dictdef-devicemotioneventinit" style="display:none">Info about the 'DeviceMotionEventInit' definition.</span><b><a href="#dictdef-devicemotioneventinit">#dictdef-devicemotioneventinit</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-devicemotioneventinit">4.3. devicemotion Event</a>
+    <li><a href="#ref-for-dictdef-devicemotioneventinit">4.3. devicemotion 事件</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-permission" class="dfn-panel" data-for="permission" id="infopanel-for-permission">
    <span id="infopaneltitle-for-permission" style="display:none">Info about the 'permission' definition.</span><b><a href="#permission">#permission</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-permission">4.1. deviceorientation Event</a> <a href="#ref-for-permission">(2)</a>
-    <li><a href="#ref-for-permission">4.3. devicemotion Event</a> <a href="#ref-for-permission①">(2)</a>
-    <li><a href="#ref-for-permission②">4.4. Permission model</a> <a href="#ref-for-permission③">(2)</a>
+    <li><a href="#ref-for-permission">4.1. deviceorientation 事件</a> <a href="#ref-for-permission">(2)</a>
+    <li><a href="#ref-for-permission">4.3. devicemotion 事件</a> <a href="#ref-for-permission">(2)</a>
+    <li><a href="#ref-for-permission">4.4. 权限模型(Permission model)</a> <a href="#ref-for-permission">(2)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
