@@ -14,6 +14,7 @@ Text Macro: DATE 2023年10月12日
 Text Macro: LONGSTATUS 翻译草案
 Boilerplate: omit issues-index, omit conformance, repository-issue-tracking no, copyright off
 Repository: mangwu/deviceorientation-zh
+Include MDN Panels: if possible
 No Editor: true
 !编辑者:
 	Reilly Grant <a href="https://www.google.com">(Google LLC)</a>
@@ -398,42 +399,36 @@ dictionary DeviceOrientationEventInit : EventInit {
  <li><p>赋值 <var>promise</var> 为一个新的期约对象。
 
  <li>
-  <p><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">同步</a> 
-  运行下列步骤:
+  <p><a lt="in parallel" dfn>同步(in parallel)</a> 运行下列步骤:
 
   <ol>
    <li><p>赋值 <var>permission</var> 为一个 
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
-   相关设置对象(relevant-settings-objec)</a> 
-   的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
-   源(origin)</a> 的 <a href="#permission">枚举值(permission)</a> 。
+   <a lt="relevant settings object" dfn>相关设置对象(relevant-settings-object)
+   </a> 的 <a for="environment settings object" lt="origin" dfn>源(origin)</a> 
+   的 <a href="#permission">权限(permission)</a> 。
 
    <li><p>如果 <var>permission</var> 值为 "<code>default</code>" 并且 
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">
-   相关全局对象(relevant global object)</a> 没有 
-   <a href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation">
-   短暂激活(transient activation)</a> ，那么使用一个 
-   {{NotAllowedError!!exception}} {{DOMException}} 错误拒绝(reject) 
+   <a lt="relevant global object" dfn>相关全局对象(relevant global object)</a> 
+   没有 <a lt="transient activation" dfn>短暂激活(transient activation)</a> ，
+   那么使用一个 {{NotAllowedError!!exception}} {{DOMException}} 错误拒绝(reject) 
    <var>promise</var> 并且中止步骤运行。
 
    <li><p>如果 <var>permission</var> 值为 "<code>default</code>"，询问用户
-   对于 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
-   相关设置对象(relevant-settings-objec)</a> 
-   的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
-   源(origin)</a> 的设备方向共享是否可以接受。如果可以接受，设置 
-   <var>permission</var> 值为 "<code>granted</code>" ，否则设置为 
-   "<code>denied</code>" 。
+   对于 <a lt="relevant settings object" dfn>相关设置对象
+   (relevant-settings-object)</a> 的 
+   <a for="environment settings object" lt="origin" dfn>源(origin)</a> 
+   的设备方向共享是否可以接受。如果可以接受，设置 <var>permission</var> 值为 
+   "<code>granted</code>" ，否则设置为 "<code>denied</code>" 。
 
    <li>
-    <p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">
-    设置一个任务队列</a> 来运行如下步骤:
+    <p><a lt="Queue a task" dfn>设置一个任务队列(Queue a task)</a> 
+    来运行如下步骤:
 
     <ol>
-     <li><p>将 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
-     相关设置对象(relevant-settings-objec)</a> 
-     的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
-     源(origin)</a> 的 <a href="#permission">枚举值(permission)</a> 赋予 
-     <var>permission</var>。
+     <li><p>将 <a lt="relevant settings object" dfn>相关设置对象
+     (relevant-settings-object) </a> 的 
+     <a for="environment settings object" lt="origin" dfn>源(origin)</a> 的 
+     <a href="#permission">权限(permission)</a> 赋予 <var>permission</var> 。
 
      <li><p>根据 <var>permission</var> 的值兑现(Fulfill) <var>promise</var> 。
     </ol>
@@ -443,10 +438,9 @@ dictionary DeviceOrientationEventInit : EventInit {
 </ol>
 
 每当方向发生显著变化时，用户代理必须在 {{window!!attribute}} 对象上使用 
-{{DeviceOrientationEvent}} 
-<a href="https://dom.spec.whatwg.org/#concept-event-fire">激发(fire an event)
-</a> 名为 {{deviceorientation}} 的事件。在这种情况下，
-显著变化的定义留给具体的实现，不过本规范建议将方向变化的最大阈值设置为一度。
+{{DeviceOrientationEvent}} <a lt="fire an event" dfn>触发(fire an event)</a> 
+名为 {{deviceorientation}} 的事件。在这种情况下，显著变化的定义留给具体的实现，
+不过本规范建议将方向变化的最大阈值设置为一度。
 如果具体实现有页面没有足够的新数据的检测逻辑，那么它们也可触发事件。
 
 事件的 {{DeviceOrientationEvent/alpha}} 、 {{DeviceOrientationEvent/beta}} 和 
@@ -618,9 +612,8 @@ rotation)，前者在旋转过程中，相对于变换后的(当前)坐标系做
 
 每当方向发生显著变化时，
 实现本规范的用户代理必须在 {{window!!attribute}} 对象上使用 
-{{DeviceOrientationEvent}} 
-<a href="https://dom.spec.whatwg.org/#concept-event-fire">激发(fire an event)
-</a>名为 <dfn event for="Window" id="def-deviceorientationabsolute">
+{{DeviceOrientationEvent}} <a lt="fire an event" dfn>触发(fire an event)</a> 名
+为 <dfn event for="Window" id="def-deviceorientationabsolute"> 
 <code>deviceorientationabsolute</code></dfn> 的事件。
 
 用户代理还必须在 {{window!!attribute}} 对象上提供名为 
@@ -644,8 +637,7 @@ partial interface Window {
 <h3 id="devicemotion">devicemotion 事件</h3>
 
 实现本规范的用户代理必须在 {{window!!attribute}} 对象上使用 
-{{DeviceMotionEvent}} <a href="https://dom.spec.whatwg.org/#concept-event-fire">
-激发(fire an event)</a> 名为 
+{{DeviceMotionEvent}} <a lt="fire an event" dfn>触发(fire an event)</a> 名为 
 <dfn event for=Window id="def-devicemotion"><code>devicemotion</code></dfn> 
 的事件。
 
@@ -721,42 +713,36 @@ dictionary DeviceMotionEventInit : EventInit {
  <li><p>赋值 <var>promise</var> 为一个新的期约对象。
 
  <li>
-  <p><a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">同步</a> 
-  运行下列步骤:
+  <p><a lt="in parallel" dfn>同步(in parallel)</a> 运行下列步骤:
 
   <ol>
    <li><p>赋值 <var>permission</var> 为一个 
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
-   相关设置对象(relevant-settings-objec)</a> 
-   的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
-   源(origin)</a> 的 <a href="#permission">枚举值(permission)</a> 。
+   <a lt="relevant settings object" dfn>相关设置对象(relevant-settings-object)
+   </a> 的 <a for="environment settings object" lt="origin" dfn>源(origin)</a> 
+   的 <a href="#permission">权限(permission)</a> 。
 
    <li><p>如果 <var>permission</var> 值为 "<code>default</code>" 并且 
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">
-   相关全局对象(relevant global object)</a> 没有 
-   <a href="https://html.spec.whatwg.org/multipage/interaction.html#transient-activation">
-   短暂激活(transient activation)</a> ，那么使用一个 
-   {{NotAllowedError!!exception}} {{DOMException}} 错误拒绝(reject) 
+   <a lt="relevant global object" dfn>相关全局对象(relevant global object)</a>  
+   没有 <a lt="transient activation" dfn>短暂激活(transient activation)</a> ，
+   那么使用一个 {{NotAllowedError!!exception}} {{DOMException}} 错误拒绝(reject) 
    <var>promise</var> 并且中止步骤运行。
 
    <li><p>如果 <var>permission</var> 值为 "<code>default</code>"，询问用户
-   对于 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
-   相关设置对象(relevant-settings-objec)</a> 
-   的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
-   源(origin)</a> 的设备方向共享是否可以接受。如果可以接受，设置 
-   <var>permission</var> 值为 "<code>granted</code>" ，否则设置为 
-   "<code>denied</code>" 。
+   对于 <a lt="relevant settings object" dfn>相关设置对象
+   (relevant-settings-object) </a> 的 
+   <a for="environment settings object" lt="origin" dfn>源(origin)</a> 
+   的设备方向共享是否可以接受。如果可以接受，设置 <var>permission</var> 值为 
+   "<code>granted</code>" ，否则设置为 "<code>denied</code>" 。
 
    <li>
-    <p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">
-    设置一个任务队列</a> 来运行如下步骤:
+    <p><a lt="Queue a task" dfn>设置一个任务队列(Queue a task)</a> 
+    来运行如下步骤:
 
     <ol>
-     <li><p>将 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">
-     相关设置对象(relevant-settings-objec)</a> 
-     的 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">
-     源(origin)</a> 的 <a href="#permission">枚举值(permission)</a> 赋予 
-     <var>permission</var>。
+     <li><p>将 <a lt="relevant settings object" dfn>相关设置对象
+     (relevant-settings-object) </a> 的 
+     <a for="environment settings object" lt="origin" dfn>源(origin)</a> 的 
+     <a href="#permission">权限(permission)</a> 赋予 <var>permission</var> 。
 
      <li><p>根据 <var>permission</var> 的值兑现(Fulfill) <var>promise</var> 。
     </ol>
@@ -816,41 +802,44 @@ In the {{DeviceMotionEvent}} events fired by the user agent, the following requi
 
 <p>仅当用户(或代表用户的用户代理)已授予 <dfn>permission</dfn> (权限)时，
 实现可以选择共享设备的方向和运动信息。对于一个给定
-<a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">
-源(origin)</a> 共享的设备方向和运动信息的 <a href="#permission">权限</a> 
-是如下三个字符串之一:
+<a for=/ lt="origin" dfn>源</a> 共享的设备方向和运动信息的 
+<a href="#permission">权限</a> 是如下三个字符串之一:
 
 <dl>
   <dt>"<code>default</code>"
-  <dd><p>This is equivalent to "<code>denied</code>", but the user has made no
-  explicit choice thus far.
+  <dd><p>相当于 "<code>denied</code>" (拒绝)，
+  但用户当前为止并没有做出明确的选择。
 
   <dt>"<code>denied</code>"
-  <dd><p>This means the user does not want
-  to share device orientation or motion.
+  <dd><p>这意味着用户不希望分享设备方向或运动信息。
 
   <dt>"<code>granted</code>"
-  <dd><p>This means device orientation or motion may be shared.
+  <dd><p>这意味着同意共享设备方向或运动。
 </dl>
 
-<p class=note>There is no equivalent to "<code>default</code>"
-meaning "<code>granted</code>". In that case
-"<code>granted</code>" is simply returned as there would be no reason
-for the application to ask for <a>permission</a>.
+<p class=note>没有意为 "<code>granted</code>" 的等价的 "<code>default</code>"。
+在那种情况下， "<code>granted</code>" 将被简单地返回，因为应用程序没有理由请求 
+<a href="#permission">权限</a> 。
 
-Security and privacy considerations {#security-and-privacy}
+安全和隐私注意事项 {#security-and-privacy}
 ===========================================================
 
-The API defined in this specification can be used to obtain information from hardware sensors, such as accelerometer, gyroscope and magnetometer. Provided data may be considered as sensitive and could become a subject of attack from malicious web pages. The calibration of accelerometers, gyroscopes and magnetometers may reveal persistent details about the particular sensor hardware [[SENSORID]]. The main attack vectors can be categorized into following categories:
+本规范中定义的 API 可用于从硬件传感器(如加速度计、陀螺仪和磁力计)中获取信息。
+所提供的数据可能被视为敏感数据，并可能成为恶意网页攻击的对象。
+加速度计、陀螺仪和磁力计的校准可以展现出特定传感器硬件 [[SENSORID]] 的持续细节。
+主要攻击手段可分为以下几类: 
 
-* Monitoring of a user input [[TOUCH]]
-* Location tracking [[INDOORPOS]]
-* User identification [[FINGERPRINT]]
+* 监视用户输入 [[TOUCH]]
+* 位置跟踪 [[INDOORPOS]]
+* 用户标识 [[FINGERPRINT]]
 
-In light of that, implementations may consider permissions or visual indicators to signify the use of sensors by the web page. Furthermore, to minimize privacy risks, the chance of fingerprinting and other attacks the implementations must:
+有鉴于此，实现可以考虑权限或视觉指示器来认证网页对传感器的使用。此外，
+为了最大限度地降低隐私风险、指纹识别和其他攻击的可能性，实现必须:
 
-* fire events only when [=active document=] is [=visible=],
-* fire events only on the [=top-level browsing context=] and same-origin [=nested browsing contexts=],
+* 仅当 <a lt="active document" dfn>活动文档</a>  <a lt="visible" dfn>可见</a> 
+    时才触发事件，
+* 仅在 <a lt="top-level browsing context" dfn>顶级浏览上下文</a> 
+    和同源嵌套浏览上下文上触发事件，
 * fire events only on secure browsing contexts [[!SECURE-CONTEXTS]],
 * limit precision of attribute values as described in the previous sections.
 
