@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/orientation-event/" rel="canonical">
-  <meta content="b70b8037b942dc2dfa79f7227ca820158b1dbd07" name="document-revision">
+  <meta content="66182d862c8b22c6a36101e8e97a00d0a05597fd" name="document-revision">
   <link href="./override.css" rel="stylesheet">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -863,15 +863,15 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      </ol>
     <li><a href="#security-and-privacy"><span class="secno">5</span> <span class="content">安全和隐私注意事项</span></a>
     <li>
-     <a href="#use-cases-and-requirements"><span class="secno">6</span> <span class="content">Use-Cases and Requirements</span></a>
+     <a href="#use-cases-and-requirements"><span class="secno">6</span> <span class="content">用例和要求</span></a>
      <ol class="toc">
-      <li><a href="#use-cases"><span class="secno">6.1</span> <span class="content">Use-Cases</span></a>
-      <li><a href="#requirements"><span class="secno">6.2</span> <span class="content">Requirements</span></a>
+      <li><a href="#use-cases"><span class="secno">6.1</span> <span class="content">用例</span></a>
+      <li><a href="#requirements"><span class="secno">6.2</span> <span class="content">要求</span></a>
      </ol>
     <li>
-     <a href="#examples"><span class="secno"></span> <span class="content">A Examples</span></a>
+     <a href="#examples"><span class="secno"></span> <span class="content">A 实例</span></a>
      <ol class="toc">
-      <li><a href="#worked-example"><span class="secno"></span> <span class="content">A.1 Calculating compass heading</span></a>
+      <li><a href="#worked-example"><span class="secno"></span> <span class="content">A.1 计算指南针方向</span></a>
       <li><a href="#worked-example-2"><span class="secno"></span> <span class="content">A.2 Alternate device orientation representations</span></a>
      </ol>
     <li><a href="#acknowledgments"><span class="secno"></span> <span class="content">Acknowledgments</span></a>
@@ -1401,43 +1401,48 @@ rotation)，前者在旋转过程中，相对于变换后的(当前)坐标系做
     <li data-md>
      <p>仅在 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-browsing-context" id="ref-for-top-level-browsing-context">顶级浏览上下文</a> 和同源嵌套浏览上下文上触发事件，</p>
     <li data-md>
-     <p>fire events only on secure browsing contexts <a data-link-type="biblio" href="#biblio-secure-contexts" title="Secure Contexts">[SECURE-CONTEXTS]</a>,</p>
+     <p>仅在安全浏览上下文 <a data-link-type="biblio" href="#biblio-secure-contexts" title="Secure Contexts">[SECURE-CONTEXTS]</a> 上触发事件，</p>
     <li data-md>
-     <p>limit precision of attribute values as described in the previous sections.</p>
+     <p>如前几节所述，限制属性值的精度。</p>
    </ul>
-   <p>Additionally, implementing these items may also have a beneficial impact on the battery life of mobile devices.</p>
-   <h2 class="heading settled" data-level="6" id="use-cases-and-requirements"><span class="secno">6. </span><span class="content">Use-Cases and Requirements</span><a class="self-link" href="#use-cases-and-requirements"></a></h2>
-   <h3 class="heading settled" data-level="6.1" id="use-cases"><span class="secno">6.1. </span><span class="content">Use-Cases</span><a class="self-link" href="#use-cases"></a></h3>
+   <p>此外，实现这些项目特性也可能对移动设备的电池寿命产生有益影响。</p>
+   <h2 class="heading settled" data-level="6" id="use-cases-and-requirements"><span class="secno">6. </span><span class="content">用例和要求</span><a class="self-link" href="#use-cases-and-requirements"></a></h2>
+   <h3 class="heading settled" data-level="6.1" id="use-cases"><span class="secno">6.1. </span><span class="content">用例</span><a class="self-link" href="#use-cases"></a></h3>
     <em>本节不是规范的。</em> 
-   <h4 class="no-toc heading settled" data-level="6.1.1" id="controlling-a-game"><span class="secno">6.1.1. </span><span class="content">Controlling a game</span><a class="self-link" href="#controlling-a-game"></a></h4>
+   <h4 class="no-toc heading settled" data-level="6.1.1" id="controlling-a-game"><span class="secno">6.1.1. </span><span class="content">游戏操纵</span><a class="self-link" href="#controlling-a-game"></a></h4>
     <em>本节不是规范的。</em> 
-   <p>A gaming Web application monitors the device’s orientation and interprets tilting in a certain direction as a means to control an on-screen sprite.</p>
-   <h4 class="no-toc heading settled" data-level="6.1.2" id="gesture-recognition"><span class="secno">6.1.2. </span><span class="content">Gesture recognition</span><a class="self-link" href="#gesture-recognition"></a></h4>
+   <p>一个游戏类型的 Web 应用程序可以监视设备的方向，
+并将向某个方向倾斜解释为控制屏幕上的精灵的一种方式。</p>
+   <h4 class="no-toc heading settled" data-level="6.1.2" id="gesture-recognition"><span class="secno">6.1.2. </span><span class="content">手势识别</span><a class="self-link" href="#gesture-recognition"></a></h4>
     <em>本节不是规范的。</em> 
-   <p>A Web application monitors the device’s acceleration and applies signal processing in order to recognize certain specific gestures. For example, using a shaking gesture to clear a web form.</p>
-   <h4 class="no-toc heading settled" data-level="6.1.3" id="mapping"><span class="secno">6.1.3. </span><span class="content">Mapping</span><a class="self-link" href="#mapping"></a></h4>
+   <p>Web 应用程序可以监视设备的加速度，并应用信号处理来识别特定的手势。例如，
+使用摇动手势来清除网页表单。</p>
+   <h4 class="no-toc heading settled" data-level="6.1.3" id="mapping"><span class="secno">6.1.3. </span><span class="content">地图</span><a class="self-link" href="#mapping"></a></h4>
     <em>本节不是规范的。</em> 
-   <p>A mapping Web application uses the device’s orientation to correctly align the map with reality.</p>
-   <h3 class="heading settled" data-level="6.2" id="requirements"><span class="secno">6.2. </span><span class="content">Requirements</span><a class="self-link" href="#requirements"></a></h3>
+   <p>地图类型的 Web 应用程序使用设备的方向信息将地图与现实正确对齐。</p>
+   <h3 class="heading settled" data-level="6.2" id="requirements"><span class="secno">6.2. </span><span class="content">要求</span><a class="self-link" href="#requirements"></a></h3>
     <em>本节不是规范的。</em> 
    <ul>
     <li data-md>
-     <p>The specification must provide data that describes the physical orientation in space of the device.</p>
+     <p>规范必须提供描述设备在空间中的物理方向的数据。</p>
     <li data-md>
-     <p>The specification must provide data that describes the motion in space of the device.</p>
+     <p>规范必须提供描述设备在空间中运动的数据。</p>
     <li data-md>
-     <p>The specification must allow Web applications to register for changes in the device’s orientation.</p>
+     <p>本规范必须允许 Web 应用程序记录(register for)设备方向的更改。</p>
     <li data-md>
-     <p>The specification must be agnostic to the underlying sources of orientation and motion data.</p>
+     <p>本规范必须对方向和运动数据的底层来源而言是不可知的。</p>
     <li data-md>
-     <p>The specification must use the existing DOM event framework.</p>
+     <p>规范必须使用现有的 DOM 事件框架。</p>
    </ul>
-   <h2 class="no-num heading settled" id="examples"><span class="content">A Examples</span><a class="self-link" href="#examples"></a></h2>
+   <h2 class="no-num heading settled" id="examples"><span class="content">A 实例</span><a class="self-link" href="#examples"></a></h2>
     <em>本节不是规范的。</em> 
-   <h3 class="heading settled" id="worked-example"><span class="content">A.1 Calculating compass heading</span><a class="self-link" href="#worked-example"></a></h3>
+   <h3 class="heading settled" id="worked-example"><span class="content">A.1 计算指南针方向</span><a class="self-link" href="#worked-example"></a></h3>
    <p><em>本节不是规范的。</em></p>
-   <p>The following worked example is intended as an aid to users of the DeviceOrientation event.</p>
-   <p><a href="#introduction">Introduction</a> section provided an example of using the DeviceOrientation event to obtain a compass heading when the device is held with the screen horizontal. This example shows how to determine the compass heading that the user is facing when holding the device with the screen approximately vertical in front of them. An application of this is an augmented-reality system.</p>
+   <p>以下示例演示旨在帮助使用 DeviceOrientation 事件的用户。</p>
+   <p><a href="#introduction">简介</a> 部分提供了一个示例: 当设备屏幕处于水平位置时，可以使用
+DeviceOrientation 事件来获取指南针方向。此示例显示了在设备屏幕大致垂直于(站立)
+用户的情况下，握住设备时，如何确定用户所面对的指南针方向。一个应用场景是增强现实
+(augmented-reality ，AR)系统。</p>
    <p>More precisely, we wish to determine the compass heading of the horizontal component of a vector which is orthogonal to the device’s screen and pointing out of the back of the screen.</p>
    <p>If v represents this vector in the rotated device body frame xyz, then v is as follows.</p>
    <object class="equation" data="equation1.xhtml" type="application/mathml+xml">
@@ -2154,7 +2159,7 @@ deviceorientation' definition.</span><b><a href="#def-deviceorientation">#def-de
    <ul>
     <li><a href="#ref-for-dom-deviceorientationevent-absolute">4.1. deviceorientation 事件</a> <a href="#ref-for-dom-deviceorientationevent-absolute①">(2)</a> <a href="#ref-for-dom-deviceorientationevent-absolute②">(3)</a>
     <li><a href="#ref-for-dom-deviceorientationevent-absolute③">4.2. deviceorientationabsolute 事件</a>
-    <li><a href="#ref-for-dom-deviceorientationevent-absolute④">A.1 Calculating compass heading</a>
+    <li><a href="#ref-for-dom-deviceorientationevent-absolute④">A.1 计算指南针方向</a>
     <li><a href="#ref-for-dom-deviceorientationevent-absolute⑤">A.2 Alternate device orientation representations</a> <a href="#ref-for-dom-deviceorientationevent-absolute⑥">(2)</a>
    </ul>
   </aside>
