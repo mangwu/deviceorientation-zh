@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/orientation-event/" rel="canonical">
-  <meta content="66182d862c8b22c6a36101e8e97a00d0a05597fd" name="document-revision">
+  <meta content="fbbf9b0ab1f434605ba6267e970480abd1e5289a" name="document-revision">
   <link href="./override.css" rel="stylesheet">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -809,7 +809,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">设备方向事件(DeviceOrientation Event)规范</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#UD">翻译草案</a>, <time class="dt-updated" datetime="2023-10-18">2023年10月12日</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#UD">翻译草案</a>, <time class="dt-updated" datetime="2023-10-23">2023年10月12日</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1443,35 +1443,39 @@ rotation)，前者在旋转过程中，相对于变换后的(当前)坐标系做
 DeviceOrientation 事件来获取指南针方向。此示例显示了在设备屏幕大致垂直于(站立)
 用户的情况下，握住设备时，如何确定用户所面对的指南针方向。一个应用场景是增强现实
 (augmented-reality ，AR)系统。</p>
-   <p>More precisely, we wish to determine the compass heading of the horizontal component of a vector which is orthogonal to the device’s screen and pointing out of the back of the screen.</p>
-   <p>If v represents this vector in the rotated device body frame xyz, then v is as follows.</p>
+   <p>更准确地说，我们希望确定垂直于设备的屏幕并指向屏幕背面向量的水平分量，
+这个水平分量可以表示指南针方向。</p>
+   <p>如果 v 表示这个在旋转设备坐标系 xyz 中的向量，则v如下。</p>
    <object class="equation" data="equation1.xhtml" type="application/mathml+xml">
     <p><img alt="v = [0; 0; -1]" height="64" src="equation1.png" width="81"> </p>
    </object>
-   <p>The transformation of v due to the rotation about the z axis can be represented by the following rotation matrix.</p>
+   <p>v 由于绕z轴旋转而产生的变换可以由以下旋转矩阵表示。</p>
    <object class="equation" data="equation2.xhtml" type="application/mathml+xml"> <img alt="Z = [cos(alpha) -sin(alpha) 0; sin(alpha) cos(alpha) 0; 0 0 1]" height="71" src="equation2.png" width="203"> </object>
-   <p>The transformation of v due to the rotation about the x axis can be represented by the following rotation matrix.</p>
+   <p>v 由于绕x轴的旋转而产生的变换可以由以下旋转矩阵表示。</p>
    <object class="equation" data="equation3.xhtml" type="application/mathml+xml"> <img alt="X = [1 0 0; 0 cos(beta) -sin(beta); 0 sin(beta) cos(beta)]" height="72" src="equation3.png" width="203"> </object>
-   <p>The transformation of v due to the rotation about the y axis can be represented by the following rotation matrix.</p>
+   <p>v 由于绕y轴的旋转而产生的变换可以由以下旋转矩阵表示。</p>
    <object class="equation" data="equation4.xhtml" type="application/mathml+xml"> <img alt="Y = [cos(gamma) 0 sin(gamma); 0 1 0; -sin(gamma) 0 cos(gamma)]" height="72" src="equation4.png" width="203"> </object>
-   <p>If R represents the full rotation matrix of the device in the earth frame XYZ, then since the initial body frame is aligned with the earth, R is as follows.</p>
+   <p>如果 R 表示设备在地球坐标系 XYZ 中的全旋转矩阵，
+因为初始设备坐标系与地球坐标系对齐，所以R可以如下表示。</p>
    <object class="equation" data="equation13a.xhtml" type="application/mathml+xml"> <img alt="R = ZXY = [[cos(alpha) cos(gamma)-sin(alpha) sin(beta) sin(gamma), -cos(beta) sin(alpha), cos(gamma) sin(alpha) sin(beta)+cos(alpha) sin(gamma)], [cos(gamma) sin(alpha)+cos(alpha) sin(beta) sin(gamma), cos(alpha) cos(beta), sin(alpha) sin(gamma)-cos(alpha) cos(gamma) sin(beta)], [-cos(beta) sin(gamma), sin(beta), cos(beta) cos(gamma)]]" height="76" src="equation13a.png" width="763"> </object>
-   <p>If v' represents the vector v in the earth frame XYZ, then since the initial body frame is aligned with the earth, v' is as follows.</p>
+   <p>如果 v' 表示地球坐标系 XYZ 中(经过全旋转后)的矢量v，
+因为初始设备坐标系与地球坐标系对齐，所以v’可以如下表示。</p>
    <object class="equation" data="equation5a.xhtml" type="application/mathml+xml"> <img alt="v&apos; = Rv" height="26" src="equation5a.png" width="62"> </object>
    <object class="equation" data="equation5e.xhtml" type="application/mathml+xml"> <img alt="v&apos; = [-cos(alpha)sin(gamma)-sin(alpha)sin(beta)cos(gamma); -sin(alpha)sin(gamma)+cos(alpha)sin(beta)cos(gamma); -cos(beta)cos(gamma)]" height="76" src="equation5e.png" width="332"> </object>
-   <p>The compass heading θ is given by</p>
+   <p>指南针方向 θ 通过如下公式计算</p>
    <object class="equation" data="equation6.xhtml" type="application/mathml+xml"> <img alt="theta = atan((v’_x)/(v’_y)) = atan((-cos(alpha)sin(gamma)-sin(alpha)sin(beta)cos(gamma))/(-sin(alpha)sin(gamma)+cos(alpha)sin(beta)cos(gamma)))" height="62" src="equation6.png" width="491"> </object>
-   <p>provided that β and γ are not both zero.</p>
-   <div class="example" id="example-cad08fa0">
-    <a class="self-link" href="#example-cad08fa0"></a> 
-    <p>The compass heading calculation above can be represented in JavaScript as follows to return the correct compass heading when the provided parameters are defined, not null and represent <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-absolute" id="ref-for-dom-deviceorientationevent-absolute④">absolute</a></code> values.</p>
-<pre class="lang-js highlight"><c- a>var</c-> degtorad <c- o>=</c-> Math<c- p>.</c->PI <c- o>/</c-> <c- mf>180</c-><c- p>;</c-> <c- c1>// Degree-to-Radian conversion</c->
+   <p>条件是 β 和 γ 都不为零。</p>
+   <div class="example" id="example-0ba2666b">
+    <a class="self-link" href="#example-0ba2666b"></a> 
+    <p>上面的指南针方向计算可以用 JavaScript 代码如下表示，
+以便在提供的定义好的参数(非 <code>null</code> 并且是 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-absolute" id="ref-for-dom-deviceorientationevent-absolute④"> 绝对</a></code> 值)时能正确返回的指南针方向。</p>
+<pre class="lang-js highlight"><c- a>var</c-> degtorad <c- o>=</c-> Math<c- p>.</c->PI <c- o>/</c-> <c- mf>180</c-><c- p>;</c-> <c- c1>// 度-弧度 转换系数</c->
 
 <c- a>function</c-> compassHeading<c- p>(</c-> alpha<c- p>,</c-> beta<c- p>,</c-> gamma <c- p>)</c-> <c- p>{</c->
 
-  <c- a>var</c-> _x <c- o>=</c-> beta  <c- o>?</c-> beta  <c- o>*</c-> degtorad <c- o>:</c-> <c- mf>0</c-><c- p>;</c-> <c- c1>// beta value</c->
-  <c- a>var</c-> _y <c- o>=</c-> gamma <c- o>?</c-> gamma <c- o>*</c-> degtorad <c- o>:</c-> <c- mf>0</c-><c- p>;</c-> <c- c1>// gamma value</c->
-  <c- a>var</c-> _z <c- o>=</c-> alpha <c- o>?</c-> alpha <c- o>*</c-> degtorad <c- o>:</c-> <c- mf>0</c-><c- p>;</c-> <c- c1>// alpha value</c->
+  <c- a>var</c-> _x <c- o>=</c-> beta  <c- o>?</c-> beta  <c- o>*</c-> degtorad <c- o>:</c-> <c- mf>0</c-><c- p>;</c-> <c- c1>// β 值</c->
+  <c- a>var</c-> _y <c- o>=</c-> gamma <c- o>?</c-> gamma <c- o>*</c-> degtorad <c- o>:</c-> <c- mf>0</c-><c- p>;</c-> <c- c1>// γ 值</c->
+  <c- a>var</c-> _z <c- o>=</c-> alpha <c- o>?</c-> alpha <c- o>*</c-> degtorad <c- o>:</c-> <c- mf>0</c-><c- p>;</c-> <c- c1>// α 值</c->
 
   <c- a>var</c-> cX <c- o>=</c-> Math<c- p>.</c->cos<c- p>(</c-> _x <c- p>);</c->
   <c- a>var</c-> cY <c- o>=</c-> Math<c- p>.</c->cos<c- p>(</c-> _y <c- p>);</c->
@@ -1480,32 +1484,32 @@ DeviceOrientation 事件来获取指南针方向。此示例显示了在设备�
   <c- a>var</c-> sY <c- o>=</c-> Math<c- p>.</c->sin<c- p>(</c-> _y <c- p>);</c->
   <c- a>var</c-> sZ <c- o>=</c-> Math<c- p>.</c->sin<c- p>(</c-> _z <c- p>);</c->
 
-  <c- c1>// Calculate Vx and Vy components</c->
+  <c- c1>// 计算 Vx 和 Vy 分量</c->
   <c- a>var</c-> Vx <c- o>=</c-> <c- o>-</c-> cZ <c- o>*</c-> sY <c- o>-</c-> sZ <c- o>*</c-> sX <c- o>*</c-> cY<c- p>;</c->
   <c- a>var</c-> Vy <c- o>=</c-> <c- o>-</c-> sZ <c- o>*</c-> sY <c- o>+</c-> cZ <c- o>*</c-> sX <c- o>*</c-> cY<c- p>;</c->
 
-  <c- c1>// Calculate compass heading</c->
+  <c- c1>// 计算指南针方向</c->
   <c- a>var</c-> compassHeading <c- o>=</c-> Math<c- p>.</c->atan<c- p>(</c-> Vx <c- o>/</c-> Vy <c- p>);</c->
 
-  <c- c1>// Convert compass heading to use whole unit circle</c->
+  <c- c1>// 将指南针方向转换为使用整个单位圆的格式</c->
   <c- k>if</c-><c- p>(</c-> Vy <c- o>&lt;</c-> <c- mf>0</c-> <c- p>)</c-> <c- p>{</c->
     compassHeading <c- o>+=</c-> Math<c- p>.</c->PI<c- p>;</c->
   <c- p>}</c-> <c- k>else</c-> <c- k>if</c-><c- p>(</c-> Vx <c- o>&lt;</c-> <c- mf>0</c-> <c- p>)</c-> <c- p>{</c->
     compassHeading <c- o>+=</c-> <c- mf>2</c-> <c- o>*</c-> Math<c- p>.</c->PI<c- p>;</c->
   <c- p>}</c->
 
-  <c- k>return</c-> compassHeading <c- o>*</c-> <c- p>(</c-> <c- mf>180</c-> <c- o>/</c-> Math<c- p>.</c->PI <c- p>);</c-> <c- c1>// Compass Heading (in degrees)</c->
+  <c- k>return</c-> compassHeading <c- o>*</c-> <c- p>(</c-> <c- mf>180</c-> <c- o>/</c-> Math<c- p>.</c->PI <c- p>);</c-> <c- c1>// 指南针方向 (度单位)</c->
 
 <c- p>}</c->
 </pre>
    </div>
-   <p>As a consistency check, if we set γ = 0, then</p>
+   <p>可以进行一次稳定性(consistency)检查，如果我们设置 γ = 0 ，那么</p>
    <object class="equation" data="equation7.xhtml" type="application/mathml+xml"> <img alt="theta = atan(-sin(alpha)sin(beta)/cos(alpha)sin(beta)) = -alpha" height="59" src="equation7.png" width="263"> </object>
-   <p>as expected.</p>
-   <p>Alternatively, if we set β = 90, then</p>
+   <p>如同预期一样。</p>
+   <p>或者，如果我们设置 β = 90 ，那么</p>
    <object class="equation" data="equation8a.xhtml" type="application/mathml+xml"> <img alt="theta = atan((-cos(alpha)sin(gamma)-sin(alpha)cos(gamma))/(-sin(alpha)sin(gamma)+cos(alpha)cos(gamma)))" height="61" src="equation8a.png" width="327"> </object>
    <object class="equation" data="equation8b.xhtml" type="application/mathml+xml"> <img alt="theta = atan(-sin(alpha+gamma)/cos(alpha+gamma)) = -(alpha+gamma)" height="61" src="equation8b.png" width="288"> </object>
-   <p>as expected.</p>
+   <p>如同预期一样。</p>
    <h3 class="heading settled" id="worked-example-2"><span class="content">A.2 Alternate device orientation representations</span><a class="self-link" href="#worked-example-2"></a></h3>
    <p><em>本节不是规范的。</em></p>
    <p>Describing orientation using Tait-Bryan angles can have some disadvantages such as introducing gimbal lock <a data-link-type="biblio" href="#biblio-gimballock" title="Gimbal Lock">[GIMBALLOCK]</a>. Depending on the intended application it can be useful to convert the Device Orientation values to other rotation representations.</p>

@@ -891,41 +891,42 @@ DeviceOrientation 事件来获取指南针方向。此示例显示了在设备�
 用户的情况下，握住设备时，如何确定用户所面对的指南针方向。一个应用场景是增强现实
 (augmented-reality ，AR)系统。
 
-More precisely, we wish to determine the compass heading of the horizontal 
-component of a vector which is orthogonal to the device's screen and pointing out 
-of the back of the screen.
+更准确地说，我们希望确定垂直于设备的屏幕并指向屏幕背面向量的水平分量，
+这个水平分量可以表示指南针方向。
 
-If v represents this vector in the rotated device body frame xyz, then v is as follows.
+如果 v 表示这个在旋转设备坐标系 xyz 中的向量，则v如下。
 
 <object class="equation" data="equation1.xhtml" type="application/mathml+xml">
     <p><img src="equation1.png" alt="v = [0; 0; -1]">
 </object>
 
-The transformation of v due to the rotation about the z axis can be represented by the following rotation matrix.
+v 由于绕z轴旋转而产生的变换可以由以下旋转矩阵表示。
 
 <object class="equation" data="equation2.xhtml" type="application/mathml+xml">
     <img src="equation2.png" alt="Z = [cos(alpha) -sin(alpha) 0; sin(alpha) cos(alpha) 0; 0 0 1]">
 </object>
 
-The transformation of v due to the rotation about the x axis can be represented by the following rotation matrix.
+v 由于绕x轴的旋转而产生的变换可以由以下旋转矩阵表示。
 
 <object class="equation" data="equation3.xhtml" type="application/mathml+xml">
     <img src="equation3.png" alt="X = [1 0 0; 0 cos(beta) -sin(beta); 0 sin(beta) cos(beta)]">
 </object>
 
-The transformation of v due to the rotation about the y axis can be represented by the following rotation matrix.
+v 由于绕y轴的旋转而产生的变换可以由以下旋转矩阵表示。
 
 <object class="equation" data="equation4.xhtml" type="application/mathml+xml">
     <img src="equation4.png" alt="Y = [cos(gamma) 0 sin(gamma); 0 1 0; -sin(gamma) 0 cos(gamma)]">
 </object>
 
-If R represents the full rotation matrix of the device in the earth frame XYZ, then since the initial body frame is aligned with the earth, R is as follows.
+如果 R 表示设备在地球坐标系 XYZ 中的全旋转矩阵，
+因为初始设备坐标系与地球坐标系对齐，所以R可以如下表示。
 
 <object class="equation" data="equation13a.xhtml" type="application/mathml+xml">
     <img src="equation13a.png" alt="R = ZXY = [[cos(alpha) cos(gamma)-sin(alpha) sin(beta) sin(gamma), -cos(beta) sin(alpha), cos(gamma) sin(alpha) sin(beta)+cos(alpha) sin(gamma)], [cos(gamma) sin(alpha)+cos(alpha) sin(beta) sin(gamma), cos(alpha) cos(beta), sin(alpha) sin(gamma)-cos(alpha) cos(gamma) sin(beta)], [-cos(beta) sin(gamma), sin(beta), cos(beta) cos(gamma)]]">
 </object>
 
-If v' represents the vector v in the earth frame XYZ, then since the initial body frame is aligned with the earth, v' is as follows.
+如果 v' 表示地球坐标系 XYZ 中(经过全旋转后)的矢量v，
+因为初始设备坐标系与地球坐标系对齐，所以v'可以如下表示。
 
 <object class="equation" data="equation5a.xhtml" type="application/mathml+xml">
     <img src="equation5a.png" alt="v' = Rv">
@@ -935,26 +936,28 @@ If v' represents the vector v in the earth frame XYZ, then since the initial bod
     <img src="equation5e.png" alt="v' = [-cos(alpha)sin(gamma)-sin(alpha)sin(beta)cos(gamma); -sin(alpha)sin(gamma)+cos(alpha)sin(beta)cos(gamma); -cos(beta)cos(gamma)]">
 </object>
 
-The compass heading &theta; is given by
+指南针方向 &theta; 通过如下公式计算
 
 <object class="equation" data="equation6.xhtml" type="application/mathml+xml">
     <img src="equation6.png" alt="theta = atan((v'_x)/(v'_y)) = atan((-cos(alpha)sin(gamma)-sin(alpha)sin(beta)cos(gamma))/(-sin(alpha)sin(gamma)+cos(alpha)sin(beta)cos(gamma)))">
 </object>
 
-provided that &beta; and &gamma; are not both zero.
+条件是 &beta; 和 &gamma; 都不为零。
 
 <div class="example">
 
-The compass heading calculation above can be represented in JavaScript as follows to return the correct compass heading when the provided parameters are defined, not null and represent {{DeviceOrientationEvent/absolute}} values.
+上面的指南针方向计算可以用 JavaScript 代码如下表示，
+以便在提供的定义好的参数(非 <code>null</code> 并且是 
+{{DeviceOrientationEvent/absolute | 绝对}} 值)时能正确返回的指南针方向。
 
 <pre class="lang-js">
-var degtorad = Math.PI / 180; // Degree-to-Radian conversion
+var degtorad = Math.PI / 180; // 度-弧度 转换系数
 
 function compassHeading( alpha, beta, gamma ) {
 
-  var _x = beta  ? beta  * degtorad : 0; // beta value
-  var _y = gamma ? gamma * degtorad : 0; // gamma value
-  var _z = alpha ? alpha * degtorad : 0; // alpha value
+  var _x = beta  ? beta  * degtorad : 0; // &beta; 值
+  var _y = gamma ? gamma * degtorad : 0; // &gamma; 值
+  var _z = alpha ? alpha * degtorad : 0; // &alpha; 值
 
   var cX = Math.cos( _x );
   var cY = Math.cos( _y );
@@ -963,35 +966,35 @@ function compassHeading( alpha, beta, gamma ) {
   var sY = Math.sin( _y );
   var sZ = Math.sin( _z );
 
-  // Calculate Vx and Vy components
+  // 计算 Vx 和 Vy 分量
   var Vx = - cZ * sY - sZ * sX * cY;
   var Vy = - sZ * sY + cZ * sX * cY;
 
-  // Calculate compass heading
+  // 计算指南针方向
   var compassHeading = Math.atan( Vx / Vy );
 
-  // Convert compass heading to use whole unit circle
+  // 将指南针方向转换为使用整个单位圆的格式
   if( Vy < 0 ) {
     compassHeading += Math.PI;
   } else if( Vx < 0 ) {
     compassHeading += 2 * Math.PI;
   }
 
-  return compassHeading * ( 180 / Math.PI ); // Compass Heading (in degrees)
+  return compassHeading * ( 180 / Math.PI ); // 指南针方向 (度单位)
 
 }
 </pre>
 </div>
 
-As a consistency check, if we set &gamma; = 0, then
+可以进行一次稳定性(consistency)检查，如果我们设置 &gamma; = 0 ，那么
 
 <object class="equation" data="equation7.xhtml" type="application/mathml+xml">
     <img src="equation7.png" alt="theta = atan(-sin(alpha)sin(beta)/cos(alpha)sin(beta)) = -alpha">
 </object>
 
-as expected.
+如同预期一样。
 
-Alternatively, if we set &beta; = 90, then
+或者，如果我们设置 &beta; = 90 ，那么
 
 <object class="equation" data="equation8a.xhtml" type="application/mathml+xml">
     <img src="equation8a.png" alt="theta = atan((-cos(alpha)sin(gamma)-sin(alpha)cos(gamma))/(-sin(alpha)sin(gamma)+cos(alpha)cos(gamma)))">
@@ -1000,15 +1003,21 @@ Alternatively, if we set &beta; = 90, then
     <img src="equation8b.png" alt="theta = atan(-sin(alpha+gamma)/cos(alpha+gamma)) = -(alpha+gamma)">
 </object>
 
-as expected.
+如同预期一样。
 
-<h3 id="worked-example-2">A.2 Alternate device orientation representations</h3>
+<h3 id="worked-example-2">A.2 备用(Alternate)设备方向模型表示</h3>
 
 <em>本节不是规范的。</em>
 
-Describing orientation using Tait-Bryan angles can have some disadvantages such as introducing gimbal lock [[GIMBALLOCK]]. Depending on the intended application it can be useful to convert the Device Orientation values to other rotation representations.
+使用泰特布莱恩(Tait-Bryan)角描述方位可能有一些缺点，例如引入万向节锁定(gimbal 
+lock) [[GIMBALLOCK]]。根据预期的应用程序，将 "设备方向(Device Orientation)"
+的值转换为其他旋转表示可能会更有用。
 
-The first alternate orientation representation uses rotation matrices. By combining the component rotation matrices provided in the [[#worked-example|worked example]] above we can represent the orientation of the device body frame as a combined rotation matrix.
+The first alternate orientation representation uses rotation matrices. 
+By combining the component rotation matrices provided in the [[#worked-example|worked example]] 
+above we can represent the orientation of the device body frame as a combined rotation matrix.
+第一个备用方向模型表示使用旋转矩阵。通过组合上述 [[#worked-example|可行示例]] 
+中提供的分量旋转矩阵，我们可以将设备主体框架的方向表示为组合旋转矩阵。
 
 If R represents the rotation matrix of the device in the earth frame XYZ, then since the initial body frame is aligned with the earth, R is as follows.
 
