@@ -894,7 +894,7 @@ DeviceOrientation 事件来获取指南针方向。此示例显示了在设备�
 更准确地说，我们希望确定垂直于设备的屏幕并指向屏幕背面向量的水平分量，
 这个水平分量可以表示指南针方向。
 
-如果 v 表示这个在旋转设备坐标系 xyz 中的向量，则v如下。
+如果 v 表示这个在旋转设备坐标系 xyz 中的向量，则 v 可以如下表示。
 
 <object class="equation" data="equation1.xhtml" type="application/mathml+xml">
     <p><img src="equation1.png" alt="v = [0; 0; -1]">
@@ -919,14 +919,14 @@ v 由于绕y轴的旋转而产生的变换可以由以下旋转矩阵表示。
 </object>
 
 如果 R 表示设备在地球坐标系 XYZ 中的全旋转矩阵，
-因为初始设备坐标系与地球坐标系对齐，所以R可以如下表示。
+因为初始设备坐标系与地球坐标系对齐，所以 R 可以如下表示。
 
 <object class="equation" data="equation13a.xhtml" type="application/mathml+xml">
     <img src="equation13a.png" alt="R = ZXY = [[cos(alpha) cos(gamma)-sin(alpha) sin(beta) sin(gamma), -cos(beta) sin(alpha), cos(gamma) sin(alpha) sin(beta)+cos(alpha) sin(gamma)], [cos(gamma) sin(alpha)+cos(alpha) sin(beta) sin(gamma), cos(alpha) cos(beta), sin(alpha) sin(gamma)-cos(alpha) cos(gamma) sin(beta)], [-cos(beta) sin(gamma), sin(beta), cos(beta) cos(gamma)]]">
 </object>
 
 如果 v' 表示地球坐标系 XYZ 中(经过全旋转后)的矢量v，
-因为初始设备坐标系与地球坐标系对齐，所以v'可以如下表示。
+因为初始设备坐标系与地球坐标系对齐，所以 v' 可以如下表示。
 
 <object class="equation" data="equation5a.xhtml" type="application/mathml+xml">
     <img src="equation5a.png" alt="v' = Rv">
@@ -945,7 +945,6 @@ v 由于绕y轴的旋转而产生的变换可以由以下旋转矩阵表示。
 条件是 &beta; 和 &gamma; 都不为零。
 
 <div class="example">
-
 上面的指南针方向计算可以用 JavaScript 代码如下表示，
 以便在提供的定义好的参数(非 <code>null</code> 并且是 
 {{DeviceOrientationEvent/absolute | 绝对}} 值)时能正确返回的指南针方向。
@@ -1013,28 +1012,27 @@ function compassHeading( alpha, beta, gamma ) {
 lock) [[GIMBALLOCK]]。根据预期的应用程序，将 "设备方向(Device Orientation)"
 的值转换为其他旋转表示可能会更有用。
 
-The first alternate orientation representation uses rotation matrices. 
-By combining the component rotation matrices provided in the [[#worked-example|worked example]] 
-above we can represent the orientation of the device body frame as a combined rotation matrix.
-第一个备用方向模型表示使用旋转矩阵。通过组合上述 [[#worked-example|可行示例]] 
-中提供的分量旋转矩阵，我们可以将设备主体框架的方向表示为组合旋转矩阵。
+第一个备用方向模型表示是使用旋转矩阵。通过组合上述 [[#worked-example|可行示例]] 
+中提供的分量旋转矩阵，我们可以将设备坐标系的方向表示为组合旋转矩阵。
 
-If R represents the rotation matrix of the device in the earth frame XYZ, then since the initial body frame is aligned with the earth, R is as follows.
+如果 R 表示设备在地球坐标系 XYZ 中的旋转矩阵，因为初始设备坐标系与地球坐标系对齐
+，所以 R 可以如下表示。
 
 <object class="equation" data="equation13a.xhtml" type="application/mathml+xml">
     <img src="equation13a.png" alt="R = ZXY = [[cos(alpha) cos(gamma)-sin(alpha) sin(beta) sin(gamma), -cos(beta) sin(alpha), cos(gamma) sin(alpha) sin(beta)+cos(alpha) sin(gamma)], [cos(gamma) sin(alpha)+cos(alpha) sin(beta) sin(gamma), cos(alpha) cos(beta), sin(alpha) sin(gamma)-cos(alpha) cos(gamma) sin(beta)], [-cos(beta) sin(gamma), sin(beta), cos(beta) cos(gamma)]]">
 </object>
 
 <div class="example">
-The above combined rotation matrix can be represented in JavaScript as follows provided passed parameters are defined, not null and represent {{DeviceOrientationEvent/absolute}} values.
+上述组合旋转矩阵的计算可以用 JavaScript 代码如下表示，前提是传递的参数是定义好的，
+而不是空的，并且表示 {{DeviceOrientationEvent/absolute | 绝对}} 值。
 <pre class="lang-js">
-var degtorad = Math.PI / 180; // Degree-to-Radian conversion
+var degtorad = Math.PI / 180; // 度-弧度 转换系数
 
 function getRotationMatrix( alpha, beta, gamma ) {
 
-  var _x = beta  ? beta  * degtorad : 0; // beta value
-  var _y = gamma ? gamma * degtorad : 0; // gamma value
-  var _z = alpha ? alpha * degtorad : 0; // alpha value
+  var _x = beta  ? beta  * degtorad : 0; // &beta; 值
+  var _y = gamma ? gamma * degtorad : 0; // &gamma; 值
+  var _z = alpha ? alpha * degtorad : 0; // &alpha; 值
 
   var cX = Math.cos( _x );
   var cY = Math.cos( _y );
@@ -1044,7 +1042,7 @@ function getRotationMatrix( alpha, beta, gamma ) {
   var sZ = Math.sin( _z );
 
   //
-  // ZXY rotation matrix construction.
+  // ZXY 旋转矩阵构造。
   //
 
   var m11 = cZ * cY - sZ * sX * sY;
@@ -1069,24 +1067,26 @@ function getRotationMatrix( alpha, beta, gamma ) {
 </pre>
 </div>
 
-Another alternate representation of device orientation data is as Quaternions. [[QUATERNIONS]]
+另一种备用的设备方向数据的表示形式是四元法(Quaternions)。[[QUATERNIONS]]
 
-If q represents the unit quaternion of the device in the earth frame XYZ, then since the initial body frame is aligned with the earth, q is as follows.
+如果 q 表示设备在地球坐标系 XYZ 中的单位四元数(unit quaternion)，
+因为初始设备坐标系与地球坐标系对齐，所以 q 可以如下表示。
 
 <object class="equation" data="equation14.xhtml" type="application/mathml+xml">
     <img src="equation14.png" alt="q = [[q_w], [q_x], [q_y], [q_z]] = [[cos(beta)cos(gamma)cos(alpha) - sin(beta)sin(gamma)sin(alpha)], [sin(beta)cos(gamma)cos(alpha) - cos(beta)sin(gamma)sin(alpha)], [cos(beta)sin(gamma)cos(alpha) + sin(beta)cos(gamma)sin(alpha)], [cos(beta)cos(gamma)sin(alpha) + sin(beta)sin(gamma)cos(alpha)]]">
 </object>
 
 <div class="example">
-The above quaternion can be represented in JavaScript as follows provided the passed parameters are defined, are {{DeviceOrientationEvent/absolute}} values and those parameters are not null.
+上述四元数的计算可以用 JavaScript 代码如下表示，前提是传递的参数是定义好的，是
+{{DeviceOrientationEvent/absolute | 绝对}} 值，并且这些参数不为空。
 <pre class="lang-js">
-var degtorad = Math.PI / 180; // Degree-to-Radian conversion
+var degtorad = Math.PI / 180; // 度-弧度 转换系数
 
 function getQuaternion( alpha, beta, gamma ) {
 
-  var _x = beta  ? beta  * degtorad : 0; // beta value
-  var _y = gamma ? gamma * degtorad : 0; // gamma value
-  var _z = alpha ? alpha * degtorad : 0; // alpha value
+  var _x = beta  ? beta  * degtorad : 0; // &beta; 值
+  var _y = gamma ? gamma * degtorad : 0; // &gamma; 值
+  var _z = alpha ? alpha * degtorad : 0; // &alpha; 值
 
   var cX = Math.cos( _x/2 );
   var cY = Math.cos( _y/2 );
@@ -1096,7 +1096,7 @@ function getQuaternion( alpha, beta, gamma ) {
   var sZ = Math.sin( _z/2 );
 
   //
-  // ZXY quaternion construction.
+  // ZXY 四元数构造。
   //
 
   var w = cX * cY * cZ - sX * sY * sZ;
@@ -1110,15 +1110,16 @@ function getQuaternion( alpha, beta, gamma ) {
 </pre>
 </div>
 
-We can check that a Unit Quaternion has been constructed correctly using Lagrange's four-square theorem
+我们可以用拉格朗日四平方和定理(Lagrange's four-square theorem)
+来检验单位四元数是否被正确地构造出来
 
 <object class="equation" data="equation18.xhtml" type="application/mathml+xml">
     <img src="equation18.png" alt="q_w^2 * q_x^2 * q_y^2 * q_z^2 = 1">
 </object>
 
-as expected.
+如同预期一样。
 
-<h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
+<h2 class="no-num" id="acknowledgments">鸣谢</h2>
 
 Lars Erik Bolstad, Dean Jackson, Claes Nilsson, George Percivall, Doug Turner, Matt Womer, Chris Dumez
 
