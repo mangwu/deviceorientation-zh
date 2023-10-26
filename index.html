@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/orientation-event/" rel="canonical">
-  <meta content="23ad05ead5bb6a9c8d5c15a7f80da3e0cea0c96f" name="document-revision">
+  <meta content="ec49dbd00b81a9e7de87d00020433e229f75b5c4" name="document-revision">
   <link href="./override.css" rel="stylesheet">
 <style>/* style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -1354,12 +1354,12 @@ rotation)，前者在旋转过程中，相对于变换后的(当前)坐标系做
 为单位，且精确度不得超过 0.1 m/s<sup>2</sup> 。</p>
    <div class="note custom-note" data-content="注释:" role="note"> 在实践中， <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity⑤">accelerationIncludingGravity</a></code> 表示从 <a href="https://w3c.github.io/motion-sensors/#accelerometer"> 运动传感器解释器 § 加速度计</a> 中获得的原始数据或 <a data-link-type="biblio" href="#biblio-g-force" title="G-Force">[G-FORCE]</a> ，而 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration④">acceleration</a></code> 提供 <a href="https://w3c.github.io/motion-sensors/#linear-acceleration-sensor"> 运动传感器解释器 § 线性加速度传感器</a> 的数据，
 并且这个数据很可能是将多个传感器的数据进行整合和处理(的结果)。 </div>
-   <p>属性必须使用主机设备在空间中的旋转速率进行初始化。它必须表示为之前定义的 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①③">alpha</a></code> (x轴)、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta①⓪">beta</a></code> (y轴)、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma①⓪">gamma</a></code> (z轴)的角度的变化率。
+   <p><code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-rotationrate" id="ref-for-dom-devicemotionevent-rotationrate②">rotationRate</a></code> 属性必须使用主机设备在空间中的旋转速率进行初始化。它必须表示为之前定义的 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-alpha" id="ref-for-dom-deviceorientationevent-alpha①③">alpha</a></code> (x轴)、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-beta" id="ref-for-dom-deviceorientationevent-beta①⓪">beta</a></code> (y轴)、 <code class="idl"><a data-link-type="idl" href="#dom-deviceorientationevent-gamma" id="ref-for-dom-deviceorientationevent-gamma①⓪">gamma</a></code> (z轴)的角度的变化率。
 每个属性必须以度数/度数(deg/s)为单位，并且精确度不得超过 0.1deg/s 。</p>
    <p><code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-interval" id="ref-for-dom-devicemotionevent-interval①">interval</a></code> 属性必须使用从底层硬件获取的间隔数据进行初始化，
 并且必须以毫秒(ms)为单位。它必须是一个常量，以简化 Web 应用程序对数据的筛选。</p>
    <p>无法提供全部属性值的实现必须将未知属性的值初始化为 <code>null</code> 。
-如果一个实现永远无法提供运动信息，那么在触发 <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion③">devicemotion</a></code> 事件时， <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration⑤">acceleration</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity⑥">accelerationIncludingGravity</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-rotationrate" id="ref-for-dom-devicemotionevent-rotationrate②">rotationRate</a></code> 属性应该设置为 <code>null</code> 。</p>
+如果一个实现永远无法提供运动信息，那么在触发 <code class="idl"><a data-link-type="idl" href="#def-devicemotion" id="ref-for-def-devicemotion③">devicemotion</a></code> 事件时， <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-acceleration" id="ref-for-dom-devicemotionevent-acceleration⑤">acceleration</a></code> 、 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-accelerationincludinggravity" id="ref-for-dom-devicemotionevent-accelerationincludinggravity⑥">accelerationIncludingGravity</a></code> 和 <code class="idl"><a data-link-type="idl" href="#dom-devicemotionevent-rotationrate" id="ref-for-dom-devicemotionevent-rotationrate③">rotationRate</a></code> 属性应该设置为 <code>null</code> 。</p>
    <h3 class="heading settled" data-level="4.4" id="id=permission-model"><span class="secno">4.4. </span><span class="content">权限模型(Permission model)</span><a class="self-link" href="#id=permission-model"></a></h3>
    <div class="issue" id="issue-a68af727"><a class="self-link" href="#issue-a68af727"></a>正在为权限模型的实现收集进一步的经验，
 并且根据实现经验获知的规范阐述(clarifications)正在 <a href="https://github.com/w3c/deviceorientation/issues/74">GitHub问题#74</a> 中进行讨论。</div>
@@ -2251,7 +2251,7 @@ deviceorientationabsolute' definition.</span><b><a href="#def-deviceorientationa
    <span id="infopaneltitle-for-dom-devicemotionevent-rotationrate" style="display:none">Info about the 'rotationRate' definition.</span><b><a href="#dom-devicemotionevent-rotationrate">#dom-devicemotionevent-rotationrate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-devicemotionevent-rotationrate">2. 简介</a>
-    <li><a href="#ref-for-dom-devicemotionevent-rotationrate①">4.3. devicemotion 事件</a> <a href="#ref-for-dom-devicemotionevent-rotationrate②">(2)</a>
+    <li><a href="#ref-for-dom-devicemotionevent-rotationrate①">4.3. devicemotion 事件</a> <a href="#ref-for-dom-devicemotionevent-rotationrate②">(2)</a> <a href="#ref-for-dom-devicemotionevent-rotationrate③">(3)</a>
    </ul>
   </aside>
   <aside aria-labelledby="infopaneltitle-for-dom-devicemotionevent-interval" class="dfn-panel" data-for="dom-devicemotionevent-interval" id="infopanel-for-dom-devicemotionevent-interval">

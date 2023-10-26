@@ -778,6 +778,7 @@ dictionary DeviceMotionEventInit : EventInit {
 并且这个数据很可能是将多个传感器的数据进行整合和处理(的结果)。
 </div>
 
+{{DeviceMotionEvent/rotationRate}} 
 属性必须使用主机设备在空间中的旋转速率进行初始化。它必须表示为之前定义的 
 {{DeviceOrientationEvent/alpha}} (x轴)、 {{DeviceOrientationEvent/beta}} (y轴)、
 {{DeviceOrientationEvent/gamma}} (z轴)的角度的变化率。
