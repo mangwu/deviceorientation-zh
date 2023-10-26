@@ -751,7 +751,6 @@ dictionary DeviceMotionEventInit : EventInit {
  <li><p>返回 <var>promise</var> 。
 </ol>
 
-In the {{DeviceMotionEvent}} events fired by the user agent, the following requirements must apply:
 在用户代理触发的 {{DeviceMotionEvent}} 事件中，必须满足以下要求:
 
 {{DeviceMotionEvent/acceleration}} 属性必须使用主机设备相对于地球坐标系
